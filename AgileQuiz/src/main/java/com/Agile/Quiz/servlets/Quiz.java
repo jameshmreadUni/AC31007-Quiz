@@ -6,6 +6,7 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
+import com.Agile.Quiz.models.ModelQuiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class Quiz extends HttpServlet {
         switch (command) {
             case 1:
                 System.out.println("QUIZ URL CAPTURED");
-               test(request, response);
+               getQuiz(request, response, null);
                 break;
             default:
                
@@ -89,9 +90,15 @@ public class Quiz extends HttpServlet {
     }
 
     
-    private void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
+        ModelQuiz modelQuestions = new ModelQuiz();
+        
+        modelQuestions.getAnswers(quizName);
+        modelQuestions.getQuestions(quizName);
+        
         RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-        request.setAttribute("TEST", "TESTTESTEST");
+        request.setAttribute("answers", modelQuestions.getAnswers(quizName));
+        request.setAttribute("answers", modelQuestions.getQuestions(quizName));
         rd.forward(request, response);
     }
     
