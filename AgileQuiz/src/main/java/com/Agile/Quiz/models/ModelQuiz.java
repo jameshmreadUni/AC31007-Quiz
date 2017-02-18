@@ -23,8 +23,14 @@ public class ModelQuiz {
         
         //this loop will go through the questions for a quiz and put the result into the Question bean
         //the list of these beans will then be exported to the controller-->view
+        String questionText = "Placeholder Question Text";
+        String answerText = "Answer";
         for(int i = 0; i < numberOfRowsReturned; i++){
             questionBean = new QuestionBean(numberOfRowsReturned);
+            questionBean.setQuestionText(questionText);
+            //the I values need to be replaced with values appropriate to the content of the DB
+            questionBean.setAnswerText(answerText, i);
+            questionBean.setQuestionNumber(i);
             question.add(questionBean);
         }
         //TODO implement database stuff

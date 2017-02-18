@@ -6,7 +6,6 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
-import com.Agile.Quiz.models.ModelQuiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -22,22 +21,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jamesread
  */
-@WebServlet(name = "Quiz", urlPatterns = {"/Quiz", "/Quiz/*"})
+@WebServlet(name = "Register", urlPatterns = {"/Register"})
+public class Register extends HttpServlet {  
 
-
-public class Quiz extends HttpServlet {
-    
-    
-     private HashMap CommandsMap = new HashMap();
+    private HashMap CommandsMap = new HashMap();
     
     
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Quiz() {
+    public Register() {
         super();
-        CommandsMap.put("Quiz", 1);
+        CommandsMap.put("Register", 1);
 
     }
 
@@ -68,13 +64,13 @@ public class Quiz extends HttpServlet {
         switch (command) {
             case 1:
                 //System.out.println("QUIZ URL CAPTURED");
-               getQuiz(request, response, (String)args[2]);
+               checkRegistration(request, response);
                 break;
             default:
                
         }
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -86,21 +82,27 @@ public class Quiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("POST");
+
     }
 
-    
-    private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
-        ModelQuiz modelQuestions = new ModelQuiz();
+    private void checkRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String username = (String)request.getAttribute("userName");
+        String password = (String)request.getAttribute("password");
+        String confirmPassword = (String)request.getAttribute("confirmPassword");
         
-        //modelQuestions.getAnswers(quizName);
-        modelQuestions.getQuestions(quizName);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/quizPage.jsp");
-        //request.setAttribute("answers", modelQuestions.getAnswers(quizName));
-        request.setAttribute("question", modelQuestions.getQuestions(quizName));
-        request.setAttribute("quizTitle", quizName);
+        if(checkExistingUsername(username))
+            request.setAttribute("invalidUsername", "exists");
+        if(password.equals(confirmPassword))
+            request.setAttribute("invalidPassword", "noMatch");
+        if(password.length() < 7)
+            request.setAttribute("invalidPassword", "tooShort");
+            
+        RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
         rd.forward(request, response);
+    }
+    
+    private boolean checkExistingUsername(String username){
+        return false;
     }
     
     /**
