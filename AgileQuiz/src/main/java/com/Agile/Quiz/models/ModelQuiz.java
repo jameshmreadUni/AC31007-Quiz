@@ -6,6 +6,7 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.stores.QuestionBean;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,10 +14,19 @@ import com.Agile.Quiz.stores.QuestionBean;
  */
 public class ModelQuiz {
     
-    public QuestionBean getQuestions(String quizName){
+    public LinkedList<QuestionBean> getQuestions(String quizName){
         //database connection, return info using quiz name
+        //select all questions, answers from quizName
         int numberOfRowsReturned = 4;
-        QuestionBean question = new QuestionBean(numberOfRowsReturned);
+        LinkedList<QuestionBean> question = new LinkedList<>();
+        QuestionBean questionBean;
+        
+        //this loop will go through the questions for a quiz and put the result into the Question bean
+        //the list of these beans will then be exported to the controller-->view
+        for(int i = 0; i < numberOfRowsReturned; i++){
+            questionBean = new QuestionBean(numberOfRowsReturned);
+            question.add(questionBean);
+        }
         //TODO implement database stuff
         //will need to fill  the question.getfield;
         return question;

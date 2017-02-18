@@ -15,10 +15,10 @@
     </head>
     <body>
         <h1><%=question.getQuizName()%></h1>
-        
         <h2><%=question.getQuestionText() %></h2>
         <%String[] answers = question.getAnswerText(); %>
         <form>
+            <%--going to need to use an iterator to iterate through the 'now' linked list of questions--%>
         <%for(int i = 0; i < question.getAnswerText().length; i++){ %>
         <input type="radio" name = "answer" value="<%=i%>"> <%=answers[i] %></li> <br>
             <%}%>
