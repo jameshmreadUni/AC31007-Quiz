@@ -5,19 +5,23 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.stores.QuestionBean;
+
 /**
  *
  * @author jamesread
  */
 public class ModelQuiz {
     
-    public String[] getQuestions(String quizName){
-        String[] question = new String[3]; 
-        question[0] = "Question 1"; 
-        question[1] = "Question 2";
-        question[2] = "Question 3";
+    public QuestionBean getQuestions(String quizName){
+        //database connection, return info using quiz name
+        int numberOfRowsReturned = 4;
+        QuestionBean question = new QuestionBean(numberOfRowsReturned);
+        //TODO implement database stuff
+        //will need to fill  the question.getfield;
         return question;
     }
+    //not sure ill need this
     public String[] getAnswers(String quizName){
         String[] answer = new String[3]; 
         answer[0] = "Answer A"; 

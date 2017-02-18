@@ -93,12 +93,12 @@ public class Quiz extends HttpServlet {
     private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
         ModelQuiz modelQuestions = new ModelQuiz();
         
-        modelQuestions.getAnswers(quizName);
+        //modelQuestions.getAnswers(quizName);
         modelQuestions.getQuestions(quizName);
         
-        RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-        request.setAttribute("answers", modelQuestions.getAnswers(quizName));
-        request.setAttribute("answers", modelQuestions.getQuestions(quizName));
+        RequestDispatcher rd = request.getRequestDispatcher("/quizPage.jsp");
+        //request.setAttribute("answers", modelQuestions.getAnswers(quizName));
+        request.setAttribute("question", modelQuestions.getQuestions(quizName));
         rd.forward(request, response);
     }
     
