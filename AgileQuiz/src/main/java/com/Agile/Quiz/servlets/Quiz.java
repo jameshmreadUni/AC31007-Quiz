@@ -7,6 +7,7 @@ package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
 import com.Agile.Quiz.models.ModelQuiz;
+import com.Agile.Quiz.stores.QuestionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Quiz extends HttpServlet {
     
     
-     private HashMap CommandsMap = new HashMap();
+     private final HashMap CommandsMap = new HashMap();
     
     
 
@@ -93,13 +94,10 @@ public class Quiz extends HttpServlet {
     private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
         ModelQuiz modelQuestions = new ModelQuiz();
         
-        //modelQuestions.getAnswers(quizName);
-        modelQuestions.getQuestions(quizName);
-        
         RequestDispatcher rd = request.getRequestDispatcher("/quizPage.jsp");
-        //request.setAttribute("answers", modelQuestions.getAnswers(quizName));
-        request.setAttribute("question", modelQuestions.getQuestions(quizName));
+        request.setAttribute("quiz", modelQuestions.getQuestions(quizName));
         request.setAttribute("quizTitle", quizName);
+
         rd.forward(request, response);
     }
     

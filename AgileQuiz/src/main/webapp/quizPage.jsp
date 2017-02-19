@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("question"); %>
+        <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("quiz"); %>
         <%String quizTitle = (String)request.getAttribute("quizTitle");%>
         
         <title>Quiz - TODO input Module Code</title>
@@ -24,14 +24,14 @@
             iterator = questionList.iterator();
             while (iterator.hasNext()) {
                 QuestionBean question = (QuestionBean)iterator.next();
+                String answerType = question.getAnswerType();
         %>
                     
                     <h2><%=question.getQuestionText() %></h2>
                     <%String[] answers = question.getAnswerText(); %>
                     <form>
-                            <%--going to need to use an iterator to iterate through the 'now' linked list of questions--%>
                         <%for(int i = 0; i < question.getAnswerText().length; i++){ %>
-                        <input type="radio" name = "answer" value="<%=i%>"> <%=answers[i] %></li> <br>
+                        <input type="<%=answerType%>" name = "<%=question.getQuestionNumber()%>" value="<%=i%>"> <%=answers[i] %></li> <br>
                         <%}%>
             <%}%>
                     </form>

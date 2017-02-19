@@ -14,10 +14,10 @@ public class QuestionBean {
     private String[] answerText;
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
-    
+    private String answerType;
     //constructor initialises the size of the array of questions upon creation
-    public QuestionBean(int numberOfQuestions){
-        answerText = new String[numberOfQuestions];
+    public QuestionBean(int numberOfAnswers){
+        answerText = new String[numberOfAnswers];
        /*
         this.questionText = "Question 1: Who is president?";
        this.answerText[0] = "A: Donald Trump";
@@ -55,5 +55,13 @@ public class QuestionBean {
     }
     public int getQuestionNumber(){
         return this.questionNumber;
+    }
+    
+    public void setAnswerType(String type){
+        this.answerType = type;
+    }
+    
+    public String getAnswerType(){
+        return this.answerType;
     }
 }

@@ -17,7 +17,10 @@ public class ModelQuiz {
     public LinkedList<QuestionBean> getQuestions(String quizName){
         //database connection, return info using quiz name
         //select all questions, answers from quizName
-        int numberOfRowsReturned = 4;
+        int numberOfQuestions = 4;
+        int numberOfAnswers = 5;
+        String answerType = "radio";
+        
         LinkedList<QuestionBean> question = new LinkedList<>();
         QuestionBean questionBean;
         
@@ -25,24 +28,20 @@ public class ModelQuiz {
         //the list of these beans will then be exported to the controller-->view
         String questionText = "Placeholder Question Text";
         String answerText = "Answer";
-        for(int i = 0; i < numberOfRowsReturned; i++){
-            questionBean = new QuestionBean(numberOfRowsReturned);
+        
+        for(int i = 0; i < numberOfQuestions; i++){
+            questionBean = new QuestionBean(numberOfAnswers);
             questionBean.setQuestionText(questionText);
-            //the I values need to be replaced with values appropriate to the content of the DB
-            questionBean.setAnswerText(answerText, i);
             questionBean.setQuestionNumber(i);
+            questionBean.setAnswerType(answerType);
+            //the I/j values need to be replaced with values appropriate to the content of the DB
+            for(int j = 0; j < numberOfAnswers; j++)
+                questionBean.setAnswerText(answerText, j);
+            
             question.add(questionBean);
         }
         //TODO implement database stuff
         //will need to fill  the question.getfield;
         return question;
-    }
-    //not sure ill need this
-    public String[] getAnswers(String quizName){
-        String[] answer = new String[3]; 
-        answer[0] = "Answer A"; 
-        answer[1] = "Answer B";
-        answer[2] = "Answer C";
-        return answer;
     }
 }
