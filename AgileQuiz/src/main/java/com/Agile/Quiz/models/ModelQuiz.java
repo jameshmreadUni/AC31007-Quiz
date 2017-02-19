@@ -20,14 +20,15 @@ public class ModelQuiz {
         int numberOfQuestions = 4;
         int numberOfAnswers = 5;
         String answerType = "radio";
+        String questionText = "Placeholder Question Text";
+        String answerText = "Answer";
         
         LinkedList<QuestionBean> question = new LinkedList<>();
         QuestionBean questionBean;
         
         //this loop will go through the questions for a quiz and put the result into the Question bean
         //the list of these beans will then be exported to the controller-->view
-        String questionText = "Placeholder Question Text";
-        String answerText = "Answer";
+        
         
         for(int i = 0; i < numberOfQuestions; i++){
             questionBean = new QuestionBean(numberOfAnswers);
@@ -41,7 +42,6 @@ public class ModelQuiz {
             question.add(questionBean);
         }
         //TODO implement database stuff
-        //will need to fill  the question.getfield;
         return question;
     }
 }
