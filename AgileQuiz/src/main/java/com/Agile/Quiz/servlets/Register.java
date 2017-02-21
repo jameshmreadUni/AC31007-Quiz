@@ -6,6 +6,8 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
+import com.Agile.Quiz.models.ModelUser;
+import com.Agile.Quiz.stores.RegisterBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -63,8 +65,8 @@ public class Register extends HttpServlet {
         }
         switch (command) {
             case 1:
-                //System.out.println("QUIZ URL CAPTURED");
-               checkRegistration(request, response);
+                       RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+                       rd.forward(request, response);
                 break;
             default:
                
@@ -82,27 +84,16 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-    }
-
-    private void checkRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String username = (String)request.getAttribute("userName");
-        String password = (String)request.getAttribute("password");
-        String confirmPassword = (String)request.getAttribute("confirmPassword");
-        
-        if(checkExistingUsername(username))
-            request.setAttribute("invalidUsername", "exists");
-        if(password.equals(confirmPassword))
-            request.setAttribute("invalidPassword", "noMatch");
-        if(password.length() < 7)
-            request.setAttribute("invalidPassword", "tooShort");
+        String username = (String)request.getParameter("username");
+        String password = (String)request.getParameter("password");
+        String confirmPassword = (String)request.getParameter("confirmPassword");
+        String email = (String)request.getParameter("email");
+        ModelUser user = new ModelUser();
+        RegisterBean errorFeedback = (RegisterBean)user.checkRegistration(username, password, confirmPassword, email);
             
-        RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
-        rd.forward(request, response);
-    }
-    
-    private boolean checkExistingUsername(String username){
-        return false;
+            request.setAttribute("errorFeedback", errorFeedback);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
     }
     
     /**
