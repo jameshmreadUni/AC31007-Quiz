@@ -28,9 +28,9 @@ public class loginBean {
         loggedin=true;
     }
     
-    public void setLoginState(){
-        this.loggedin=true;
-    }
+   // public void setLoginState(){
+   //     this.loggedin=true;
+  //  }
     public boolean getlogedin(){
         return loggedin;
     }
