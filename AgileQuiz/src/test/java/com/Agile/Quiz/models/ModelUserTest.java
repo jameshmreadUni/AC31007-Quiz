@@ -47,20 +47,67 @@ public class ModelUserTest {
      */
     @Test
     public void testCheckRegistration() {
-        System.out.println("checkRegistration");
-        String username = "uniqueUsername";
+        System.out.println("checkRegistration all right");
+        String username = "uniqueGoodUsername";
         String password = "validPassword";
         String confirmPassword = "validPassword";
         String email = "email@email.com";
         
-        RegisterBean expResult = new RegisterBean(); //should just be an empty bean
-        expResult.setUsername(username);
-        expResult.setPassword(password);
-        expResult.setConfirmPassword(confirmPassword);
-        expResult.setEmail(email);
+        RegisterBean expResult = new RegisterBean(); 
+        //expResult.setUsername(username);
+        //expResult.setPassword(password);
+        //expResult.setConfirmPassword(confirmPassword);
+        //expResult.setEmail(email);
         ModelUser instance = new ModelUser();
         RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
         assertEquals(expResult.getInputErrors(), result.getInputErrors());
     }
     
+    @Test
+    public void testCheckRegistrationUsername() {
+        System.out.println("checkRegistration bad username");
+        String username = "existingUsername";
+        String password = "validPassword";
+        String confirmPassword = "validPassword";
+        String email = "email@email.com";
+        
+        String expResult = "Username already exists.";
+        
+        ModelUser instance = new ModelUser();
+        RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
+        assertEquals(expResult, result.getInputErrors(0));
+    }
+    
+    @Test
+    public void testCheckRegistrationPassword() {
+        System.out.println("checkRegistration short password");
+        String username = "goodUsername";
+        String password = "bad";
+        String confirmPassword = "bad";
+        String email = "email@email.com";
+        
+        String expResult = "Your password is too short";
+        
+        ModelUser instance = new ModelUser();
+        RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
+      
+        assertEquals(expResult, result.getInputErrors(0));
+    }
+    
+        @Test
+    public void testCheckRegistrationAllWrong() {
+        System.out.println("checkRegistration all bad info");
+        String username = "existingUsername";
+        String password = "bad";
+        String confirmPassword = "noMatch";
+        String email = "email@email.com";
+        
+        int expResult = 3;
+        
+        ModelUser instance = new ModelUser();
+        RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
+      
+        assertEquals(expResult, result.getInputErrorsSize());
+    
+}
 }
