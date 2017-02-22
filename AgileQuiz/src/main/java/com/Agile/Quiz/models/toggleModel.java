@@ -17,36 +17,42 @@ public class toggleModel {
   
     
     
-    public void checkAvailability(String input){
+    public boolean checkAvailability(String input){
     //this is for checking the availability of the quiz before its inserted
     
         if (input!=null)
         {
             availability = true;
             System.out.println("Quiz will be set to be available");
+            return true;
         } 
         else if (input==null)
         {
             availability = false;
             System.out.println("Quiz will be set to be unavailable");
+            return false;
         } 
     
     
-    
+        return false; 
     }
     
     
-    public void insertToDB(){
+    public boolean insertToDB(){
         //this will be used for when we insert stuff into the database
+        
+        return true; 
     
     
     }
     
-    public void retriveFromDB(){
+    public boolean retriveFromDB(){
     
         //this will be for when we retrieve struff from the database
         
         availability = true;
+        
+        return availability;
         
     }
     
