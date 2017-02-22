@@ -41,7 +41,7 @@ public class toggleModelTest {
      * Test of checkAvailability method, of class toggleModel.
      */
     @org.junit.Test
-    public void testCheckAvailability() {
+    public void testCheckTrue() {
         System.out.println("checkAvailability");
         String input ="true";
         toggleModel instance = new toggleModel();
@@ -51,6 +51,20 @@ public class toggleModelTest {
         //fail("The test case is a prototype.");
     }
 
+     @org.junit.Test
+    public void testCheckFalse() {
+        System.out.println("checkAvailability");
+        String input = null;
+        toggleModel instance = new toggleModel();
+       boolean test = instance.checkAvailability(input);
+        assertEquals("Should be true", false, test);  
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }   
+    
+    
+    
+    
     /**
      * Test of insertToDB method, of class toggleModel.
      */

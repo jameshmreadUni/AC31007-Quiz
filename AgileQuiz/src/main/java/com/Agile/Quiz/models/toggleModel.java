@@ -20,13 +20,13 @@ public class toggleModel {
     public boolean checkAvailability(String input){
     //this is for checking the availability of the quiz before its inserted
     
-        if (input!=null)
+        if (input=="true")
         {
             availability = true;
             System.out.println("Quiz will be set to be available");
             return true;
         } 
-        else if (input==null)
+        else
         {
             availability = false;
             System.out.println("Quiz will be set to be unavailable");
