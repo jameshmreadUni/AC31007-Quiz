@@ -34,8 +34,8 @@
                 <input type="submit" value="Add to Quiz">
             </form>
             
-            <form>
-                <input type="checkbox" name="available" value ="available"> Quiz is available upon creation <br>
+            <form method="POST" action ="/AgileQuiz/toggleServlet">
+                <input type="checkbox" name="toggleBox" value ="true"> Quiz is available upon creation <br>
                 <input type="submit" value="Finish Quiz">
             </form>
             

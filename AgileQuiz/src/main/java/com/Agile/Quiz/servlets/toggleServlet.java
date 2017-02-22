@@ -74,12 +74,15 @@ public class toggleServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String input;
-        boolean availability = false; 
+        //boolean availability = false; 
+        
+        input = request.getParameter("toggleBox");
+        System.out.println("Input: " + input);
+        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
         
         
-        
-        
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
