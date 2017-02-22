@@ -14,8 +14,9 @@ import com.Agile.Quiz.stores.loginBean;
  * @author Brian
  */
 public class ModelStaffUser {
-      String staffUserName = "100000000";
+    String staffUserName = "100000000";
     String staffUserPass = "password";
+  
     public ModelStaffUser(){
         
     }

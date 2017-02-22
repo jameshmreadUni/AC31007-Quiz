@@ -21,12 +21,12 @@ import javax.servlet.http.HttpSession;
  * @author Brian
  */
 
-@WebServlet(name = "Login", urlPatterns = {"/Login","/login","/staffLogin","/stafflogin", "/Stafflogin","/StaffLogin", "/Login/*"})
+@WebServlet(name = "staffLogin", urlPatterns = {"/Login","/login","/staffLogin","/stafflogin", "/Stafflogin","/StaffLogin", "/Login/*"})
 
 public class staffLogin {
   
     public staffLogin(){
-super();
+//super();
         
 }
 
@@ -74,12 +74,12 @@ super();
 
             session.setAttribute("loginBean", lg);
 // This Will be the page that the login redipaches to once a vaild login is accheved
-         //   System.out.println("Session in servlet " + session);
+           System.out.println("Session in servlet " + session);
            // ProfileStore ps = new ProfileStore();
            // ps.setUUID(us.selectProfilePic(username));
             //session.setAttribute("profilepic", ps);
-           // RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            //rd.forward(request, response);
+           RequestDispatcher rd = request.getRequestDispatcher("index.html");
+           rd.forward(request, response);
 
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

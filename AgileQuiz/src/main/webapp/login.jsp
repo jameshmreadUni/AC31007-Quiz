@@ -19,7 +19,7 @@
     <body>
         <h1>Login</h1>
         
-        <form method="POST"  action="Login">
+        <form method="POST"  action="/AgileQuiz/Login">
                     <ul>
                         <li>User Name <input type="text" name="username"></li>
                         <li>Password <input type="password" name="password"></li>
