@@ -78,4 +78,17 @@ public class ModelStaffUserTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
+    //test for correct username but wrong password
+           @org.junit.Test
+    public void testIsValidUserFalsePassword() {
+        System.out.println("Is Not a Valid User");
+        String username = "100000000";
+        String password = "Password";
+        ModelStaffUser instance = new ModelStaffUser();
+        boolean expResult = false;
+        boolean result = instance.IsValidUser(username, password);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
 }
