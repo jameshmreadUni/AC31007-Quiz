@@ -28,8 +28,6 @@ public class ModelQuiz {
         
         //this loop will go through the questions for a quiz and put the result into the Question bean
         //the list of these beans will then be exported to the controller-->view
-        
-        
         for(int i = 0; i < numberOfQuestions; i++){
             questionBean = new QuestionBean(numberOfAnswers);
             questionBean.setQuestionText(questionText);

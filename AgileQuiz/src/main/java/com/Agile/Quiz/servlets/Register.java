@@ -88,12 +88,19 @@ public class Register extends HttpServlet {
         String password = (String)request.getParameter("password");
         String confirmPassword = (String)request.getParameter("confirmPassword");
         String email = (String)request.getParameter("email");
+        
         ModelUser user = new ModelUser();
         RegisterBean errorFeedback = (RegisterBean)user.checkRegistration(username, password, confirmPassword, email);
-            
-            request.setAttribute("errorFeedback", errorFeedback);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
-            rd.forward(request, response);
+        
+            if(errorFeedback.getInputErrorsSize() > 0){
+                request.setAttribute("errorFeedback", errorFeedback);
+                RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+                rd.forward(request, response);
+            }else{
+                //TODO CALL Login bean
+                RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
     }
     
     /**

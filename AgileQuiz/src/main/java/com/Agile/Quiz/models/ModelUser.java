@@ -29,6 +29,7 @@ public class ModelUser {
            register.setUsername(username);
            register.setPassword(password);
            register.setConfirmPassword(confirmPassword);
+           register.setEmail(email);
            return register;
     }
 
