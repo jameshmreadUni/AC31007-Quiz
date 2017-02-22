@@ -6,8 +6,8 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
-import com.Agile.Quiz.models.ModelQuiz;
-import com.Agile.Quiz.stores.QuestionBean;
+import com.Agile.Quiz.models.ModelUser;
+import com.Agile.Quiz.stores.RegisterBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -23,22 +23,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jamesread
  */
-@WebServlet(name = "Quiz", urlPatterns = {"/Quiz", "/Quiz/*"})
+@WebServlet(name = "Register", urlPatterns = {"/Register"})
+public class Register extends HttpServlet {  
 
-
-public class Quiz extends HttpServlet {
-    
-    
-     private final HashMap CommandsMap = new HashMap();
+    private HashMap CommandsMap = new HashMap();
     
     
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Quiz() {
+    public Register() {
         super();
-        CommandsMap.put("Quiz", 1);
+        CommandsMap.put("Register", 1);
 
     }
 
@@ -68,14 +65,14 @@ public class Quiz extends HttpServlet {
         }
         switch (command) {
             case 1:
-                //System.out.println("QUIZ URL CAPTURED");
-               getQuiz(request, response, (String)args[2]);
+                       RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+                       rd.forward(request, response);
                 break;
             default:
                
         }
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -87,18 +84,23 @@ public class Quiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("POST");
-    }
-
-    
-    private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
-        ModelQuiz modelQuestions = new ModelQuiz();
+        String username = (String)request.getParameter("username");
+        String password = (String)request.getParameter("password");
+        String confirmPassword = (String)request.getParameter("confirmPassword");
+        String email = (String)request.getParameter("email");
         
-        RequestDispatcher rd = request.getRequestDispatcher("/quizPage.jsp");
-        request.setAttribute("quiz", modelQuestions.getQuestions(quizName));
-        request.setAttribute("quizTitle", quizName);
-
-        rd.forward(request, response);
+        ModelUser user = new ModelUser();
+        RegisterBean errorFeedback = (RegisterBean)user.checkRegistration(username, password, confirmPassword, email);
+        
+            if(errorFeedback.getInputErrorsSize() > 0){
+                request.setAttribute("errorFeedback", errorFeedback);
+                RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+                rd.forward(request, response);
+            }else{
+                //TODO CALL Login bean
+                RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
     }
     
     /**
