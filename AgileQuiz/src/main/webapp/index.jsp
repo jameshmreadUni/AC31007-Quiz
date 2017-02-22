@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +10,6 @@
         
         <h3>This should break things</h3>
         <h2>We are testing branches </h2>
-        <h2>Test Joe Davis</h2>
 
     </body>
 </html>
