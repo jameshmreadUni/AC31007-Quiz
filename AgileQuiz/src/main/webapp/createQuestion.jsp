@@ -35,6 +35,7 @@
             </form>
             
             <form>
+                <input type="checkbox" name="available" value ="available"> Quiz is available upon creation <br>
                 <input type="submit" value="Finish Quiz">
             </form>
             
