@@ -8,3 +8,29 @@ and open the template in the editor.
     Author     : seans
 */
 
+
+body{
+    background-color: #fcfcfc;
+}
+
+#content, #header{
+    
+    background-color: #47A8D7;
+    border-radius: 8px;
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+    
+}
+
+#content{
+    
+    text-align: center;
+    
+}
+
+#questionBox{
+    
+    background-color: red;
+    
+}
