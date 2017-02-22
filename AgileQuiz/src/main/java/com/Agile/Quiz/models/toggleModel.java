@@ -11,6 +11,24 @@ package com.Agile.Quiz.models;
  */
 public class toggleModel {
     
-    public void insertToDB(){}
+    //this will be used for setting a quiz's availability in the DB
+    //as well as returning it to the servlet if required.
+    public boolean availability; 
+  
+    
+    public void insertToDB(){
+        //this will be used for when we insert stuff into the database
+    
+    
+    }
+    
+    public void retriveFromDB(){
+    
+        //this will be for when we retrieve struff from the database
+        
+        
+    }
+    
+    
     
 }
