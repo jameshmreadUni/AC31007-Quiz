@@ -16,6 +16,26 @@ public class toggleModel {
     public boolean availability; 
   
     
+    
+    public void checkAvailability(String input){
+    //this is for checking the availability of the quiz before its inserted
+    
+        if (input!=null)
+        {
+            availability = true;
+            System.out.println("Quiz will be set to be available");
+        } 
+        else if (input==null)
+        {
+            availability = false;
+            System.out.println("Quiz will be set to be unavailable");
+        } 
+    
+    
+    
+    }
+    
+    
     public void insertToDB(){
         //this will be used for when we insert stuff into the database
     
@@ -26,6 +46,7 @@ public class toggleModel {
     
         //this will be for when we retrieve struff from the database
         
+        availability = true;
         
     }
     

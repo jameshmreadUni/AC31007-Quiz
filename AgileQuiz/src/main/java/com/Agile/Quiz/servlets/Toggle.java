@@ -12,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.Agile.Quiz.models.*;
 
 /**
  *
  * @author seans
  */
-@WebServlet(name = "toggleServlet", urlPatterns = {"/toggleServlet"})
-public class toggleServlet extends HttpServlet {
+@WebServlet(name = "toggleServlet", urlPatterns = {"/Toggle"})
+public class Toggle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -78,6 +79,10 @@ public class toggleServlet extends HttpServlet {
         
         input = request.getParameter("toggleBox");
         System.out.println("Input: " + input);
+        
+        toggleModel tm = new toggleModel();
+        tm.checkAvailability(input);
+        
         
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
