@@ -71,7 +71,7 @@ public class StaffLogin extends HttpServlet {
         boolean isValid = us.IsValidUser(username, password);
         HttpSession session = request.getSession();
         System.out.println("Session in servlet " + session);
-        if (isValid == true) {
+        if (!isValid) {
             loginBean lg = new loginBean();
             lg.setLoggedin();
             lg.setUsername(username);
@@ -81,7 +81,7 @@ public class StaffLogin extends HttpServlet {
 // This Will be the page that the login redipaches to once a vaild login is accheved
            System.out.println("Session in servlet " + session);
 
-           RequestDispatcher rd = request.getRequestDispatcher("/index.html");
+           RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
            rd.forward(request, response);
 
         } else {
