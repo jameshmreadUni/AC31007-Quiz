@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>This is the Login Page!</h1>
         
         <% String test  = (String)request.getAttribute("TEST"); %>
         <h2><%=test %></h2>

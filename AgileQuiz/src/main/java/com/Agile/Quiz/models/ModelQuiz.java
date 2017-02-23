@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author jamesread
+ * @author jamesread 
  */
 public class ModelQuiz {
     

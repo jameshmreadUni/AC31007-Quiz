@@ -1,7 +1,7 @@
 <%-- 
     Document   : quizes
     Created on : 18-Feb-2017, 17:37:04
-    Author     : seans
+    Author     : Sean's
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

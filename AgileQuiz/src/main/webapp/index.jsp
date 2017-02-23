@@ -12,4 +12,5 @@
         <h2>We are testing branches </h2>
 
     </body>
+    <li><a href="quizList.jsp">Select A Quiz</a></li>
 </html>
