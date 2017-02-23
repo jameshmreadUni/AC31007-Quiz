@@ -5,26 +5,19 @@
  */
 package com.Agile.Quiz.servlets;
 
-import com.Agile.Quiz.models.ModelStaffUser;
-import com.Agile.Quiz.stores.loginBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Brian
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login","/login","/staffLogin","/stafflogin", "/Stafflogin","/StaffLogin", "/Login/*"})
+public class QuizOrder extends HttpServlet {
 
-
-public class StaffLogin1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +36,10 @@ public class StaffLogin1 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffLogin1</title>");            
+            out.println("<title>Servlet QuizOrder</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffLogin1 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet QuizOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,8 +57,7 @@ public class StaffLogin1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -79,32 +71,7 @@ public class StaffLogin1 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String username = (String)request.getParameter("username");
-       System.out.println(username);
-        String password = request.getParameter("password");
- System.out.println(password);
-// need a user model with placeholder
-        ModelStaffUser us = new ModelStaffUser();
-        boolean isValid = us.IsValidUser(username, password);
-        HttpSession session = request.getSession();
-        System.out.println("Session in servlet " + session);
-        if (isValid == true) {
-            loginBean lg = new loginBean();
-            lg.setLoggedin();
-            lg.setUsername(username);
-
-
-            session.setAttribute("loginBean", lg);
-// This Will be the page that the login redipaches to once a vaild login is accheved
-           System.out.println("Session in servlet " + session);
-
-           RequestDispatcher rd = request.getRequestDispatcher("/index.html");
-           rd.forward(request, response);
-
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

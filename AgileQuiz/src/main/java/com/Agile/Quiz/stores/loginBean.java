@@ -27,10 +27,7 @@ public class loginBean {
     public void setLoggedin(){
         loggedin=true;
     }
-    
-   // public void setLoginState(){
-   //     this.loggedin=true;
-  //  }
+
     public boolean getlogedin(){
         return loggedin;
     }
