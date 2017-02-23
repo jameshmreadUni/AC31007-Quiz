@@ -12,7 +12,7 @@
         <title>Login</title>
     <nav>
         <ul>
-         <li><a href="/AgileQuiz/index.html">Home</a></li>
+         <li><a href="/AgileQuiz">Home</a></li>
         </ul>
     </nav>
     </head>
@@ -27,7 +27,7 @@
                     <br/>
                     <input type="submit" value="Login"> 
                     <ul>
-                        <li><a href="/AgileQuiz/register.jsp">Register</a></li>
+                        <li><a href="/AgileQuiz/Register">Register</a></li>
                     </ul>
         </form>
     </body>

@@ -28,7 +28,7 @@ public class loginBean {
         loggedin=true;
     }
 
-    public boolean getlogedin(){
+    public boolean getloggedin(){
         return loggedin;
     }
         

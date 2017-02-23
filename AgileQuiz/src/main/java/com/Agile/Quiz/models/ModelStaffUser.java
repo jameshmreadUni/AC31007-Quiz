@@ -26,17 +26,17 @@ public class ModelStaffUser {
     public boolean IsValidUser(String username, String password) {
         
         if(username == staffUserName && password == staffUserPass){
-        loginBean ls = new loginBean();
-        ls.setLoggedin();
+      
         return true;
         } // could be a sequrity flaw as gives out vaild usernames by brute force
         else if(username == staffUserName && password != staffUserPass){
             System.out.println("Please Enter The Correct Password");
+            return false;
         }else{
             System.out.println("This is Not a Valid User");
             return false;
         }
-          return false;
+      
             
     }
     
