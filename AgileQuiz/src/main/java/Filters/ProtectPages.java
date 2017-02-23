@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Sean + James
  */
-@WebFilter(filterName = "ProtectPages", urlPatterns = {"/Quiz", "/Toggle"})
+@WebFilter(filterName = "ProtectPages", urlPatterns = {"/Quiz", "/Toggle", "/createQuestion.jsp", "quizPage.jsp"})
 public class ProtectPages implements Filter {
     
     private static final boolean debug = true;
