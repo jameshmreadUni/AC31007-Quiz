@@ -12,14 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.Agile.Quiz.models.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author seans
  */
-@WebServlet(name = "toggleServlet", urlPatterns = {"/Toggle"})
-public class Toggle extends HttpServlet {
+@WebServlet(name = "LogOut", urlPatterns = {"/LogOut"})
+public class LogOut extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,7 +31,6 @@ public class Toggle extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -44,7 +44,15 @@ public class Toggle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+    //Call the Session, Invalidate it, then forward back to the index page. 
+        HttpSession session = request.getSession();
+        
+        session.invalidate();
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request,response);
+    
+    
+    
     }
 
     /**
@@ -58,20 +66,6 @@ public class Toggle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String input;
-        //boolean availability = false; 
-        
-        input = request.getParameter("toggleBox");
-        System.out.println("Input: " + input);
-        
-        toggleModel tm = new toggleModel();
-        tm.checkAvailability(input);
-        
-        
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-        
-        
         //processRequest(request, response);
     }
 
