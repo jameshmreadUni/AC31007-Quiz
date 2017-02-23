@@ -24,7 +24,7 @@
                         String UserName = lg.getUsername();
                         if (lg.getloggedin()) {
                 %>
-    <li><a href="/AgileQuiz/Logout" >Logout</a></li>
+    <li><a href="/AgileQuiz/LogOut">Logout</a></li>
       <% }
        } else {
        %>
