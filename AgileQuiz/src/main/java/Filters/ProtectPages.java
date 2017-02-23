@@ -113,13 +113,12 @@ public class ProtectPages implements Filter {
         System.out.println("Doing Filter");
         HttpServletRequest hrequest = (HttpServletRequest) request;  
         HttpSession session = hrequest.getSession(false);
-        loginBean li = (loginBean)session.getAttribute("LoggedIn");
+        loginBean li = (loginBean)session.getAttribute("loginBean");
         System.out.println("Session in filter" + session);
         if ((li ==null || (!li.getLoggedIn()))){
            
             RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
-        
+            rd.forward(request, response);        
         }
         
         
