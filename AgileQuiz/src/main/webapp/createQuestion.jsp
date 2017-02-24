@@ -24,7 +24,7 @@
         
         <div id = "content">
             
-            <form method="POST" action="createQuestion">
+            <form method="POST" action="CreateQuestion">
                 Question!<br>
                 <input type="text" name="question" placeholder="Question">
                 <br>
