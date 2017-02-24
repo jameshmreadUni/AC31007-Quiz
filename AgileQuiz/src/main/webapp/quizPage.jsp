@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="Style.css">
         <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("quiz"); %>
         <%String quizTitle = (String)request.getAttribute("quizTitle");%>
         
