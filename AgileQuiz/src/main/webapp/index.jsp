@@ -3,13 +3,18 @@
 <html>
     <head>
         <title>Start Page</title>
+        <link rel="stylesheet" type="text/css" href="Style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
         
-        <h3>This should break things</h3>
-        <h2>We are testing branches </h2>
+        <div id = "navBar">
+            <h3>Student Login</h3>
+            <h3>Staff Login</h3>
+        </div>
+        
+        <img id ="uniLogo" src="Images/UniLogo.png" alt="Dundee University">
+        <h1>Team 4 Quiz</h1>
 
     </body>
 </html>
