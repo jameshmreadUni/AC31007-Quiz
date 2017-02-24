@@ -43,7 +43,7 @@ public class ModelStaffUserTest {
     @org.junit.Test
     public void testIsValidUserTrue() {
         System.out.println("Is Valid User");
-        String username = "staff";
+        String username = "100000000";
         String password = "password";
         ModelStaffUser instance = new ModelStaffUser();
         boolean expResult = true;
@@ -82,7 +82,7 @@ public class ModelStaffUserTest {
            @org.junit.Test
     public void testIsValidUserFalsePassword() {
         System.out.println("Is Not a Valid User");
-        String username = "staff";
+        String username = "100000000";
         String password = "Password";
         ModelStaffUser instance = new ModelStaffUser();
         boolean expResult = false;

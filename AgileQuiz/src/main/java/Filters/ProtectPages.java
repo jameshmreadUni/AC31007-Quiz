@@ -5,7 +5,6 @@
  */
 package Filters;
 
-import com.Agile.Quiz.stores.loginBean;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Sean + James
  */
-@WebFilter(filterName = "ProtectPages", urlPatterns = {"/Quiz/*", "/Toggle", "/quizPage.jsp"})
+@WebFilter(filterName = "ProtectPages", urlPatterns = {"/Quiz", "/Toggle"})
 public class ProtectPages implements Filter {
     
     private static final boolean debug = true;
@@ -110,17 +109,17 @@ public class ProtectPages implements Filter {
         }
         
         doBeforeProcessing(request, response);
-        
-        System.out.println("Doing Filter");
-        HttpServletRequest hrequest = (HttpServletRequest) request;  
-        HttpSession session = hrequest.getSession();
-        loginBean li = (loginBean)session.getAttribute("loginBean");
-        System.out.println("Session in filter" + session);
-        if ((li == null || (!li.getloggedin()))){
-           
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);        
-        }
+//        
+//        System.out.println("Doing Filter");
+//        HttpServletRequest hrequest = (HttpServletRequest) request;  
+//        HttpSession session = hrequest.getSession(false);
+//       // loginBean li = (loginBean)session.getAttribute("loginBean");
+//        System.out.println("Session in filter" + session);
+//        if ((li ==null || (!li.getLoggedIn()))){
+//           
+//            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+//            rd.forward(request, response);        
+//        }
         
         
         
