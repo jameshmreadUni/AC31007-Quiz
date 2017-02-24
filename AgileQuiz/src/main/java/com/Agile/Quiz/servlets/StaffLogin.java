@@ -67,7 +67,7 @@ public class StaffLogin extends HttpServlet {
         System.out.println("Session in servlet " + session);
         
         
-        if (isValid) {
+        if (us.IsValidUser(username, password)) {
             loginBean lg = new loginBean();
             lg.setLoggedin();
             lg.setUsername(username);
