@@ -37,8 +37,19 @@ public class ModelStaffUser {
             return false;
         }
       
-            
+    }    
+    public void retrieveUserInfo(){
+        
+    
+    //This will retrieve all the stuff from the DB when we have one    
+        
+        
+    
+    
+    }    
+        
+        
     }
     
-}
+
     
