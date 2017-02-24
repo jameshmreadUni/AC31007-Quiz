@@ -71,7 +71,7 @@ public class ModelUserTest {
         String confirmPassword = "validPassword";
         String email = "email@email.com";
         
-        String expResult = "Username already exists.";
+        String expResult = "Username already exists";
         
         ModelUser instance = new ModelUser();
         RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
@@ -108,6 +108,22 @@ public class ModelUserTest {
         RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
       
         assertEquals(expResult, result.getInputErrorsSize());
-    
-}
+    }
+            @Test
+    public void testCheckRegistrationAllBlank() {
+        System.out.println("checkRegistration all empty");
+        String username = "";
+        String password = "";
+        String confirmPassword = "";
+        String email = "email";
+        
+        int expResult = 2;
+        
+        ModelUser instance = new ModelUser();
+        RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
+        for(int i = 0; i < result.getInputErrorsSize(); i++)
+            System.out.print(result.getInputErrors(i));
+       
+        assertEquals(expResult, result.getInputErrorsSize());
+    }
 }
