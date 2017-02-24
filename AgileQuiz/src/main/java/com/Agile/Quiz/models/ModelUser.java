@@ -16,9 +16,9 @@ public class ModelUser {
         
         public RegisterBean checkRegistration(String username, String password, String confirmPassword, String email){
             Vector errorList = new Vector();
-            
+          
         if(checkExistingUsername(username))
-            errorList.add("Username already exists.");
+            errorList.add("Username already exists");
         if(!password.equals(confirmPassword))
             errorList.add("Passwords do not match");
         if(!validPassword(password))
@@ -39,6 +39,7 @@ public class ModelUser {
         
         private boolean checkExistingUsername(String username){
         //select from users where username == username, if no results, return true
+        if(username.length() < 5) return true;
         return username.equals("existingUsername");
         
     }

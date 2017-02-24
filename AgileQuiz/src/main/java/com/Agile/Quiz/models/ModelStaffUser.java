@@ -5,9 +5,7 @@
  */
 package com.Agile.Quiz.models;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import static jdk.nashorn.internal.objects.NativeFunction.call;
+
 import com.Agile.Quiz.stores.loginBean;
 /**
  *
@@ -15,29 +13,26 @@ import com.Agile.Quiz.stores.loginBean;
  */
 public class ModelStaffUser {
     //This will come from the database
-    String staffUserName = "100000000";
-    String staffUserPass = "password";
-  
+    private String staffUsername = "staff";
+    private String staffUserPass = "password";
+    
+    private String studentUsername = "student";
+    private String studentPass = "password";
+    
+    private String[] usernames = new String[2];
+    private String[] passwords = new String[2];
     public ModelStaffUser(){
-        
+            usernames[0] = "staff";
+            usernames[1] = "student";
+            passwords[0] = "password";
+            passwords[1] = "password";
     }
     
-   
     public boolean IsValidUser(String username, String password) {
-        
-        if(username == staffUserName && password == staffUserPass){
-      
-        return true;
-        } // could be a sequrity flaw as gives out vaild usernames by brute force
-        else if(username == staffUserName && password != staffUserPass){
-            System.out.println("Please Enter The Correct Password");
-            return false;
-        }else{
-            System.out.println("This is Not a Valid User");
-            return false;
+        for(int i = 0; i < usernames.length; i++){
+            if(username.equals(usernames[i]) && password.equals(passwords[i])) return true;
         }
-      
-            
+        return false;         
     }
     
 }

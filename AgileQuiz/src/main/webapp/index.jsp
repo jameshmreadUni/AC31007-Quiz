@@ -21,13 +21,14 @@
     <%
                     loginBean lg = (loginBean) session.getAttribute("loginBean");
                     if (lg != null) {
-                        String UserName = lg.getUsername();
-                        if (lg.getloggedin()) {
-                %>
-    <li><a href="/AgileQuiz/Logout" >Logout</a></li>
-      <% }
-       } else {
-       %>
+                        String username = lg.getUsername();
+                        if(lg.getloggedin()){
+    %>
+    <li><a href="/AgileQuiz/LogOut" >Logout</a></li>
+    <li><a href="/AgileQuiz/Quiz/test" >Quiz</a></li>
+                        <%}
+                        }else{
+                        %>
     <li><a href="/AgileQuiz/Login">Login</a></li>
     <li><a href="/AgileQuiz/Register">Register</a></li>
      <%}%>
