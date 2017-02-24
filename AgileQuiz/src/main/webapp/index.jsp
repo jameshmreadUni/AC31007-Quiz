@@ -2,9 +2,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
     <head>
-        <title>Start Page</title>
-        <link rel="stylesheet" type="text/css" href="Style.css">
+        <title>Student Portal</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
 
@@ -19,7 +19,6 @@
         <img id ="uniLogo" src="Images/UniLogo.png" alt="Dundee University">
         <h1>Team 4 Quiz</h1>
 
-        <h2>We are testing branches </h2>
 <nav>
     <ul>
     <%

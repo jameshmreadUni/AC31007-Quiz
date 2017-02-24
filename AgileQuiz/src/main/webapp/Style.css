@@ -69,5 +69,62 @@ img{
 #uniLogo{
     
     margin: auto;
+}
+#homepagehead{
+    text-align: center;
+    color: black;
+}
+
+#indexform {
+    background-color: lightskyblue;
+    text-align: center;
+    border-color: black;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#editquiz
+{
+    background-color: lightskyblue;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#menubar {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: lightskyblue;
+    position: static;
+    top: 10px;
+    width: 98%;
+    font-family: Arial;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+    display: inline-block;
+    text-align: center;
+    border-radius: 10px;
+    
+}
+li {
+    display: inline-block;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+
+}
+
+.active {
+    background-color: blue;
     
 }

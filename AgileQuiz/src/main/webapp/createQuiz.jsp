@@ -18,6 +18,7 @@
         </div>
         
         <div id="content">
+            <form method="POST" action="QuestionCreate">
             <h4>Please give a name for the quiz: </h4>
             <input type="text" name="quizName" placeholder="Name of the quiz">
             <br>
@@ -57,8 +58,8 @@
             </select>
             
             
-                <input type="submit" value ="createQuiz" href="/AgileQuiz/createQuestion.jsp">
-            
+                <input type="submit" value ="createQuiz">
+            </form>
         </div>
     </body>
 </html>

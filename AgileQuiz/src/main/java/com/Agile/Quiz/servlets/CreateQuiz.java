@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.servlets;
 
+import com.Agile.Quiz.lib.Convertors;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,42 +13,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.Agile.stores.storeQuestion;
+import com.Agile.Quiz.stores.storeQuestion;
+import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author JoeDavis
  */
-@WebServlet(name = "createQuestion", urlPatterns = {"/createQuestion"})
-public class createQuestion extends HttpServlet {
+@WebServlet(name = "CreateQuiz", urlPatterns = {"/CreateQuiz"})
+public class CreateQuiz extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+      private final HashMap CommandsMap = new HashMap();
+      
+      
+      /**
+     * @see HttpServlet#HttpServlet()
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet createQuestion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet createQuestion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    public CreateQuiz() {
+        super();
+        CommandsMap.put("CreateQuiz", 1);
 
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -60,7 +48,22 @@ public class createQuestion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String args[] = Convertors.SplitRequestPath(request);
+        int command;
+        try {
+            command = (Integer) CommandsMap.get(args[1]);
+        } catch (Exception et) {
+            return;
+        }
+        switch (command) {
+            case 1:
+                RequestDispatcher rd = request.getRequestDispatcher("/createQuiz.jsp");
+                rd.forward(request, response);
+                break;
+            default:
+               
+        }
     }
 
     /**
@@ -117,10 +120,11 @@ public class createQuestion extends HttpServlet {
             storequestion.setCorrectAnswer(correctAnswer);
         }
         
-        response.sendRedirect("/AgileQuiz/createQuestion.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/createQuiz.jsp");
+        rd.forward(request, response);
         
         
-        //processRequest(request, response);
+
     }
 
     /**
