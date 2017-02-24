@@ -10,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("quiz"); %>
@@ -18,7 +19,7 @@
         <title>Quiz - TODO input Module Code</title>
     </head>
     <body>
-        <h1><%=quizTitle%></h1>
+       <h1><%=quizTitle%></h1>
         <%
             Iterator<QuestionBean> iterator;
             iterator = questionList.iterator();

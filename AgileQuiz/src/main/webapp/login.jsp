@@ -57,24 +57,23 @@
         <li><a href="quizPage.jsp">Quiz Page</a></li>
         <li><a href="createQuestion.jsp">Create Question</a></li>
         <li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li>
+        <li><a href="/AgileQuiz/register.jsp">Register</a></li>
+                        <li><a href="/AgileQuiz/index.jsp">Home</a></li>
         <li style="float:right"><a href="login.jsp">Login</a></li>
         </ul>
     </nav>
         
         <form method="POST"  action="Login" onsubmit="return validateForm();">
                     <ul>
-                        <li>User Name <input type="text" id="username" name="username"></li>
-                        <li>Password <input type="password" id="password" name="password"></li>
+                        <li style="float:center">User Name <input type="text" id="username" name="username"></li>
+                        <li style="float:center">Password <input type="password" id="password" name="password"></li>
                         <p id = "validateForm_userFeedback"></p>
                     </ul>
                         
                     <br/>
                     <input type="submit" value="Login"> 
                     
-                    <ul>
-                        <ul><a href="/AgileQuiz/register.jsp">Register</a></ul>
-                        <ul><a href="/AgileQuiz/index.jsp">Home</a></ul>
-                    </ul>
+                   
         </form>
     </body>
 </html>

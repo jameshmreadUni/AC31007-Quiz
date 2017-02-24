@@ -32,9 +32,7 @@ public class toggleModel {
             System.out.println("Quiz will be set to be unavailable");
             return false;
         } 
-    
-    
-        return false; 
+      //  return false; 
     }
     
     
