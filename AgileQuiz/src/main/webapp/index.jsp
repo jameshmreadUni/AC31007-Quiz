@@ -14,12 +14,12 @@
         <ul id ="menubar">
             <h1 id="homepagehead">Student Portal</h1>
         
-        <li><a href="quizPage.jsp">Quiz(BROKEN)</a></li>
+<!--        <li><a href="AgileQuiz/Quiz/test">Quiz(BROKEN)</a></li>
         <li><a href="quizes.jsp">Quiz List</a></li>
         <li><a href="quizPage.jsp">Quiz Page</a></li>
         <li><a href="createQuestion.jsp">Create Question</a></li>
         <li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li>
-        <li style="float:right"><a href="login.jsp">Login</a></li>
+        <li style="float:right"><a href="login.jsp">Login</a></li>-->
         </ul>
     </nav>
         
