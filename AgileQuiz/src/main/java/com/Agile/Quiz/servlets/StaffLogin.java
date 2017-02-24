@@ -54,24 +54,37 @@ public class StaffLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-            String username = (String)request.getParameter("username");
-            System.out.println(username);
-            String password = request.getParameter("password");
-            System.out.println(password);
-            
-        // need a user model with placeholder
+
+        String username = (String)request.getParameter("username");
+        System.out.println(username);
+        String password = request.getParameter("password");
+        System.out.println(password);
+// need a user model with placeholder
+
         ModelStaffUser us = new ModelStaffUser();
 
         HttpSession session = request.getSession();
         System.out.println("Session in servlet " + session);
         
+        
         if (us.IsValidUser(username, password)) {
             loginBean lg = new loginBean();
             lg.setLoggedin();
             lg.setUsername(username);
-
             session.setAttribute("loginBean", lg);
+            
+            
+            //If the login is successful, determine the users type
+            //Call method to determine user's type.
+            //
+            
+            
+            
+            
+            
+// This Will be the page that the login redipaches to once a vaild login is accheved
+           System.out.println("Session in servlet " + session);
+
 
            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
            rd.forward(request, response);

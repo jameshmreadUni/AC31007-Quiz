@@ -16,19 +16,18 @@
         <h2>We are testing branches </h2>
 <nav>
     <ul>
-        <%--<li><a href="/AgileQuiz/Login">Login</a></li>
-<li><a href="/AgileQuiz/register.jsp">Register</a></li>  <%--%>
     <%
                     loginBean lg = (loginBean) session.getAttribute("loginBean");
                     if (lg != null) {
                         String username = lg.getUsername();
+
                         if(lg.getloggedin()){
     %>
     <li><a href="/AgileQuiz/LogOut" >Logout</a></li>
     <li><a href="/AgileQuiz/Quiz/test" >Quiz</a></li>
                         <%}
                         }else{
-                        %>
+                        %>
     <li><a href="/AgileQuiz/Login">Login</a></li>
     <li><a href="/AgileQuiz/Register">Register</a></li>
      <%}%>

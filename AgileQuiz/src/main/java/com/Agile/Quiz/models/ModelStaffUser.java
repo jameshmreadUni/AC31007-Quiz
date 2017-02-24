@@ -32,8 +32,22 @@ public class ModelStaffUser {
         for(int i = 0; i < usernames.length; i++){
             if(username.equals(usernames[i]) && password.equals(passwords[i])) return true;
         }
-        return false;         
+      return false;   
+      
+    }    
+    public void retrieveUserInfo(){
+        
+    
+    //This will retrieve all the stuff from the DB when we have one    
+        
+        
+    
+    
+    }    
+        
+        
+
     }
     
-}
+
     

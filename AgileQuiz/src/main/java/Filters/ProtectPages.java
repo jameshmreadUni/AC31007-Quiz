@@ -26,6 +26,7 @@
 // *
 // * @author Sean + James
 // */
+
 //@WebFilter(filterName = "ProtectPages", urlPatterns = {"/Quiz/*", "/Toggle", "/quizPage.jsp"})
 //public class ProtectPages implements Filter {
 //    
@@ -113,10 +114,12 @@
 //        
 //        System.out.println("Doing Filter");
 //        HttpServletRequest hrequest = (HttpServletRequest) request;  
-//        HttpSession session = hrequest.getSession();
+
+//        HttpSession session = hrequest.getSession(false);
 //        loginBean li = (loginBean)session.getAttribute("loginBean");
 //        System.out.println("Session in filter" + session);
-//        if ((li == null || (!li.getloggedin()))){
+//        if ((li ==null || (!li.getloggedin()))){
+
 //           
 //            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 //            rd.forward(request, response);        
