@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Filters;
+package com.Agile.Quiz.filters;
 
 import com.Agile.Quiz.stores.loginBean;
 import java.io.IOException;
