@@ -6,13 +6,10 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
-import com.Agile.Quiz.models.ModelQuiz;
-import com.Agile.Quiz.stores.QuestionBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,31 +20,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jamesread
  */
-@WebServlet(name = "Quiz", urlPatterns = {"/Quiz", "/Quiz/*"})
-
-
-public class Quiz extends HttpServlet {
-    
+@WebServlet(name = "CreateQuestion", urlPatterns = {"/CreateQuestion"})
+public class CreateQuestion extends HttpServlet {
     
      private final HashMap CommandsMap = new HashMap();
-    
-    
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Quiz() {
+     
+     public CreateQuestion() {
         super();
-        CommandsMap.put("Quiz", 1);
+        CommandsMap.put("CreateQuestion", 1);
 
     }
-
-    public void init(ServletConfig config) throws ServletException {
-        // TODO Auto-generated method stub
-        //cluster = CassandraHosts.getCluster();
-    }
-
-   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -57,8 +40,9 @@ public class Quiz extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.print("HAH");
         String args[] = Convertors.SplitRequestPath(request);
         int command;
         try {
@@ -68,13 +52,16 @@ public class Quiz extends HttpServlet {
         }
         switch (command) {
             case 1:
-               getQuiz(request, response, (String)args[2]);
+                System.out.print("HAHAHAHAHHA");
+                RequestDispatcher rd = request.getRequestDispatcher("/createQuestion.jsp");
+                rd.forward(request, response);
                 break;
             default:
                
         }
+       
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -86,20 +73,10 @@ public class Quiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("POST");
+                     RequestDispatcher rd = request.getRequestDispatcher("/createQuestion.jsp");
+                rd.forward(request, response);
     }
 
-    
-    private void getQuiz(HttpServletRequest request, HttpServletResponse response, String quizName) throws ServletException, IOException{
-        ModelQuiz modelQuestions = new ModelQuiz();
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/quizPage.jsp");
-        request.setAttribute("quiz", modelQuestions.getQuestions(quizName));
-        request.setAttribute("quizTitle", quizName);
-
-        rd.forward(request, response);
-    }
-    
     /**
      * Returns a short description of the servlet.
      *

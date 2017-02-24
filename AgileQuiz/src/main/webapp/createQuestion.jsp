@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.Agile.stores.*" %>
+<%@page import="com.Agile.Quiz.stores.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,7 +24,7 @@
         
         <div id = "content">
             
-            <form method="POST" action="createQuestion">
+            <form method="POST" action="CreateQuestion">
                 Question!<br>
                 <input type="text" name="question" placeholder="Question">
                 <br>
