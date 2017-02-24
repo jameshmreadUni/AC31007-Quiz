@@ -26,15 +26,7 @@ import javax.servlet.http.HttpSession;
 
 public class StaffLogin extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-
+   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,13 +54,15 @@ public class StaffLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String username = (String)request.getParameter("username");
         System.out.println(username);
         String password = request.getParameter("password");
         System.out.println(password);
 // need a user model with placeholder
+
         ModelStaffUser us = new ModelStaffUser();
-        boolean isValid = us.IsValidUser(username, password);
+
         HttpSession session = request.getSession();
         System.out.println("Session in servlet " + session);
         
@@ -90,6 +84,7 @@ public class StaffLogin extends HttpServlet {
             
 // This Will be the page that the login redipaches to once a vaild login is accheved
            System.out.println("Session in servlet " + session);
+
 
            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
            rd.forward(request, response);
