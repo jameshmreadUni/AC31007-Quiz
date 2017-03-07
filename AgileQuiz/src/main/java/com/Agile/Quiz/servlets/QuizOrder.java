@@ -5,17 +5,24 @@
  */
 package com.Agile.Quiz.servlets;
 
+import com.Agile.Quiz.models.ModelQuizOrder;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
  * @author Brian
  */
+@WebServlet(name = "StudentCompletedOrNot", urlPatterns = {"/StudentCompletedOrNot","/studentcompletedornot","/StudentCompletedOrnot","/StudentCompletedornot", "/Studentcopletedornot","/studentCompletedornot", "/studentcompletedOrnot/*"})
 public class QuizOrder extends HttpServlet {
 
 
@@ -57,7 +64,8 @@ public class QuizOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response);
+
     }
 
     /**
@@ -72,6 +80,20 @@ public class QuizOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+                HttpSession session = request.getSession();
+        
+        LinkedList<String> ls = ModelQuizOrder.QuizOrder("");
+        
+        session.setAttribute("linkedlist", ls);
+// This Will be the page that the login redipaches to once a vaild login is accheved
+          
+        
+           RequestDispatcher rd = request.getRequestDispatcher("/StudentCompletedOrNot.jsp");
+           rd.forward(request, response);
+    
+
     }
 
     /**
