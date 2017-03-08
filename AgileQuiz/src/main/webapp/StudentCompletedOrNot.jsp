@@ -21,37 +21,35 @@
                 
     <%
         loginBean lg = (loginBean) session.getAttribute("loginBean");
-                    LinkedList ls = (LinkedList) session.getAttribute("linkedlist");
+                    LinkedList ls = (LinkedList) request.getAttribute("linkedlist");
                     
                     if (lg != null) {
                         String UserName = lg.getUsername();
                         if (lg.getloggedin()) {
                             
-                        }
-                        }
     %>
     
-          <%
+          <%                                 //think this should be completedbean? instead of model quiz order
                         java.util.LinkedList<ModelQuizOrder> lsLink = (java.util.LinkedList<ModelQuizOrder>) request.getAttribute("linkedlist");
                         if (lsLink == null) {
                     %>
                     <p>No List Found</p> 
                     <%
                     } else {
-                        Iterator<ModelQuizOrder> iterator;
-                        iterator = lsLink.iterator();
-                        while (iterator.hasNext()) {
-                            ModelQuizOrder lt = (ModelQuizOrder) iterator.next();
-
-
-
-                    %>
+                    %>  
                     <p>Quiz List</p>
-                    <a href="/AgileQuiz/QuizOrder<%=ls.listIterator()%>"></a><br/><%
-           
-
-                            }
+                    <%
+                        for(int i =0; i < lsLink.size(); i++)
+                        {
+                    %>
+                    <p>
+                        <%=lsLink.get(i)%>;
+                    </p>
+                    <%
                         }
+                    }
+                }
+            }
                         %> 
                 </article>
     </body>

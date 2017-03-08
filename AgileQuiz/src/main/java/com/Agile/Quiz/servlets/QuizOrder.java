@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian
  */
-@WebServlet(name = "StudentCompletedOrNot", urlPatterns = {"/StudentCompletedOrNot","/studentcompletedornot","/StudentCompletedOrnot","/StudentCompletedornot", "/Studentcopletedornot","/studentCompletedornot", "/studentcompletedOrnot/*"})
+@WebServlet(name = "StudentCompletedOrNot", urlPatterns = {"/StudentCompletedOrNot","/CompletedQuizzes","/StudentCompletedOrnot","/StudentCompletedornot", "/Studentcopletedornot","/studentCompletedornot", "/studentcompletedOrnot/*"})
 public class QuizOrder extends HttpServlet {
 
 
@@ -64,10 +64,17 @@ public class QuizOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       processRequest(request, response);
-
+     //  processRequest(request, response);
+        LinkedList<String> ls = ModelQuizOrder.QuizOrder();
+        
+        request.setAttribute("linkedlist", ls);
+// This Will be the page that the login redipaches to once a vaild login is accheved
+          
+        
+           RequestDispatcher rd = request.getRequestDispatcher("/StudentCompletedOrNot.jsp");
+           rd.forward(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -79,19 +86,10 @@ public class QuizOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
         
         
-                HttpSession session = request.getSession();
         
-        LinkedList<String> ls = ModelQuizOrder.QuizOrder("");
-        
-        session.setAttribute("linkedlist", ls);
-// This Will be the page that the login redipaches to once a vaild login is accheved
-          
-        
-           RequestDispatcher rd = request.getRequestDispatcher("/StudentCompletedOrNot.jsp");
-           rd.forward(request, response);
     
 
     }

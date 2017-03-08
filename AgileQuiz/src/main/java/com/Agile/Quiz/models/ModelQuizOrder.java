@@ -14,9 +14,6 @@ import java.util.List;
  */
 public class ModelQuizOrder {
 
-    public static LinkedList<String> QuizOrder(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
  //these will be replaced from the database.
  //the order of completed and non completed will be done by the database.
@@ -27,7 +24,7 @@ public class ModelQuizOrder {
  
    }
    
-     public static LinkedList<String> QuizOrder(String args[]) {
+     public static LinkedList<String> QuizOrder() {
 
  LinkedList<String> linkedlist = new LinkedList<>();
 

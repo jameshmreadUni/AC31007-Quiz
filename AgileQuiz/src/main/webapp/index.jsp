@@ -30,7 +30,7 @@
     %>
     <li><a href="/AgileQuiz/LogOut" >Logout</a></li>
     <li><a href="/AgileQuiz/Quiz/test" >Quiz</a></li>
-    <li><a href="/AgileQuiz/StudentCompletedOrNot.jsp">Completed Quizes</a></li>
+    <li><a href="/AgileQuiz/StudentCompletedOrNot">Completed Quizzes</a></li>
                         <%}
                         }else{
                         %>
