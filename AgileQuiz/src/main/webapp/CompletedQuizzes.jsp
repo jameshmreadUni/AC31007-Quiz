@@ -37,13 +37,13 @@
                     <%
                     } else {
                     %>  
-                    <p>Quiz List</p>
+                    <h2>Quiz List</h2>
                     <%
                         for(int i =0; i < lsLink.size(); i++)
                         {
                     %>
                     <p>
-                        <%=lsLink.get(i)%>;
+                        <%=lsLink.get(i)%>
                     </p>
                     <%
                         }
@@ -54,25 +54,3 @@
                 </article>
     </body>
 </html>
-
-               <%-- <article>
-                    <h1>Your Pics</h1>
-                    <%
-                        java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
-                        if (lsPics == null) {
-                    %>
-                    <p>No Pictures found</p>
-                    <%
-                    } else {
-                        Iterator<Pic> iterator;
-                        iterator = lsPics.iterator();
-                        while (iterator.hasNext()) {
-                            Pic p = (Pic) iterator.next();
-
-                    %>
-                    <a class="image featured" href="/Instagrim/Image/<%=p.getUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getUUID()%>"></a><br/><%
-
-                            }
-                        }
-                        %>
-                </article> --%>

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian
  */
-@WebServlet(name = "StudentCompletedOrNot", urlPatterns = {"/StudentCompletedOrNot","/CompletedQuizzes","/StudentCompletedOrnot","/StudentCompletedornot", "/Studentcopletedornot","/studentCompletedornot", "/studentcompletedOrnot/*"})
+@WebServlet(name = "CompletedQuizzes", urlPatterns = {"/CompletedQuizzes","/completedquizzez","/completedQuizzes","/Completedquizzes/*"})
 public class QuizOrder extends HttpServlet {
 
 
@@ -71,7 +71,7 @@ public class QuizOrder extends HttpServlet {
 // This Will be the page that the login redipaches to once a vaild login is accheved
           
         
-           RequestDispatcher rd = request.getRequestDispatcher("/StudentCompletedOrNot.jsp");
+           RequestDispatcher rd = request.getRequestDispatcher("/CompletedQuizzes.jsp");
            rd.forward(request, response);
     }
     
