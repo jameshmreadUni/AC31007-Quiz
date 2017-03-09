@@ -15,6 +15,7 @@ public class QuestionBean {
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
     private String answerType;
+    private String explanation;
     //constructor initialises the size of the array of questions upon creation
     public QuestionBean(int numberOfAnswers){
         answerText = new String[numberOfAnswers];
@@ -33,6 +34,16 @@ public class QuestionBean {
     
     public String getQuestionText(){
         return this.questionText;
+    }
+    
+    public String getExplanation()
+    {
+        return this.explanation;
+    }
+    
+    public void setExplanation(String explain)
+    {
+        explanation = explain;
     }
     
     public void setAnswerText(String answerText, int answerNumber){
@@ -64,4 +75,5 @@ public class QuestionBean {
     public String getAnswerType(){
         return this.answerType;
     }
+    
 }

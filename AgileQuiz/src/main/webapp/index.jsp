@@ -35,4 +35,5 @@
     </ul>
 </nav>
     </body>
+    <li><a href="quizList.jsp">Select A Quiz</a></li>
 </html>

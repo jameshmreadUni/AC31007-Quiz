@@ -7,10 +7,11 @@ package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.stores.QuestionBean;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
- * @author jamesread
+ * @author jamesread 
  */
 public class ModelQuiz {
     
@@ -22,6 +23,7 @@ public class ModelQuiz {
         String answerType = "radio";
         String questionText = "Placeholder Question Text";
         String answerText = "Answer";
+        String explanation = "we dont have one";
         
         LinkedList<QuestionBean> question = new LinkedList<>();
         QuestionBean questionBean;
@@ -33,6 +35,8 @@ public class ModelQuiz {
             questionBean.setQuestionText(questionText);
             questionBean.setQuestionNumber(i);
             questionBean.setAnswerType(answerType);
+            questionBean.setExplanation(explanation);
+
             //the I/j values need to be replaced with values appropriate to the content of the DB
             for(int j = 0; j < numberOfAnswers; j++)
                 questionBean.setAnswerText(answerText, j);
@@ -41,5 +45,9 @@ public class ModelQuiz {
         }
         //TODO implement database stuff
         return question;
+    }
+
+    public LinkedList<QuestionBean> getQuestiins(String quizName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
