@@ -56,7 +56,17 @@ public Connection establishConnection(){
     
     }
 
+public void closeConnection(){
 
+   
+    try{
+        if(conn.isClosed())
+            conn.close();
 
+    }catch (SQLException ex){
+       System.out.println("SQLException: " + ex.getMessage());
+       System.out.println("SQLState: " + ex.getSQLState());
+       System.out.println("VendorError: " + ex.getErrorCode());
     }
-
+    }
+}
