@@ -11,6 +11,7 @@ import java.util.LinkedList;
 /**
  *
  * @author jamesread
+ * this model returns the requested quiz
  */
 public class ModelQuiz {
     
