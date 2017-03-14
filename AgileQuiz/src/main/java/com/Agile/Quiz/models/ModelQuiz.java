@@ -6,6 +6,7 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.stores.QuestionBean;
+import java.sql.PreparedStatement;
 import java.util.LinkedList;
 
 /**
@@ -15,6 +16,24 @@ import java.util.LinkedList;
 public class ModelQuiz {
     
     public LinkedList<QuestionBean> getQuestions(String quizName){
+        
+        //What we need
+        
+        //Return the quizid for the matching quiz title and module
+        //Return the total number of questions for that quizid (Could maybe be done with an array and use the length?)
+        //Select all the questions from that quiz
+        //Return the number of answers for each question.(Could maybe be done with an array and use the length?)
+        //Return the answers for each question
+        
+        
+        
+        PreparedStatement ps = null;
+        
+        String text = "select * from 16agileteam4db.quiz";
+        
+        
+        
+        
         //database connection, return info using quiz name
         //select all questions, answers from quizName
         int numberOfQuestions = 4;
