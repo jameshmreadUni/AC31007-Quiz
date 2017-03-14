@@ -36,9 +36,10 @@ public class QuizFeedback extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ModelFeedback feedback = new ModelFeedback();
         String quizName = "testQuizName"; // TODO = request.getParameter("quizName");
 
-        request.setAttribute("quizFeedback", ModelFeedback.getFeedback(quizName));
+        request.setAttribute("quizFeedback", feedback.getFeedback(quizName));
         RequestDispatcher rd = request.getRequestDispatcher("/feedback.jsp");
         rd.forward(request, response);
     }

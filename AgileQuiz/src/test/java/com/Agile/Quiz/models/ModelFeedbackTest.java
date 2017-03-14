@@ -46,9 +46,9 @@ public class ModelFeedbackTest {
         System.out.println("getFeedback");
         String quizName = "test";
         
-        
-        boolean expResult = true;
-        boolean result = ModelFeedback.getFeedback(quizName);
+        ModelFeedback feedback = new ModelFeedback();
+        String expResult = feedback.getFeedback(quizName).getQuestionExplanations(0);
+        String result = feedback.getFeedback(quizName).getQuestionExplanations(0);
         assertEquals(expResult, result);
     }
     

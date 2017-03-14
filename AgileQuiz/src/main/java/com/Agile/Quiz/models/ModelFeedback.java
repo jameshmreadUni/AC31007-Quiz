@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.QuizResultBean;
 
 /**
@@ -12,8 +13,8 @@ import com.Agile.Quiz.stores.QuizResultBean;
  * @author jamesread
  */
 public class ModelFeedback {
-    public static boolean getFeedback(String quizName){
-        //TODO database stuff
+    public QuizResultBean getFeedback(String quizName){
+        //TODO database stuff      
         
         String[] questions = {"question1", "question2", "question3"};
         String[] correctAnswers = {"correct1","correct2","correct3"};
@@ -30,6 +31,6 @@ public class ModelFeedback {
         quizResult.setCorrectAnswers(correctAnswers);
         quizResult.setScore(score);
         
-        return true;
+        return quizResult;
     }
 }
