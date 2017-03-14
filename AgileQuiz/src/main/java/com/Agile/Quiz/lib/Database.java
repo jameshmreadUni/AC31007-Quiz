@@ -12,10 +12,6 @@ import java.sql.*;
  */
 public class Database {
     
-private String user = "16agileteam4";
-private String pass = "9348.at4.8439";
-private String dbClass = "com.mysql.jdbc.Driver";
-private String dbDriver = "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam4db";
 private Connection conn = null;
     
    
@@ -87,7 +83,47 @@ public Connection closeConnection(){
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-
+  
+        conn = this.closeConnection(); 
+       
+        
         return quizid; 
     }
+
+
+
+    public int getQuestionsNumbers(String quizID){
+
+        PreparedStatement ps = null; 
+        int numberofquestions = 0;
+        
+        String text = "SELECT COUNT(*) FROM question WHERE quizID = ?";
+        
+        try{
+           conn = this.establishConnection();
+           System.out.println("Conn: " + conn);
+           ps = conn.prepareStatement(text);
+           ps.setString(1, quizID);
+           System.out.println(ps);
+           System.out.println(quizID);
+           ResultSet rs = ps.executeQuery();
+           System.out.println(rs);
+           while (rs.next()) {
+               
+                numberofquestions = rs.getInt("COUNT(*)");
+                System.out.println("quizID : " + numberofquestions);
+            }
+
+        }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+  
+        conn = this.closeConnection(); 
+       
+        return numberofquestions; 
+    }
+    
 }

@@ -10,10 +10,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
+    <%-- <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" /> --%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css">
+        
         <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("quiz"); %>
         <%String quizTitle = (String)request.getAttribute("quizTitle");%>
         
