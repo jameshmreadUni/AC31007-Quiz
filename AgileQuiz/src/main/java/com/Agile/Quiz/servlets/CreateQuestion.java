@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,7 +37,7 @@ public class CreateQuestion extends HttpServlet {
         super();
         quiz = new LinkedList<>();
         CommandsMap.put("CreateQuestion", 1);
-        CommandsMap.put("changeAnswerType", 2);
+        CommandsMap.put("changeAnswerType", 2); 
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -89,11 +90,21 @@ public class CreateQuestion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       if(request.getParameter("answerType") != null ){
+        HttpSession session = (HttpSession) request.getSession();
+        String quizName = (String) session.getAttribute("quizName");
+        if(request.getParameter("answerType") != null ){
+            if(session.getAttribute("questionNumber")==null)
+                session.setAttribute("questionNumber", 0);
+            else session.setAttribute("questionNumber", (int) session.getAttribute("questionNumber")+1);
+        /*
+        Sets a session var for the question number if not already done so and
+        increases it every time this is called to update the question number
+        */
+       
         if(request.getParameter("answerType").equals("text"))
-           addTextQuestion(request, response);
+           addTextQuestion(request, response, (int) session.getAttribute("questionNumber"), quizName);
         else{
-           addMultiChoiceQuestion(request, response);
+           addMultiChoiceQuestion(request, response, (int) session.getAttribute("questionNumber"), quizName);
         }
        }
         
@@ -119,29 +130,31 @@ public class CreateQuestion extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void addTextQuestion(HttpServletRequest request, HttpServletResponse response) {
+    private void addTextQuestion(HttpServletRequest request, HttpServletResponse response, int questionNumber, String quizName) {
        String questionText = (String)request.getParameter("question");
        String correctAnswerText = (String)request.getParameter("answer");
+       
+       
        System.out.println("Textbox Question Added");
-       ModelCreateQuiz.addTextQuestion(questionText, correctAnswerText);
+       
+       ModelCreateQuiz.addTextQuestion(questionText, correctAnswerText, questionNumber, quizName);
        //add question is static, trying out static model
     }
 
-    private void addMultiChoiceQuestion(HttpServletRequest request, HttpServletResponse response) {
+    private void addMultiChoiceQuestion(HttpServletRequest request, HttpServletResponse response, int questionNumber, String quizName) {
         String questionText = (String)request.getParameter("question");
         String[] answerArray = request.getParameterValues("answer");
-        int numberOfAnswers = (int)request.getParameterValues("answer").length;
+        
+        
         String[] correctAnswerArray = request.getParameterValues("correctAnswer");
         System.out.println("Multichoice Question Added");
+        
         ModelCreateQuiz.addMultiAnswerQuestion(questionText, 
-                answerArray, numberOfAnswers, correctAnswerArray);
+                answerArray,
+                correctAnswerArray, questionNumber, quizName);
         
        
-        for(int i = 0; i < request.getParameterValues("answer").length; i++)
-            if(answerArray[i] != "")
-                System.out.println("Answers: " + answerArray[i]);
-        for(int i = 0; i < request.getParameterValues("correctAnswer").length; i++)
-            System.out.println("Correct Answer?: " + correctAnswerArray[i]);
+        
         
     }
 

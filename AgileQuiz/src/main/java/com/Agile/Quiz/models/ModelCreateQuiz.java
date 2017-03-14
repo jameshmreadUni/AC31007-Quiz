@@ -6,6 +6,7 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.stores.QuestionBean;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,32 +14,43 @@ import com.Agile.Quiz.stores.QuestionBean;
  */
 public class ModelCreateQuiz {
     
-    public static void addTextQuestion(String questionText, String answerText){
-        //TODO add into DB
+    //LinkedList<QuestionBean> quiz = new LinkedList<>();
+    
+    public static boolean addTextQuestion(String questionText, 
+            String answerText, int questionNumber, String quizName){
+       //TODO DB STUFF
         /*
        QuestionBean question = new QuestionBean(1);
        question.setQuestionText(questionText);
        question.setAnswerText(correctAnswerText, 0);
         */
+        boolean inserted = true;
+        return inserted;
     }
     
-    public static void addMultiAnswerQuestion(String questionText, 
-        String[] inputAnswerArray, int numberOfAnswers, String[] correctAnswerArray){
+    public static boolean addMultiAnswerQuestion(String questionText, 
+        String[] inputAnswerArray, 
+        String[] correctAnswerArray, int questionNumber, String quizName){
         
-        String[] answerArray = new String[numberOfAnswers];
+        LinkedList<String> answerArray = new LinkedList<>();
         //this new answer array eliminates the spaces in the returned array of
         //inputed answers to avoid an empty answer
-         for(int i = 0; i < answerArray.length; i++)
+         for(int i = 0; i < inputAnswerArray.length; i++)
             if(!inputAnswerArray[i].equals(""))
-                 answerArray[i] = inputAnswerArray[i];
-//TODO ADD DB STUFF
-        /*
-        QuestionBean question = new QuestionBean(numberOfAnswers);
-        question.setQuestionText(questionText);
-        
-        for(int i = 0; i < numberOfAnswers; i++)
-            question.setAnswerText(answerArray[i], i);
-            */
+                 answerArray.add(inputAnswerArray[i]);
+        //////// 
+         System.out.println("Question Number: " + questionNumber);
+         
+       
+         //TODO DB STUFF
+         boolean inserted = true;
+        return inserted;
+            
+    }
+    
+    public static boolean addQuizToDB(LinkedList<QuestionBean> questionList){
+        //TODO DB stuff
+        return true;
     }
 
 }
