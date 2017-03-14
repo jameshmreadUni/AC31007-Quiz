@@ -111,7 +111,7 @@ public Connection closeConnection(){
            while (rs.next()) {
                
                 numberofquestions = rs.getInt("COUNT(*)");
-                System.out.println("quizID : " + numberofquestions);
+                System.out.println("Num of Qs : " + numberofquestions);
             }
 
         }catch (SQLException ex) {
@@ -125,5 +125,37 @@ public Connection closeConnection(){
        
         return numberofquestions; 
     }
-    
+    public int getAnswerNumbers(int questionID){
+
+        PreparedStatement ps = null; 
+        int numberofanswers = 0;
+        
+        String text = "SELECT COUNT(*) FROM answer WHERE questionID = ?";
+        
+        try{
+           conn = this.establishConnection();
+           System.out.println("Conn: " + conn);
+           ps = conn.prepareStatement(text);
+           ps.setInt(1, questionID);
+           System.out.println(ps);
+           System.out.println(questionID);
+           ResultSet rs = ps.executeQuery();
+           System.out.println(rs);
+           while (rs.next()) {
+               
+                numberofanswers = rs.getInt("COUNT(*)");
+                System.out.println("numberofanswers : " + numberofanswers);
+            }
+
+        }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+  
+        conn = this.closeConnection(); 
+       
+        return numberofanswers; 
+    }
 }

@@ -34,11 +34,11 @@ public class ModelQuiz {
         String quizID = db.selectQuizID(quizName); 
         System.out.println(quizID);
         int numberOfQuestions = db.getQuestionsNumbers(quizID);
-        
+        int numberOfAnswers = db.getAnswerNumbers(1000);
         
         //database connection, return info using quiz name
         //select all questions, answers from quizName
-        int numberOfAnswers = 5;
+        //int numberOfAnswers = 5;
         String answerType = "radio";
         String questionText = "Placeholder Question Text";
         String answerText = "Answer";
