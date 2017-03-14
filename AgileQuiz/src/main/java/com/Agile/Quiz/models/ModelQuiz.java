@@ -5,8 +5,9 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.QuestionBean;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.LinkedList;
 
 /**
@@ -16,6 +17,9 @@ import java.util.LinkedList;
 public class ModelQuiz {
     
     public LinkedList<QuestionBean> getQuestions(String quizName){
+        
+        Database db = new Database();
+        
         
         //What we need
         
@@ -27,11 +31,9 @@ public class ModelQuiz {
         
         
         
-        PreparedStatement ps = null;
+        String quizID = db.selectQuizID(quizName);
         
-        String text = "select * from 16agileteam4db.quiz";
-        
-        
+        System.out.println(quizID);
         
         
         //database connection, return info using quiz name
