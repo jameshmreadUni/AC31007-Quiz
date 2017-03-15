@@ -12,12 +12,14 @@ package com.Agile.Quiz.stores;
 public class DBQuestionBean {
     
     private String questionID[];
-    private String questionText[]; 
+    private String questionText[];
+    private String answerText[]; 
     
     
-    public DBQuestionBean(int numberOfQuestions){
+    public DBQuestionBean(int numberOfQuestions, int numberOfAnswers){
         questionText = new String[numberOfQuestions];
         questionID = new String[numberOfQuestions];
+        answerText = new String[numberOfAnswers];
 
     }
 
@@ -47,6 +49,20 @@ public class DBQuestionBean {
      */
     public void setQuestionText(String questionText, int questionNumber) {
         this.questionText[questionNumber] = questionText;
+    }
+
+    /**
+     * @return the answerText
+     */
+    public String[] getAnswerText() {
+        return answerText;
+    }
+
+    /**
+     * @param answerText the answerText to set
+     */
+    public void setAnswerText(String answerText, int answerNumber) {
+        this.answerText[answerNumber]= answerText;
     }
     
     

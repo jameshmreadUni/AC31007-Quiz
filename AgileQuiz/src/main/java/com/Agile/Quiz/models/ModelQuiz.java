@@ -29,23 +29,31 @@ public class ModelQuiz {
         
         String[] questionText;
         String[] questionID;
-        
-        
+        String[] answerText;
+
         
         
         
         int numberOfQuestions = db.getQuestionsNumbers(quizID);
-        int numberOfAnswers = db.getAnswerNumbers(1000);
-        DBQuestionBean questions;
+        int numberOfAnswers = db.getAnswerNumbers("1000");
+         QuestionBean questions;
         
         questionText = new String[numberOfQuestions];
         questionID = new String[numberOfQuestions];
-        questions = db.selectQuestionText(quizID, numberOfQuestions);
+        answerText = new String[numberOfAnswers];
+        questions = db.selectQuestionText(quizID, numberOfQuestions, numberOfAnswers);
         
         for(int i = 0; i< numberOfQuestions; i++){
         
             questionText[i] = questions.getQuestionText()[i];
-            questionID[i] = questions.getQuestionID()[i]; 
+            questionID[i] = questions.getQuestionID()[i];
+            
+            for(int j=0; j<numberOfAnswers; j++){
+               
+                questions.setAnswerText((db.selectAnswerText(questionID[i], numberOfAnswers)[j]), j);
+                
+            
+            }
         
         }
         
@@ -56,7 +64,7 @@ public class ModelQuiz {
         //int numberOfAnswers = 5;
         String answerType = "radio";
         
-        String answerText[] = db.selectAnswerText("1000", numberOfAnswers);
+        
         
         
         
@@ -66,8 +74,8 @@ public class ModelQuiz {
         //this loop will go through the questions for a quiz and put the result into the Question bean
         //the list of these beans will then be exported to the controller-->view
         for(int i = 0; i < numberOfQuestions; i++){
-            questionBean = new QuestionBean(numberOfAnswers);
-            questionBean.setQuestionText(questionText[i]);
+            questionBean = new QuestionBean(numberOfQuestions,numberOfAnswers);
+            questionBean.setQuestionText(questionText[i], i);
             questionBean.setQuestionNumber(i);
             questionBean.setAnswerType(answerType);
             //the I/j values need to be replaced with values appropriate to the content of the DB

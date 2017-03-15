@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.Agile.Quiz.lib;
-import com.Agile.Quiz.stores.DBQuestionBean;
+import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
 
 /**
@@ -132,7 +132,7 @@ public Connection closeConnection(){
        
         return numberofquestions; 
     }
-    public int getAnswerNumbers(int questionID){
+    public int getAnswerNumbers(String questionID){
     //Return the total number of answers for a specfic questionID
         System.out.println("--- GET NUMBER OF ANSWERS ---");
         PreparedStatement ps = null; 
@@ -144,7 +144,7 @@ public Connection closeConnection(){
            conn = this.establishConnection();
            System.out.println("Conn: " + conn);
            ps = conn.prepareStatement(text);
-           ps.setInt(1, questionID);
+           ps.setString(1, questionID);
            System.out.println(ps);
            System.out.println(questionID);
            ResultSet rs = ps.executeQuery();
@@ -169,10 +169,10 @@ public Connection closeConnection(){
         return numberofanswers; 
     }
     
-    public DBQuestionBean selectQuestionText(String quizID, int numberofQuestions){
+    public QuestionBean selectQuestionText(String quizID, int numberofQuestions, int numberofAnswers){
         System.out.println("--- SELECT QUESTION TEXT ---"); 
         
-        DBQuestionBean questions = new DBQuestionBean(numberofQuestions); 
+        QuestionBean questions = new QuestionBean(numberofQuestions, numberofAnswers); 
         
         
         

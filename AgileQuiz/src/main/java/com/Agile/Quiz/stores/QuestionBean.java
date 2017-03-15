@@ -10,14 +10,17 @@ package com.Agile.Quiz.stores;
  * @author jamesread
  */
 public class QuestionBean {
-    private String questionText;
+    private String questionID[];
+    private String[] questionText;
     private String[] answerText;
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
     private String answerType;
     //constructor initialises the size of the array of questions upon creation
-    public QuestionBean(int numberOfAnswers){
+    public QuestionBean(int numberOfQuestions,int numberOfAnswers){
         answerText = new String[numberOfAnswers];
+        questionText = new String[numberOfQuestions];
+        questionID = new String[numberOfQuestions];
        /*
         this.questionText = "Question 1: Who is president?";
        this.answerText[0] = "A: Donald Trump";
@@ -26,13 +29,32 @@ public class QuestionBean {
        this.questionNumber = 1;
         */
     }
-    
-    public void setQuestionText(String questionText){
-        this.questionText = questionText;
+   /**
+     * @return the questionID
+     */
+    public String[] getQuestionID() {
+        return questionID;
     }
-    
-    public String getQuestionText(){
-        return this.questionText;
+
+    /**
+     * @param questionID the questionID to set
+     */
+    public void setQuestionID(String questionID, int questionNumber) {
+        this.questionID[questionNumber] = questionID;
+    }
+
+    /**
+     * @return the questionText
+     */
+    public String[] getQuestionText() {
+        return questionText;
+    }
+
+    /**
+     * @param questionText the questionText to set
+     */
+    public void setQuestionText(String questionText, int questionNumber) {
+        this.questionText[questionNumber] = questionText;
     }
     
     public void setAnswerText(String answerText, int answerNumber){
