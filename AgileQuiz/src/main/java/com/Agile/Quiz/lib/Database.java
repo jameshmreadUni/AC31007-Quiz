@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.Agile.Quiz.lib;
-import com.Agile.Quiz.stores.QuestionBean;
+import com.Agile.Quiz.stores.DBQuestionBean;
 import java.sql.*;  
 
 /**
@@ -123,7 +123,7 @@ public Connection closeConnection(){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-                } finally {
+        } finally {
   
         conn = this.closeConnection(); 
        
@@ -169,14 +169,20 @@ public Connection closeConnection(){
         return numberofanswers; 
     }
     
-    public String selectQuestionText(String quizID){
+    public DBQuestionBean selectQuestionText(String quizID, int numberofQuestions){
         System.out.println("--- SELECT QUESTION TEXT ---"); 
         
+        DBQuestionBean questions = new DBQuestionBean(numberofQuestions); 
         
-        String questiontext = null; 
+        
+        
+        String questionText[];
+        String questionID[];
+        questionText = new String[numberofQuestions];
+        questionID = new String[numberofQuestions];
         PreparedStatement ps = null;
         int i = 0; 
-        String text = "SELECT questionText FROM question WHERE quizID = ?";
+        String text = "SELECT questionID,questionText FROM question WHERE quizID = ?";
         
         try{
            conn = this.establishConnection();
@@ -188,10 +194,21 @@ public Connection closeConnection(){
            ResultSet rs = ps.executeQuery();
            System.out.println(rs);
            while (rs.next()) {
-                questiontext = rs.getString("questionText");
-                System.out.println("quizText : " + questiontext);
+                questionText[i] = rs.getString("questionText");
+                questionID[i] = rs.getString("questionID");
+                System.out.println("questionText: " + questionText[i]);
+                System.out.println("questionID: " + questionID[i]);
+                i++; 
             }
 
+           for (int j = 0; j < numberofQuestions; j++){
+           
+               questions.setQuestionID(questionID[j], j);
+               questions.setQuestionText(questionText[j], j);
+               System.out.println("Information Set");
+           
+           }
+                      
         }catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -204,10 +221,10 @@ public Connection closeConnection(){
         }
        
         
-        return questiontext; 
+        return questions; 
     }
       
-      public String[] selectAnswerText(String questionID, int numberofanswers){
+     public String[] selectAnswerText(String questionID, int numberofanswers){
         System.out.println("--- SELECT ANSWER TEXT ---"); 
         
         
