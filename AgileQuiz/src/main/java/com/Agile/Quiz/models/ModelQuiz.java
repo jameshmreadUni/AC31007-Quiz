@@ -44,7 +44,7 @@ public class ModelQuiz {
         //int numberOfAnswers = 5;
         String answerType = "radio";
         String questionText = db.selectQuestionText(quizID);
-        String answerText = "Answer";
+        String answerText[] = db.selectAnswerText("1000", numberOfAnswers);
         
         LinkedList<QuestionBean> question = new LinkedList<>();
         QuestionBean questionBean;
@@ -58,7 +58,7 @@ public class ModelQuiz {
             questionBean.setAnswerType(answerType);
             //the I/j values need to be replaced with values appropriate to the content of the DB
             for(int j = 0; j < numberOfAnswers; j++)
-                questionBean.setAnswerText(answerText, j);
+                questionBean.setAnswerText(answerText[j], j);
             
             question.add(questionBean);
         }
