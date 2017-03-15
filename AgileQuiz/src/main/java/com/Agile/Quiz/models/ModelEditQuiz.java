@@ -44,15 +44,24 @@ public class ModelEditQuiz {
     
     //Method to delete an answer from a quiz
     public String removeQuizAnswer(){
+        //Dummy Code that will actually be removed from the database
+        String quizAnswerRemove = "Gemma";
         
-        return null;
+        //Removes String
+        quizAnswerRemove = "";
+        
+        return quizAnswerRemove;
     }
     
     
     //Method to add an answer to the quiz
     public String addQuizAnswer(){
         
-        return null;
+    String addAnswer;
+    
+    addAnswer = "Ramesh";
+    
+        return addAnswer;
         
     }
     
