@@ -53,4 +53,8 @@ public class ModelCreateQuiz {
         return true;
     }
 
+    public boolean toggleAvailability(String available){
+        //DB stuff
+        return available.equalsIgnoreCase("on");
+    }
 }

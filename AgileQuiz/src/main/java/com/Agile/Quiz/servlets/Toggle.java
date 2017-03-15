@@ -59,16 +59,10 @@ public class Toggle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String input;
-        //boolean availability = false; 
-        
-        input = request.getParameter("toggleBox");
+        String input = request.getParameter("toggleBox");
         System.out.println("Input: " + input);
-        
         toggleModel tm = new toggleModel();
-        tm.checkAvailability(input);
-        
-        
+        tm.checkAvailability(input);  
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
         
