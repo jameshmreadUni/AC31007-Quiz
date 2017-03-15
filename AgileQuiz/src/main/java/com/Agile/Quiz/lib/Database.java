@@ -206,8 +206,45 @@ public Connection closeConnection(){
         
         return questiontext; 
     }
-    
       
-    
+      public String[] selectAnswerText(String questionID, int numberofanswers){
+        System.out.println("--- SELECT ANSWER TEXT ---"); 
+        
+        
+        String answertext[];
+        answertext = new String[numberofanswers]; 
+        PreparedStatement ps = null;
+        int i = 0;
+        String text = "SELECT answerText FROM answer WHERE questionID = ?";
+        
+        try{
+           conn = this.establishConnection();
+           System.out.println("Conn: " + conn);
+           ps = conn.prepareStatement(text);
+           ps.setString(1, questionID);
+           System.out.println(ps);
+           System.out.println(questionID);
+           ResultSet rs = ps.executeQuery();
+           System.out.println(rs);
+           while (rs.next()) {
+                answertext[i] = rs.getString("answerText");
+                System.out.println("Answer : " + answertext[i]);
+                i++;
+            }
+
+        }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        } finally {
+  
+        conn = this.closeConnection(); 
+       
+        }
+       
+        
+        return answertext; 
+    }
     
 }
