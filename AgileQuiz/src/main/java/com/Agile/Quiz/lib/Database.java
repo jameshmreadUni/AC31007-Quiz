@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.Agile.Quiz.lib;
+import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
 
 /**
@@ -45,7 +46,7 @@ public Connection establishConnection(){
 
 public Connection closeConnection(){
     try{
-        if(!conn.isClosed())
+        if(conn!=null)
             conn.close(); System.out.println("Closed");
 
     }catch (SQLException ex){
@@ -58,6 +59,8 @@ public Connection closeConnection(){
 
 
     public String selectQuizID(String quizName){
+    //Return the quizID for a specfic quiz title
+    System.out.println("--- SELECT QUIZ ID ---");
         String quizid = null; 
         PreparedStatement ps = null;
         String text = "SELECT * FROM quiz WHERE quizName = ?";
@@ -82,18 +85,19 @@ public Connection closeConnection(){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-        }
+        } finally {
   
         conn = this.closeConnection(); 
        
-        
+        }
         return quizid; 
     }
 
 
 
     public int getQuestionsNumbers(String quizID){
-
+    //Return the total number of questions for a specfic quizID 
+        System.out.println("--- GET NUMBER OF QUESTIONS ---");
         PreparedStatement ps = null; 
         int numberofquestions = 0;
         
@@ -119,14 +123,18 @@ public Connection closeConnection(){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-        }
+                } finally {
   
         conn = this.closeConnection(); 
+       
+        }
+
        
         return numberofquestions; 
     }
     public int getAnswerNumbers(int questionID){
-
+    //Return the total number of answers for a specfic questionID
+        System.out.println("--- GET NUMBER OF ANSWERS ---");
         PreparedStatement ps = null; 
         int numberofanswers = 0;
         
@@ -152,10 +160,54 @@ public Connection closeConnection(){
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-        }
+        } finally {
   
         conn = this.closeConnection(); 
        
+        }
+       
         return numberofanswers; 
     }
+    
+    public String selectQuestionText(String quizID){
+        System.out.println("--- SELECT QUESTION TEXT ---"); 
+        
+        
+        String questiontext = null; 
+        PreparedStatement ps = null;
+        int i = 0; 
+        String text = "SELECT questionText FROM question WHERE quizID = ?";
+        
+        try{
+           conn = this.establishConnection();
+           System.out.println("Conn: " + conn);
+           ps = conn.prepareStatement(text);
+           ps.setString(1, quizID);
+           System.out.println(ps);
+           System.out.println(quizID);
+           ResultSet rs = ps.executeQuery();
+           System.out.println(rs);
+           while (rs.next()) {
+                questiontext = rs.getString("questionText");
+                System.out.println("quizText : " + questiontext);
+            }
+
+        }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        } finally {
+  
+        conn = this.closeConnection(); 
+       
+        }
+       
+        
+        return questiontext; 
+    }
+    
+      
+    
+    
 }

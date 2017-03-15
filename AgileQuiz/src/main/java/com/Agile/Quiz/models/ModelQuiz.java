@@ -29,6 +29,9 @@ public class ModelQuiz {
         //Return the number of answers for each question.(Could maybe be done with an array and use the length?)
         //Return the answers for each question
         
+        //Use a question bean to return question details
+        //Use an array to return the question details
+        
         
         
         String quizID = db.selectQuizID(quizName); 
@@ -40,7 +43,7 @@ public class ModelQuiz {
         //select all questions, answers from quizName
         //int numberOfAnswers = 5;
         String answerType = "radio";
-        String questionText = "Placeholder Question Text";
+        String questionText = db.selectQuestionText(quizID);
         String answerText = "Answer";
         
         LinkedList<QuestionBean> question = new LinkedList<>();
