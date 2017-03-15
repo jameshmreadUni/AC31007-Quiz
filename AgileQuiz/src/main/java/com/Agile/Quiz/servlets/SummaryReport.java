@@ -5,8 +5,13 @@
  */
 package com.Agile.Quiz.servlets;
 
+
+import com.Agile.Quiz.models.ModelSummaryReport;
+import com.Agile.Quiz.stores.SummaryReportBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian
  */
-@WebServlet(name = "SummaryReport", urlPatterns = {"/SummaryReport"})
+@WebServlet(name = "SummaryReport", urlPatterns = {"/summaryReport"})
 public class SummaryReport extends HttpServlet {
 
     /**
@@ -56,9 +61,18 @@ public class SummaryReport extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     //  processRequest(request, response);
+        ModelSummaryReport modelsummaryreport = new ModelSummaryReport();
+        LinkedList<SummaryReportBean> sl = modelsummaryreport.QuizSummaryReport();
+        
+        request.setAttribute("summaryList", sl);
+// This Will be the page that the login redipaches to once a vaild login is accheved
+          
+        
+           RequestDispatcher rd = request.getRequestDispatcher("/summaryReport.jsp");
+           rd.forward(request, response);
     }
 
     /**

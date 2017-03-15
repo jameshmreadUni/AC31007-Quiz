@@ -87,7 +87,7 @@ public class SummaryReportBean {
        /**
      * @param percentage the percentage to set
      */
-    public void setPercentage(double percentage) {
+    public void setPercentage(double percentage) { 
         this.percentage = percentage;
     }
 
