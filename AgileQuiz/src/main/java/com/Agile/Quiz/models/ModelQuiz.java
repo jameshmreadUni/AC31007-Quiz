@@ -5,17 +5,22 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.QuestionBean;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.LinkedList;
 
 /**
  *
  * @author jamesread
+ * this model returns the requested quiz
  */
 public class ModelQuiz {
     
     public LinkedList<QuestionBean> getQuestions(String quizName){
+        
+        Database db = new Database();
+        
         
         //What we need
         
@@ -25,22 +30,22 @@ public class ModelQuiz {
         //Return the number of answers for each question.(Could maybe be done with an array and use the length?)
         //Return the answers for each question
         
-        
-        
-        PreparedStatement ps = null;
-        
-        String text = "select * from 16agileteam4db.quiz";
+        //Use a question bean to return question details
+        //Use an array to return the question details
         
         
         
+        String quizID = db.selectQuizID(quizName); 
+        System.out.println(quizID);
+        int numberOfQuestions = db.getQuestionsNumbers(quizID);
+        int numberOfAnswers = db.getAnswerNumbers(1000);
         
         //database connection, return info using quiz name
         //select all questions, answers from quizName
-        int numberOfQuestions = 4;
-        int numberOfAnswers = 5;
+        //int numberOfAnswers = 5;
         String answerType = "radio";
-        String questionText = "Placeholder Question Text";
-        String answerText = "Answer";
+        String questionText = db.selectQuestionText(quizID);
+        String answerText[] = db.selectAnswerText("1000", numberOfAnswers);
         
         LinkedList<QuestionBean> question = new LinkedList<>();
         QuestionBean questionBean;
@@ -54,7 +59,7 @@ public class ModelQuiz {
             questionBean.setAnswerType(answerType);
             //the I/j values need to be replaced with values appropriate to the content of the DB
             for(int j = 0; j < numberOfAnswers; j++)
-                questionBean.setAnswerText(answerText, j);
+                questionBean.setAnswerText(answerText[j], j);
             
             question.add(questionBean);
         }

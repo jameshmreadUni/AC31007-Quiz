@@ -126,4 +126,24 @@ public class ModelUserTest {
        
         assertEquals(expResult, result.getInputErrorsSize());
     }
+    
+            @Test
+    public void testCheckRegistrationLogin() {
+        System.out.println("checkRegistration on success, user logged in");
+        String username = "staff";
+        String password = "password";
+        String confirmPassword = "password";
+        String email = "email@email.com";
+        
+        boolean expResultLog = true;
+        int expResultReg = 0;
+        ModelUser instance = new ModelUser();
+        ModelStaffUser loginInstance = new ModelStaffUser();
+        RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
+        loginInstance.IsValidUser(username, password);
+        //for(int i = 0; i < result.getInputErrorsSize(); i++)
+          //  System.out.print(result.getInputErrors(i));
+        assertEquals(expResultLog, loginInstance.IsValidUser(username, password));
+        assertEquals(expResultReg, result.getInputErrorsSize());
+    }
 }
