@@ -12,7 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css">
         <%storeQuestion storequestion = (storeQuestion) session.getAttribute("ProfileStore");%>
-        
+        <%String answerType = (String) request.getAttribute("answerType");%>
+        <% if(answerType == null) answerType = "radio"; %>
         <title>Create Question</title>
     </head>
     <body>
@@ -23,21 +24,39 @@
         </div>
         
         <div id = "content">
+            <form method="GET" action="CreateQuestion">
+                    Answer Type
+                    <br>
+                    <input type="radio" name="answerType" value="radio" > Radio Button<br>
+                    <input type="radio" name="answerType" value="checkbox" > Checkbox <br>
+                    <input type="radio" name="answerType" value="text" > Text Box<br>
+                    <input type="submit" name="Submit" value="Change answer type">
+            </form>
             
+                <%  if(answerType.equals("radio") || answerType.equals("checkbox")){%>
             <form method="POST" action="CreateQuestion">
-                Question!<br>
+                Question<br>
                 <input type="text" name="question" placeholder="Question">
                 <br>
                 <br>
-                Answers! (Please indicate the correct answer)<br>
-                <input type="text" name="answer1" placeholder="Answer 1"> <input type="radio" name="correctAnswer" value="correct1"><br>
-                <input type="text" name="answer2" placeholder="Answer 2"> <input type="radio" name="correctAnswer" value="correct2"><br>
-                <input type="text" name="answer3" placeholder="Answer 3"> <input type="radio" name="correctAnswer" value="correct3"><br>
-                <input type="text" name="answer4" placeholder="Answer 4"> <input type="radio" name="correctAnswer" value="correct4"><br>
+                Answer Please indicate the correct answer(s)<br>
+                <%for(int i = 0; i < 10; i++){%>
+                <input type="text" name="answer" placeholder="Answer <%=i%>"> <input type="<%=answerType%>" name="correctAnswer" value="correct<%=i%>"><br>
+                <%}%>
+                <input type="hidden" name="answerType" value="<%=answerType%>">
                 <br><br>
                 <input type="submit" value="Add to Quiz">
             </form>
-            
+            <%}else if(answerType.equals("text")){%>
+                 <form method="POST" action="CreateQuestion">
+                     <input type="text" name="question" placeholder="Question">
+                     <br><br>
+                     <input type="text" name="answer" placeholder="Replace this text with answer text"> 
+                     <br><br>
+                     <input type="hidden" name="answerType" value="<%=answerType%>">
+                     <input type="submit" value="Add to Quiz">
+                 </form>
+            <%}%>
             <form method="POST" action ="/AgileQuiz/Toggle">
                 <input type="checkbox" name="toggleBox" value ="true"> Quiz is available upon creation <br>
                 <input type="submit" value="Finish Quiz">

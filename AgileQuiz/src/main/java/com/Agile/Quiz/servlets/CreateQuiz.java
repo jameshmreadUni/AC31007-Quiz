@@ -120,7 +120,7 @@ public class CreateQuiz extends HttpServlet {
             storequestion.setCorrectAnswer(correctAnswer);
         }
         
-        RequestDispatcher rd = request.getRequestDispatcher("/createQuiz.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/createQuestion.jsp");
         rd.forward(request, response);
         
         
