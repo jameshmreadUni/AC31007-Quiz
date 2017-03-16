@@ -5,22 +5,22 @@
  */
 package com.Agile.Quiz.stores;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author jamesread
  */
 public class QuestionBean {
-    private String questionID[];
-    private String[] questionText;
-    private String[] answerText;
+    private String questionID;
+    private String questionText;
+    private LinkedList<String> answerText;
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
     private String answerType;
     //constructor initialises the size of the array of questions upon creation
-    public QuestionBean(int numberOfQuestions,int numberOfAnswers){
-        answerText = new String[numberOfAnswers];
-        questionText = new String[numberOfQuestions];
-        questionID = new String[numberOfQuestions];
+    public QuestionBean(){
+        answerText = new LinkedList<>();
        /*
         this.questionText = "Question 1: Who is president?";
        this.answerText[0] = "A: Donald Trump";
@@ -32,36 +32,36 @@ public class QuestionBean {
    /**
      * @return the questionID
      */
-    public String[] getQuestionID() {
+    public String getQuestionID() {
         return questionID;
     }
 
     /**
      * @param questionID the questionID to set
      */
-    public void setQuestionID(String questionID, int questionNumber) {
-        this.questionID[questionNumber] = questionID;
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
     }
 
     /**
      * @return the questionText
      */
-    public String[] getQuestionText() {
+    public String getQuestionText() {
         return questionText;
     }
 
     /**
      * @param questionText the questionText to set
      */
-    public void setQuestionText(String questionText, int questionNumber) {
-        this.questionText[questionNumber] = questionText;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
     
-    public void setAnswerText(String answerText, int answerNumber){
-        this.answerText[answerNumber] = answerText;
+    public void setAnswerText(LinkedList<String> answerText){
+        this.answerText = answerText; 
     }
     
-    public String[] getAnswerText(){
+    public LinkedList<String> getAnswerText(){
         return this.answerText;
     }
     
