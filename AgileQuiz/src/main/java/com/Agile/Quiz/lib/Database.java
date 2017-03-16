@@ -6,6 +6,7 @@
 package com.Agile.Quiz.lib;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
+import java.util.LinkedList;
 
 /**
  *
@@ -92,91 +93,16 @@ public Connection closeConnection(){
         }
         return quizid; 
     }
-
-
-
-    public int getQuestionsNumbers(String quizID){
-    //Return the total number of questions for a specfic quizID 
-        System.out.println("--- GET NUMBER OF QUESTIONS ---");
-        PreparedStatement ps = null; 
-        int numberofquestions = 0;
-        
-        String text = "SELECT COUNT(*) FROM question WHERE quizID = ?";
-        
-        try{
-           conn = this.establishConnection();
-           System.out.println("Conn: " + conn);
-           ps = conn.prepareStatement(text);
-           ps.setString(1, quizID);
-           System.out.println(ps);
-           System.out.println(quizID);
-           ResultSet rs = ps.executeQuery();
-           System.out.println(rs);
-           while (rs.next()) {
-               
-                numberofquestions = rs.getInt("COUNT(*)");
-                System.out.println("Num of Qs : " + numberofquestions);
-            }
-
-        }catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-                } finally {
-  
-        conn = this.closeConnection(); 
-       
-        }
-
-       
-        return numberofquestions; 
-    }
-    public int getAnswerNumbers(int questionID){
-    //Return the total number of answers for a specfic questionID
-        System.out.println("--- GET NUMBER OF ANSWERS ---");
-        PreparedStatement ps = null; 
-        int numberofanswers = 0;
-        
-        String text = "SELECT COUNT(*) FROM answer WHERE questionID = ?";
-        
-        try{
-           conn = this.establishConnection();
-           System.out.println("Conn: " + conn);
-           ps = conn.prepareStatement(text);
-           ps.setInt(1, questionID);
-           System.out.println(ps);
-           System.out.println(questionID);
-           ResultSet rs = ps.executeQuery();
-           System.out.println(rs);
-           while (rs.next()) {
-               
-                numberofanswers = rs.getInt("COUNT(*)");
-                System.out.println("numberofanswers : " + numberofanswers);
-            }
-
-        }catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        } finally {
-  
-        conn = this.closeConnection(); 
-       
-        }
-       
-        return numberofanswers; 
-    }
     
-    public String selectQuestionText(String quizID){
+    public LinkedList<QuestionBean> selectQuestionText(String quizID){
         System.out.println("--- SELECT QUESTION TEXT ---"); 
         
+        LinkedList<QuestionBean> questions = new LinkedList<>(); 
+                
         
-        String questiontext = null; 
         PreparedStatement ps = null;
-        int i = 0; 
-        String text = "SELECT questionText FROM question WHERE quizID = ?";
+       
+        String text = "SELECT questionID,questionText, answerType FROM question WHERE quizID = ?";
         
         try{
            conn = this.establishConnection();
@@ -187,11 +113,18 @@ public Connection closeConnection(){
            System.out.println(quizID);
            ResultSet rs = ps.executeQuery();
            System.out.println(rs);
+           
+           QuestionBean question; 
            while (rs.next()) {
-                questiontext = rs.getString("questionText");
-                System.out.println("quizText : " + questiontext);
+               question = new QuestionBean(); 
+               question.setQuestionID(rs.getString("questionID"));
+               question.setQuestionText(rs.getString("questionText"));
+               question.setAnswerText(this.selectAnswerText(rs.getString("questionID")));
+               question.setAnswerType(rs.getString("answerType"));
+               questions.add(question);
             }
-
+           
+                      
         }catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
@@ -204,17 +137,15 @@ public Connection closeConnection(){
         }
        
         
-        return questiontext; 
+        return questions; 
     }
       
-      public String[] selectAnswerText(String questionID, int numberofanswers){
+     public LinkedList<String> selectAnswerText(String questionID){
         System.out.println("--- SELECT ANSWER TEXT ---"); 
         
         
-        String answertext[];
-        answertext = new String[numberofanswers]; 
+        LinkedList<String> answerText = new LinkedList<>();
         PreparedStatement ps = null;
-        int i = 0;
         String text = "SELECT answerText FROM answer WHERE questionID = ?";
         
         try{
@@ -227,9 +158,9 @@ public Connection closeConnection(){
            ResultSet rs = ps.executeQuery();
            System.out.println(rs);
            while (rs.next()) {
-                answertext[i] = rs.getString("answerText");
-                System.out.println("Answer : " + answertext[i]);
-                i++;
+               
+               answerText.add(rs.getString("answerText"));
+             
             }
 
         }catch (SQLException ex) {
@@ -244,7 +175,7 @@ public Connection closeConnection(){
         }
        
         
-        return answertext; 
+        return answerText; 
     }
     
 }

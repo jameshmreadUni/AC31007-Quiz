@@ -31,10 +31,12 @@
         %>
                     
                     <h2><%=question.getQuestionText() %></h2>
-                    <%String[] answers = question.getAnswerText(); %>
+                    <% Iterator<String> answeriterator;
+                        answeriterator = question.getAnswerText().iterator();
+                        while (answeriterator.hasNext()) {
+                        String answerText = (String)answeriterator.next(); %>
                     <form>
-                        <%for(int i = 0; i < question.getAnswerText().length; i++){ %>
-                        <input type="<%=answerType%>" name = "<%=question.getQuestionNumber()%>" value="<%=i%>"> <%=answers[i] %></li> <br>
+                        <input type="<%=answerType%>" name = "<%=question.getQuestionNumber()%>" value="<%=question.getQuestionNumber()%>"> <%=answerText %></li> <br>
                         <%}%>
             <%}%>
                     </form>
