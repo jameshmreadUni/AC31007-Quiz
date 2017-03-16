@@ -6,7 +6,6 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.lib.Database;
-import com.Agile.Quiz.stores.DBQuestionBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;
 import java.util.Arrays;
