@@ -88,4 +88,27 @@ public class ModelCreateQuizTest {
 
     }
     
+    
+    @org.junit.Test
+    public void testCheckTrue() {
+        System.out.println("checkAvailability");
+        String input ="true";
+        ModelCreateQuiz instance = new ModelCreateQuiz();
+       boolean test = instance.toggleAvailability(input);
+        assertEquals("Should be true", true, test);  
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
+    @org.junit.Test
+    public void testCheckOn() {
+        System.out.println("checkAvailability");
+        String input ="on";
+        ModelCreateQuiz instance = new ModelCreateQuiz();
+       boolean test = instance.toggleAvailability(input);
+        assertEquals("Should be true", true, test);  
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+    
 }

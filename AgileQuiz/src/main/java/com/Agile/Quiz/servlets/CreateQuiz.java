@@ -6,6 +6,8 @@
 package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
+import com.Agile.Quiz.models.ModelCreateQuiz;
+import com.Agile.Quiz.models.toggleModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -78,53 +80,12 @@ public class CreateQuiz extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session;
-        session = request.getSession();
-        
-        // Get the valiues of the question and the answers.
-        String question=request.getParameter("question");
-        String answer1=request.getParameter("answer1");
-        String answer2=request.getParameter("answer2");
-        String answer3=request.getParameter("answer3");
-        String answer4=request.getParameter("answer4");
-        
-        // Store the question and answers into the question Store.
-        storeQuestion storequestion;
-        storequestion = new storeQuestion();
-        storequestion.setQuestion(question);
-        storequestion.setAnswer1(answer1);
-        storequestion.setAnswer2(answer2);
-        storequestion.setAnswer3(answer3);
-        storequestion.setAnswer4(answer4);
-        session.setAttribute("storeQuestion", storequestion);
-        
-        // Get the value of which one is the right answer (radio buttons).
-        String correctAnswer = request.getParameter("correctAnswer");
-        if (null != correctAnswer){
-            switch (correctAnswer) {
-                case "correct1":
-                    correctAnswer = answer1;
-                    break;
-                case "correct2":
-                    correctAnswer = answer2;
-                    break;
-                case "correct3":
-                    correctAnswer = answer3;
-                    break;
-                case "correct4":
-                    correctAnswer = answer4;
-                    break;
-            }
-            
-            storequestion.setCorrectAnswer(correctAnswer);
-        }
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/createQuestion.jsp");
-        rd.forward(request, response);
-        
-        
 
+        System.out.println("Input: " + request.getParameter("toggleQuizAvailable"));
+        ModelCreateQuiz createQuiz = new ModelCreateQuiz();
+        createQuiz.toggleAvailability(request.getParameter("toggleQuizAvailable"));  
+        
+        request.getRequestDispatcher("index.jsp").forward(request, response);    
     }
 
     /**

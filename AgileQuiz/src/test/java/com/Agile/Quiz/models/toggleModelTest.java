@@ -65,30 +65,6 @@ public class toggleModelTest {
     
     
     
-    /**
-     * Test of insertToDB method, of class toggleModel.
-     */
-    @org.junit.Test
-    public void testInsertToDB() {
-        System.out.println("insertToDB");
-        toggleModel instance = new toggleModel();
-        boolean test = instance.insertToDB();
-        assertEquals("Should be true", true, test);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of retriveFromDB method, of class toggleModel.
-     */
-    @org.junit.Test
-    public void testRetriveFromDB() {
-        System.out.println("retriveFromDB");
-        toggleModel instance = new toggleModel();
-        boolean test = instance.retriveFromDB();
-        assertEquals("Should be true", true, test);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
     
 }
