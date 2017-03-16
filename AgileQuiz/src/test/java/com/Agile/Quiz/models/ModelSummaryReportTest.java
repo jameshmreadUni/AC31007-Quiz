@@ -46,11 +46,34 @@ public class ModelSummaryReportTest {
     public void testQuizSummaryReport() {
         System.out.println("QuizSummaryReport");
         ModelSummaryReport instance = new ModelSummaryReport();
-        LinkedList<SummaryReportBean> expResult = null;
+        LinkedList<SummaryReportBean> expResult = new LinkedList<>();
+        SummaryReportBean summaryreportbean = new SummaryReportBean();
+        
+        summaryreportbean.setCorrect(7);
+        summaryreportbean.setBreif("breif");
+        summaryreportbean.setPercentage(70);
+        summaryreportbean.setTotal(10);
+        summaryreportbean.setWrong(3);
+        
+        expResult.add(summaryreportbean);
+        
+//        summaryreportbean.getBreif();
+//        summaryreportbean.getCorrect();
+//        summaryreportbean.getPercentage();
+//        summaryreportbean.getTotal();
+//        summaryreportbean.getWrong();
+        
+        
+        
         LinkedList<SummaryReportBean> result = instance.QuizSummaryReport();
-        assertEquals(expResult, result);
+        
+        assertEquals(summaryreportbean.getBreif(), result);
+        assertEquals(summaryreportbean.getCorrect(), result);
+        assertEquals(summaryreportbean.getPercentage(), result);
+        assertEquals(summaryreportbean.getTotal(), result);
+        assertEquals(summaryreportbean.getWrong(), result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
     
 }

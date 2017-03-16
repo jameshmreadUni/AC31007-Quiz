@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class ModelSummaryReport {
         int correct = 7;
-        int total = 68;
+        int total = 10;
         int wrong = total - correct;
         double percentage = (double) (correct * 100)/total;
         

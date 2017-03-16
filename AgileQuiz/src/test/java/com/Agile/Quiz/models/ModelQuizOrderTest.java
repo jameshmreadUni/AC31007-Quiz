@@ -44,11 +44,14 @@ public class ModelQuizOrderTest {
     @Test
     public void testQuizOrder() {
         System.out.println("QuizOrder");
-        LinkedList<String> expResult = null;
+        LinkedList<String> expResult = new LinkedList<>();
+        expResult.add("MathsQuiz");
+        expResult.add("EnglishQuiz");
+        expResult.add("ComputingQuiz");
         LinkedList<String> result = ModelQuizOrder.QuizOrder();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      //  fail("The test case is a prototype.");
     }
     
 }
