@@ -7,7 +7,6 @@ package com.Agile.Quiz.servlets;
 
 import com.Agile.Quiz.lib.Convertors;
 import com.Agile.Quiz.models.ModelCreateQuiz;
-import com.Agile.Quiz.models.toggleModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

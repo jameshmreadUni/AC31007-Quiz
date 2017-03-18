@@ -23,16 +23,18 @@ public class ModelQuiz {
         //database connection, return info using quiz name
         //select all questions, answers from quizName
         //int numberOfAnswers = 5;
-        String answerType = "radio";
+        String answerType = "radio"; 
+        //dummy data as DB does not have 'answer type collumn'
+        LinkedList<QuestionBean> questions = new LinkedList<>();
         
+        
+        try{
         Database db = new Database();
-
-        String quizID = db.selectQuizID(quizName); 
-   
-        LinkedList<QuestionBean> questions = new LinkedList<>(); 
-        
+        String quizID = db.selectQuizID(quizName);
         questions = db.selectQuestionText(quizID);
-        
+        }catch (Exception e){
+            return questions;
+        }
         
         
         LinkedList<QuestionBean> question = new LinkedList<>();
