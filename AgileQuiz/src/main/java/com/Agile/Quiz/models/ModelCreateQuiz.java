@@ -50,6 +50,7 @@ public class ModelCreateQuiz {
          String quizID = db.selectQuizID(quizName);
          try
          {
+             System.out.println("Lets try inserting a question");
             db.insertQuestion(quizID, questionText, answerList);
          } 
          catch (SQLException ex)
