@@ -178,7 +178,7 @@ public class Database {
         return answerText; 
     }
 
-    public void insertQuiz(String questionText, LinkedList<String> answerList, String[] correctAnswerArray, String quizName) {
+    public void insertQuiz(String quizName) {
        System.out.println("------INSERT QUIZ------");
        
        String quizID = null;
@@ -196,8 +196,7 @@ public class Database {
            quizID = rs.getString("quizID");
            
        }
-       
-       
+             
     } catch (SQLException ex) {
         // handle any errors
         System.out.println("SQLException: " + ex.getMessage());
@@ -213,7 +212,7 @@ public class Database {
     }
 
     public void insertQuestion(String quizID, String questionText, LinkedList<String> answerList) throws SQLException {
-        
+        System.out.println("Insert Question");
         try{
             conn = this.establishConnection();          
             String storedprocedure = "{CALL createQuestion(?,?,?,?)}";
@@ -244,7 +243,6 @@ public class Database {
     public void insertAnswer(LinkedList<String> answerList, String questionID) throws SQLException {
         
         try{
-
             conn = this.establishConnection(); 
 
             String text = ("INSERT INTO answer (answerText, questionID) VALUES (?,?)");

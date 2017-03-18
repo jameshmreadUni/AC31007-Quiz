@@ -7,6 +7,7 @@ package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.QuestionBean;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
@@ -16,6 +17,10 @@ import java.util.LinkedList;
 public class ModelCreateQuiz {
     
     //LinkedList<QuestionBean> quiz = new LinkedList<>();
+    
+    
+
+    
     
     public static boolean addTextQuestion(String questionText, 
             String answerText, int questionNumber, String quizName){
@@ -42,14 +47,32 @@ public class ModelCreateQuiz {
         //////// 
          System.out.println("Question Number: " + questionNumber);
          Database db = new Database();
-         db.insertQuiz(questionText, answerList, correctAnswerArray, quizName);
-         
+         String quizID = db.selectQuizID(quizName);
+         try
+         {
+            db.insertQuestion(quizID, questionText, answerList);
+         } 
+         catch (SQLException ex)
+         {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+         }
        
          //TODO DB STUFF
          boolean inserted = true;
         return inserted;
             
     }
+    
+        public void addQuiz(String quizName){
+    
+            Database db = new Database(); 
+            db.insertQuiz(quizName);
+      
+    }
+    
+    
     
     public static boolean addQuizToDB(LinkedList<QuestionBean> questionList){
         //TODO DB stuff
