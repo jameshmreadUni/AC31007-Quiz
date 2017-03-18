@@ -216,8 +216,11 @@ public class Database {
         try{
             conn = this.establishConnection();          
             String storedprocedure = "{CALL createQuestion(?,?,?,?)}";
+            
+            int qID = Integer.parseInt(quizID);
+        
             CallableStatement stmt = conn.prepareCall(storedprocedure);
-            stmt.setString(1, quizID);
+            stmt.setInt(1, qID);
             stmt.setString(2, questionText);
             stmt.setString(3, "test");
             stmt.setString(4, "radio");
@@ -243,8 +246,6 @@ public class Database {
     public void insertAnswer(LinkedList<String> answerList, String questionID) throws SQLException {
         
         try{
-            conn = this.establishConnection(); 
-
             String text = ("INSERT INTO answer (answerText, questionID) VALUES (?,?)");
             PreparedStatement ps = conn.prepareStatement(text);
 
@@ -252,6 +253,7 @@ public class Database {
                 ps.setString(1,answerList.get(i));
                 ps.setString(2, questionID);
                 ps.execute();
+                System.out.println("Adding Answer #" + i);
             } 
         } catch (SQLException ex) {
             // handle any errors
@@ -259,8 +261,6 @@ public class Database {
           System.out.println("SQLState: " + ex.getSQLState());
           System.out.println("VendorError: " + ex.getErrorCode());
         
-        } finally{
-            conn = this.closeConnection();
         }
     }
     

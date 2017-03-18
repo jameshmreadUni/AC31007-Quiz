@@ -79,9 +79,11 @@ public class CreateQuiz extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = (HttpSession) request.getSession();
+        
         
         String quizName = request.getParameter("quizName");
+        session.setAttribute("quizName", quizName);
         ModelCreateQuiz createQuiz = new ModelCreateQuiz();
         createQuiz.addQuiz(quizName);
         
