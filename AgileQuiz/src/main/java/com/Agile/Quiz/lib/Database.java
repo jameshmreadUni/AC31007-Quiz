@@ -197,28 +197,6 @@ public class Database {
            
        }
        
-       storedprocedure = "{CALL createQuestion(?,?,?,?)}";
-       String text = ("INSERT INTO ANSWER (answerText, questionID) VALUES (?,?)");
-       PreparedStatement ps = conn.prepareStatement(text); 
-       
-       stmt = conn.prepareCall(storedprocedure);
-       stmt.setString(1, quizID);
-       stmt.setString(2, questionText);
-       stmt.setString(3, "test");
-       stmt.setString(4, "radio");
-       rs = stmt.executeQuery(); 
-        
-       
-       while (rs.next())
-       {
-           String questionID = rs.getString("questionID");           
-           for(int i = 0; i < answerList.size(); i++ ){
-                ps.setString(1,answerList.get(i));
-                ps.setString(2, questionID); 
-                ps.execute(); 
-            }
-       }
-
        
     } catch (SQLException ex) {
         // handle any errors
@@ -232,6 +210,60 @@ public class Database {
 
     }
              
+    }
+
+    public void insertQuestion(String quizID, String questionText, LinkedList<String> answerList) throws SQLException {
+        
+        try{
+            conn = this.establishConnection();          
+            String storedprocedure = "{CALL createQuestion(?,?,?,?)}";
+            CallableStatement stmt = conn.prepareCall(storedprocedure);
+            stmt.setString(1, quizID);
+            stmt.setString(2, questionText);
+            stmt.setString(3, "test");
+            stmt.setString(4, "radio");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                String questionID = rs.getString("questionID");
+                    insertAnswer(answerList, questionID);
+            }
+
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        
+        } finally {
+            conn = this.closeConnection();
+        
+        }
+    }
+
+    public void insertAnswer(LinkedList<String> answerList, String questionID) throws SQLException {
+        
+        try{
+
+            conn = this.establishConnection(); 
+
+            String text = ("INSERT INTO answer (answerText, questionID) VALUES (?,?)");
+            PreparedStatement ps = conn.prepareStatement(text);
+
+            for(int i = 0; i < answerList.size(); i++ ){
+                ps.setString(1,answerList.get(i));
+                ps.setString(2, questionID);
+                ps.execute();
+            } 
+        } catch (SQLException ex) {
+            // handle any errors
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        
+        } finally{
+            conn = this.closeConnection();
+        }
     }
     
 }
