@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package com.Agile.Quiz.lib;
+import com.Agile.Quiz.stores.AnswerBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -211,7 +213,7 @@ public class Database {
              
     }
 
-    public void insertQuestion(String quizID, String questionText, LinkedList<String> answerList) throws SQLException {
+    public void insertQuestion(String quizID, String questionText, LinkedList<AnswerBean> answerList, String correctAnswerArray) throws SQLException {
         System.out.println("Insert Question");
         try{
             conn = this.establishConnection();          
@@ -228,7 +230,7 @@ public class Database {
             while (rs.next())
             {
                 String questionID = rs.getString("questionID");
-                    insertAnswer(answerList, questionID);
+                insertAnswer(answerList, questionID);
             }
 
         } catch (SQLException ex) {
@@ -243,18 +245,25 @@ public class Database {
         }
     }
 
-    public void insertAnswer(LinkedList<String> answerList, String questionID) throws SQLException {
+    public void insertAnswer(LinkedList<AnswerBean> answerList, String questionID) throws SQLException {
         
         try{
-            String text = ("INSERT INTO answer (answerText, questionID) VALUES (?,?)");
+            String text = ("INSERT INTO answer (answerText, questionID, correct) VALUES (?,?,?)");
             PreparedStatement ps = conn.prepareStatement(text);
 
-            for(int i = 0; i < answerList.size(); i++ ){
-                ps.setString(1,answerList.get(i));
-                ps.setString(2, questionID);
+            Iterator<AnswerBean> iterator;
+            iterator = answerList.iterator();
+            while (iterator.hasNext()) {
+                AnswerBean answer = (AnswerBean)iterator.next();
+                ps.setString(1,answer.getAnswerText());
+                ps.setString(2,questionID);
+                if(answer.isCorrectAnswer()){
+                   ps.setInt(3, 1);
+                } else{
+                   ps.setInt(3, 0);
+                }
                 ps.execute();
-                System.out.println("Adding Answer #" + i);
-            } 
+            }             
         } catch (SQLException ex) {
             // handle any errors
           System.out.println("SQLException: " + ex.getMessage());

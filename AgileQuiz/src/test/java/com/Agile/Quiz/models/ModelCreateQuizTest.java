@@ -48,9 +48,10 @@ public class ModelCreateQuizTest {
         String questionText = "testQuestionText";
         String answerText = "testAnswer";
         int questionNumber = 1;
+        ModelCreateQuiz test = new ModelCreateQuiz();
         String quizName = "testQuiz";
         boolean expResult = true;
-        boolean result = ModelCreateQuiz.addTextQuestion(questionText, answerText, questionNumber, quizName);
+        boolean result = test.addTextQuestion(questionText, answerText, questionNumber, quizName);
         assertEquals(expResult, result);
 
     }
@@ -63,12 +64,12 @@ public class ModelCreateQuizTest {
         System.out.println("addMultiAnswerQuestion");
         String questionText = "testQuestionText";
         String[] inputAnswerArray = {"answer1", "answer2", "","answer3"};
-        
-        String[] correctAnswerArray = {"answer1", "answer2","answer3"};
+        ModelCreateQuiz test = new ModelCreateQuiz();
+        String[] correctAnswerArray = {"correct-1", "correct-1","correct1"};
         int questionNumber = 1;
         String quizName = "testQuiz";
         boolean expResult = true;
-        boolean result = ModelCreateQuiz.addMultiAnswerQuestion(questionText, 
+        boolean result = test.addMultiAnswerQuestion(questionText, 
                 inputAnswerArray, 
                 correctAnswerArray, questionNumber, quizName);
         assertEquals(expResult, result);
@@ -83,7 +84,8 @@ public class ModelCreateQuizTest {
         System.out.println("addQuizToDB");
         LinkedList<QuestionBean> questionList = null;
         boolean expResult = true;
-        boolean result = ModelCreateQuiz.addQuizToDB(questionList);
+        ModelCreateQuiz test = new ModelCreateQuiz();
+        boolean result = test.addQuizToDB(questionList);
         assertEquals(expResult, result);
 
     }

@@ -6,6 +6,7 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.lib.Database;
+import com.Agile.Quiz.stores.AnswerBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -18,11 +19,7 @@ public class ModelCreateQuiz {
     
     //LinkedList<QuestionBean> quiz = new LinkedList<>();
     
-    
-
-    
-    
-    public static boolean addTextQuestion(String questionText, 
+    public boolean addTextQuestion(String questionText, 
             String answerText, int questionNumber, String quizName){
        //TODO DB STUFF
         /*
@@ -34,16 +31,34 @@ public class ModelCreateQuiz {
         return inserted;
     }
     
-    public static boolean addMultiAnswerQuestion(String questionText, 
+    public boolean addMultiAnswerQuestion(String questionText, 
         String[] inputAnswerArray, 
         String[] correctAnswerArray, int questionNumber, String quizName){
         
-        LinkedList<String> answerList = new LinkedList<>();
+        String correctAnswer = correctAnswerArray[0];
+        String[] correct = correctAnswer.split("-");
+        correctAnswer = correct[1];
+        
+        
+        
+        int correctA = Integer.parseInt(correctAnswer);
+        
+        
+        LinkedList<AnswerBean> answerList = new LinkedList<>();
         //this new answer array eliminates the spaces in the returned array of
         //inputed answers to avoid an empty answer
-         for(int i = 0; i < inputAnswerArray.length; i++)
-            if(!inputAnswerArray[i].equals(""))
-                 answerList.add(inputAnswerArray[i]);
+        AnswerBean answers; 
+         for(int i = 0; i < inputAnswerArray.length; i++){
+                answers = new AnswerBean();
+                answers.setAnswerText(inputAnswerArray[i]);
+                if (correctA == i){   
+                    answers.setCorrectAnswer(true);
+                    
+                } else{
+                    answers.setCorrectAnswer(false);
+                }
+                 answerList.add(answers);
+         }
         //////// 
          System.out.println("Question Number: " + questionNumber);
          Database db = new Database();
@@ -51,9 +66,8 @@ public class ModelCreateQuiz {
          try
          {
              System.out.println("Lets try inserting a question");
-            db.insertQuestion(quizID, questionText, answerList);
-         } 
-         catch (SQLException ex)
+            db.insertQuestion(quizID, questionText, answerList, correctAnswer);
+         } catch (SQLException ex)
          {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

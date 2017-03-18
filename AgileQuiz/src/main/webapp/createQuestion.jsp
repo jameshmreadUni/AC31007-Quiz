@@ -41,7 +41,7 @@
                 <br>
                 Answer Please indicate the correct answer(s)<br>
                 <%for(int i = 0; i < 10; i++){%>
-                <input type="text" name="answer" placeholder="Answer <%=i%>"> <input type="<%=answerType%>" name="correctAnswer" value="correct<%=i%>"><br>
+                <input type="text" name="answer" placeholder="Answer <%=i%>"> <input type="<%=answerType%>" name="correctAnswer" value="correct-<%=i%>"><br>
                 <%}%>
                 <input type="hidden" name="answerType" value="<%=answerType%>">
                 <br><br>
