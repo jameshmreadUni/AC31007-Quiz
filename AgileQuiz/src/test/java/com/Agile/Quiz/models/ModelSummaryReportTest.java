@@ -50,7 +50,7 @@ public class ModelSummaryReportTest {
         SummaryReportBean summaryreportbean = new SummaryReportBean();
         
         summaryreportbean.setCorrect(7);
-        summaryreportbean.setBreif("breif");
+        summaryreportbean.setBreif("this was the correct answer because: data from database will display here");
         summaryreportbean.setPercentage(70);
         summaryreportbean.setTotal(10);
         summaryreportbean.setWrong(3);
@@ -67,11 +67,17 @@ public class ModelSummaryReportTest {
         
         LinkedList<SummaryReportBean> result = instance.QuizSummaryReport();
         
+        for(int i=1 ; i < expResult.size() ; i++)
+        {
+        
         assertEquals(summaryreportbean.getBreif(), result);
         assertEquals(summaryreportbean.getCorrect(), result);
         assertEquals(summaryreportbean.getPercentage(), result);
         assertEquals(summaryreportbean.getTotal(), result);
         assertEquals(summaryreportbean.getWrong(), result);
+        
+        }
+        
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }
