@@ -95,7 +95,7 @@ public class ModelCreateQuizTest {
         String input ="true";
         ModelCreateQuiz instance = new ModelCreateQuiz();
        boolean test = instance.toggleAvailability(input);
-        assertEquals("Should be true", true, test);  
+        assertEquals("Checking toggle return string", false, test);  
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
