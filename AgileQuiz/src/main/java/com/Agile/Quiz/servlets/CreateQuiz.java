@@ -82,8 +82,6 @@ public class CreateQuiz extends HttpServlet {
         HttpSession session = (HttpSession) request.getSession();
         
         
-        
-        
         String quizName = request.getParameter("quizName");
         session.setAttribute("quizName", quizName);
         ModelCreateQuiz createQuiz = new ModelCreateQuiz();
