@@ -14,10 +14,10 @@ import java.util.LinkedList;
  */
 public class Database {
     
-private Connection conn = null;
+    private Connection conn = null;
     
    
-public Connection establishConnection(){
+    public Connection establishConnection(){
     
         try {
             // The newInstance() call is a work around for some
@@ -45,7 +45,7 @@ public Connection establishConnection(){
     
     }
 
-public Connection closeConnection(){
+    public Connection closeConnection(){
     try{
         if(conn!=null)
             conn.close(); System.out.println("Closed");
@@ -176,6 +176,62 @@ public Connection closeConnection(){
        
         
         return answerText; 
+    }
+
+    public void insertQuiz(String questionText, LinkedList<String> answerList, String[] correctAnswerArray, String quizName) {
+       System.out.println("------INSERT QUIZ------");
+       
+       String quizID = null;
+       //String questionID = null;
+       
+       try{
+       conn = this.establishConnection();
+       String storedprocedure = "{CALL createQuiz(?,?)}";
+       CallableStatement stmt = conn.prepareCall(storedprocedure);
+       stmt.setString(1,quizName);
+       stmt.setString(2, "MODTEST");
+       
+       ResultSet rs = stmt.executeQuery();
+       while (rs.next()){
+           quizID = rs.getString("quizID");
+           
+       }
+       
+       storedprocedure = "{CALL createQuestion(?,?,?,?)}";
+       String text = ("INSERT INTO ANSWER (answerText, questionID) VALUES (?,?)");
+       PreparedStatement ps = conn.prepareStatement(text); 
+       
+       stmt = conn.prepareCall(storedprocedure);
+       stmt.setString(1, quizID);
+       stmt.setString(2, questionText);
+       stmt.setString(3, "test");
+       stmt.setString(4, "radio");
+       rs = stmt.executeQuery(); 
+        
+       
+       while (rs.next())
+       {
+           String questionID = rs.getString("questionID");           
+           for(int i = 0; i < answerList.size(); i++ ){
+                ps.setString(1,answerList.get(i));
+                ps.setString(2, questionID); 
+                ps.execute(); 
+            }
+       }
+
+       
+    } catch (SQLException ex) {
+        // handle any errors
+        System.out.println("SQLException: " + ex.getMessage());
+        System.out.println("SQLState: " + ex.getSQLState());
+        System.out.println("VendorError: " + ex.getErrorCode());
+
+    } finally {
+
+        conn = this.closeConnection(); 
+
+    }
+             
     }
     
 }

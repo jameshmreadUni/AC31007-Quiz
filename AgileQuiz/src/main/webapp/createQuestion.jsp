@@ -27,9 +27,9 @@
             <form method="GET" action="CreateQuestion">
                     Answer Type
                     <br>
-                    <input type="radio" name="answerType" value="radio" > Radio Button<br>
-                    <input type="radio" name="answerType" value="checkbox" > Checkbox <br>
-                    <input type="radio" name="answerType" value="text" > Text Box<br>
+                    <input type="radio" name="answerType" value="radio" > Radio Button <br>
+                    <input type="radio" name="answerType" value="checkbox" > Check box <br>
+                    <input type="radio" name="answerType" value="text" > Text Box <br>
                     <input type="submit" name="Submit" value="Change answer type">
             </form>
             

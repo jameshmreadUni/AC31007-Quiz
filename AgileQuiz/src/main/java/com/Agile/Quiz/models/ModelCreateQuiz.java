@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.util.LinkedList;
 
@@ -32,14 +33,16 @@ public class ModelCreateQuiz {
         String[] inputAnswerArray, 
         String[] correctAnswerArray, int questionNumber, String quizName){
         
-        LinkedList<String> answerArray = new LinkedList<>();
+        LinkedList<String> answerList = new LinkedList<>();
         //this new answer array eliminates the spaces in the returned array of
         //inputed answers to avoid an empty answer
          for(int i = 0; i < inputAnswerArray.length; i++)
             if(!inputAnswerArray[i].equals(""))
-                 answerArray.add(inputAnswerArray[i]);
+                 answerList.add(inputAnswerArray[i]);
         //////// 
          System.out.println("Question Number: " + questionNumber);
+         Database db = new Database();
+         db.insertQuiz(questionText, answerList, correctAnswerArray, quizName);
          
        
          //TODO DB STUFF
