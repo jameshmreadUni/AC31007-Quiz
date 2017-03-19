@@ -44,13 +44,23 @@ public class ModelQuizOrderTest {
     @Test
     public void testOrderByName() {
         System.out.println("OrderByName");
-        LinkedList<String> ls = null;
+        //LinkedList<String> ls;
         ModelQuizOrder instance = new ModelQuizOrder();
-        LinkedList<String> expResult = null;
-        String[] result = instance.OrderByName(ls);
-        assertEquals(expResult, result);
+        LinkedList<String> expResult = new LinkedList<>();
+        expResult.add("Quiz 1");
+        expResult.add("Quiz 2"); 
+        LinkedList<String> result = instance.OrderByName();
+        
+        
+        for(int i=1; i<2; i++)
+        {
+              System.out.println(i);
+              assertEquals(expResult.get(i), result.get(i));
+         }
 
         // TODO review the generated test code and remove the default call to fail.
     }
     
 }
+
+

@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.models;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -14,20 +15,22 @@ import java.util.LinkedList;
 public class ModelQuizOrder {
 
     //Code edited From: http://stackoverflow.com/questions/8688413/sorting-strings-using-bubblesort-in-java
-    public String[] OrderByName(LinkedList<String> ls)
+    public LinkedList<String> OrderByName()
     {
+        
+        LinkedList<String> ls = new LinkedList<>();
         //Dummy Data
         String [] quizName = {"Quiz 1", "Quiz 2"};
         int size = quizName.length;
         
         
         
-        //How many quizzes there are
-        for (int i=0; i<size; i++)
-        {
-            System.out.println("How many quizzes there are" + quizName[i]);
-        }
-       
+//        //How many quizzes there are
+//        for (int i=0; i<size; i++)
+//        {
+//            System.out.println("How many quizzes there are" + quizName[i]);
+//        }
+//       
             for(int i = 0; i<quizName.length - 1; i++)        
         {                                               
             for(int j = 0; j<quizName.length - 1; j++) 
@@ -42,24 +45,11 @@ public class ModelQuizOrder {
             }
         }
 
-        for (String quizName1 : quizName) {
-            System.out.println(quizName1);
-            ls.add(quizName1);
-        }
-       //This orders the quizzes 
-//        for(int i = 0; i<ls.size() - 1; i++)        
-//        {                                                
-//            for(int j = 0; j<ls.size() - 1; j++) 
-//            {                                           
-//                if(ls.get(j).compareTo(ls.get(j+1)) > 0)
-//                {                                       
-//                    String temp = ls.get(j);                    
-//                    ls.set(j, ls.get(j+1));              
-//                    ls.set(j+1, temp);  
-//                }                                       
-//            }         System.out.println(" order of quizzes - " + ls);
-//        }
-//        
-       return quizName;
+        for (int i = 0; i < quizName.length; i++) {
+            System.out.println(Arrays.toString(quizName));
+            ls.add(quizName[i]);
+            System.out.println("");
+        }       
+       return ls;
     }
 }
