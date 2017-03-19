@@ -136,22 +136,24 @@ public class CreateQuestion extends HttpServlet {
        
        
        System.out.println("Textbox Question Added");
-       
-       ModelCreateQuiz.addTextQuestion(questionText, correctAnswerText, questionNumber, quizName);
+       ModelCreateQuiz test = new ModelCreateQuiz();
+       test.addTextQuestion(questionText, correctAnswerText, questionNumber, quizName);
        //add question is static, trying out static model
     }
 
     private void addMultiChoiceQuestion(HttpServletRequest request, HttpServletResponse response, int questionNumber, String quizName) {
+        
         String questionText = (String)request.getParameter("question");
         String[] answerArray = request.getParameterValues("answer");
-        
-        
-        String[] correctAnswerArray = request.getParameterValues("correctAnswer");
+
+        String[] Array = request.getParameterValues("correctAnswer");
+
+                
         System.out.println("Multichoice Question Added");
-        
-        ModelCreateQuiz.addMultiAnswerQuestion(questionText, 
+        ModelCreateQuiz test = new ModelCreateQuiz();
+        test.addMultiAnswerQuestion(questionText, 
                 answerArray,
-                correctAnswerArray, questionNumber, quizName);
+                Array, questionNumber, quizName);
         
        
         

@@ -18,7 +18,7 @@
         </div>
         
         <div id="content">
-            <form method="POST" action="CreateQuestion">
+            <form method="POST" action="CreateQuiz">
             <h4>Please give a name for the quiz: </h4>
             <input type="text" name="quizName" placeholder="Name of the quiz">
             <br>

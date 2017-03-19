@@ -79,12 +79,15 @@ public class CreateQuiz extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("Input: " + request.getParameter("toggleQuizAvailable"));
-        ModelCreateQuiz createQuiz = new ModelCreateQuiz();
-        createQuiz.toggleAvailability(request.getParameter("toggleQuizAvailable"));  
+        HttpSession session = (HttpSession) request.getSession();
         
-        request.getRequestDispatcher("index.jsp").forward(request, response);    
+        
+        String quizName = request.getParameter("quizName");
+        session.setAttribute("quizName", quizName);
+        ModelCreateQuiz createQuiz = new ModelCreateQuiz();
+        createQuiz.addQuiz(quizName);  
+        
+        request.getRequestDispatcher("createQuestion.jsp").forward(request, response);    
     }
 
     /**

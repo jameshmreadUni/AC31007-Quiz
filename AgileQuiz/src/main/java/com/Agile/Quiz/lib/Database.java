@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package com.Agile.Quiz.lib;
+import com.Agile.Quiz.stores.AnswerBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -14,10 +16,10 @@ import java.util.LinkedList;
  */
 public class Database {
     
-private Connection conn = null;
+    private Connection conn = null;
     
    
-public Connection establishConnection(){
+    public Connection establishConnection(){
     
         try {
             // The newInstance() call is a work around for some
@@ -45,7 +47,7 @@ public Connection establishConnection(){
     
     }
 
-public Connection closeConnection(){
+    public Connection closeConnection(){
     try{
         if(conn!=null)
             conn.close(); System.out.println("Closed");
@@ -176,6 +178,132 @@ public Connection closeConnection(){
        
         
         return answerText; 
+    }
+
+    public void insertQuiz(String quizName) {
+       System.out.println("------INSERT QUIZ------");
+       
+       String quizID = null;
+       //String questionID = null;
+       
+       try{
+       conn = this.establishConnection();
+       String storedprocedure = "{CALL createQuiz(?,?)}";
+       CallableStatement stmt = conn.prepareCall(storedprocedure);
+       stmt.setString(1,quizName);
+       stmt.setString(2, "MODTEST");
+       
+       ResultSet rs = stmt.executeQuery();
+       while (rs.next()){
+           quizID = rs.getString("quizID");
+           
+       }
+             
+    } catch (SQLException ex) {
+        // handle any errors
+        System.out.println("SQLException: " + ex.getMessage());
+        System.out.println("SQLState: " + ex.getSQLState());
+        System.out.println("VendorError: " + ex.getErrorCode());
+
+    } finally {
+
+        conn = this.closeConnection(); 
+
+    }
+             
+    }
+
+    public void insertQuestion(String quizID, String questionText, LinkedList<AnswerBean> answerList, String correctAnswerArray) throws SQLException {
+        System.out.println("Insert Question");
+        try{
+            conn = this.establishConnection();          
+            String storedprocedure = "{CALL createQuestion(?,?,?,?)}";
+            
+            int qID = Integer.parseInt(quizID);
+        
+            CallableStatement stmt = conn.prepareCall(storedprocedure);
+            stmt.setInt(1, qID);
+            stmt.setString(2, questionText);
+            stmt.setString(3, "test");
+            stmt.setString(4, "radio");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next())
+            {
+                String questionID = rs.getString("questionID");
+                insertAnswer(answerList, questionID);
+            }
+
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        
+        } finally {
+            conn = this.closeConnection();
+        
+        }
+    }
+
+    public void insertAnswer(LinkedList<AnswerBean> answerList, String questionID) throws SQLException {
+        
+        try{
+            String text = ("INSERT INTO answer (answerText, questionID, correct) VALUES (?,?,?)");
+            PreparedStatement ps = conn.prepareStatement(text);
+
+            Iterator<AnswerBean> iterator;
+            iterator = answerList.iterator();
+            while (iterator.hasNext()) {
+                AnswerBean answer = (AnswerBean)iterator.next();
+                if(!answer.getAnswerText().isEmpty()){
+                    ps.setString(1,answer.getAnswerText());
+                    ps.setString(2,questionID);
+                    if(answer.isCorrectAnswer()){
+                       ps.setInt(3, 1);
+                    } else {
+                       ps.setInt(3, 0);
+                    }
+                    ps.execute();
+                }
+            }             
+        } catch (SQLException ex) {
+            // handle any errors
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        
+        }
+    }
+    
+    
+    public void updateAvailability(String quizName){
+        
+        try{
+            
+            conn = this.establishConnection();
+
+            String text = "UPDATE quiz SET availability = ? WHERE quizName = ?";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(text);
+            ps.setInt(1, 1);
+            ps.setString(1, quizName);
+            ps.execute(); 
+        
+        
+        
+        } catch (SQLException ex){
+            
+            
+            
+        } finally {
+        
+            conn = this.closeConnection(); 
+            
+        } 
+    
+        
+        
+    
     }
     
 }

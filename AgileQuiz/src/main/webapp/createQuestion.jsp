@@ -27,9 +27,9 @@
             <form method="GET" action="CreateQuestion">
                     Answer Type
                     <br>
-                    <input type="radio" name="answerType" value="radio" > Radio Button<br>
-                    <input type="radio" name="answerType" value="checkbox" > Checkbox <br>
-                    <input type="radio" name="answerType" value="text" > Text Box<br>
+                    <input type="radio" name="answerType" value="radio" > Radio Button <br>
+                    <input type="radio" name="answerType" value="checkbox" > Check box <br>
+                    <input type="radio" name="answerType" value="text" > Text Box <br>
                     <input type="submit" name="Submit" value="Change answer type">
             </form>
             
@@ -41,7 +41,7 @@
                 <br>
                 Answer Please indicate the correct answer(s)<br>
                 <%for(int i = 0; i < 10; i++){%>
-                <input type="text" name="answer" placeholder="Answer <%=i%>"> <input type="<%=answerType%>" name="correctAnswer" value="correct<%=i%>"><br>
+                <input type="text" name="answer" placeholder="Answer <%=i%>"> <input type="<%=answerType%>" name="correctAnswer" value="correct-<%=i%>"><br>
                 <%}%>
                 <input type="hidden" name="answerType" value="<%=answerType%>">
                 <br><br>
@@ -57,7 +57,7 @@
                      <input type="submit" value="Add to Quiz">
                  </form>
             <%}%>
-            <form method="POST" action ="/AgileQuiz/CreateQuiz">
+            <form method="POST" action ="FinishQuiz">
                 <input type="checkbox" name="toggleQuizAvailable"> Quiz is available upon creation <br>
                 <input type="submit" value="Finish Quiz">
             </form>

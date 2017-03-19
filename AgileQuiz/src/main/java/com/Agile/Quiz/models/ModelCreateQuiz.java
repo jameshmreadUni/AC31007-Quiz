@@ -5,7 +5,10 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
+import com.Agile.Quiz.stores.AnswerBean;
 import com.Agile.Quiz.stores.QuestionBean;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 /**
@@ -16,7 +19,7 @@ public class ModelCreateQuiz {
     
     //LinkedList<QuestionBean> quiz = new LinkedList<>();
     
-    public static boolean addTextQuestion(String questionText, 
+    public boolean addTextQuestion(String questionText, 
             String answerText, int questionNumber, String quizName){
        //TODO DB STUFF
         /*
@@ -28,19 +31,48 @@ public class ModelCreateQuiz {
         return inserted;
     }
     
-    public static boolean addMultiAnswerQuestion(String questionText, 
+    public boolean addMultiAnswerQuestion(String questionText, 
         String[] inputAnswerArray, 
         String[] correctAnswerArray, int questionNumber, String quizName){
         
-        LinkedList<String> answerArray = new LinkedList<>();
+        String correctAnswer = correctAnswerArray[0];
+        String[] correct = correctAnswer.split("-");
+        correctAnswer = correct[1];
+        
+        
+        
+        int correctA = Integer.parseInt(correctAnswer);
+        
+        
+        LinkedList<AnswerBean> answerList = new LinkedList<>();
         //this new answer array eliminates the spaces in the returned array of
         //inputed answers to avoid an empty answer
-         for(int i = 0; i < inputAnswerArray.length; i++)
-            if(!inputAnswerArray[i].equals(""))
-                 answerArray.add(inputAnswerArray[i]);
+        AnswerBean answers; 
+         for(int i = 0; i < inputAnswerArray.length; i++){
+                answers = new AnswerBean();
+                answers.setAnswerText(inputAnswerArray[i]);
+                if (correctA == i){   
+                    answers.setCorrectAnswer(true);
+                    
+                } else{
+                    answers.setCorrectAnswer(false);
+                }
+                 answerList.add(answers);
+         }
         //////// 
          System.out.println("Question Number: " + questionNumber);
-         
+         Database db = new Database();
+         String quizID = db.selectQuizID(quizName);
+         try
+         {
+             System.out.println("Lets try inserting a question");
+            db.insertQuestion(quizID, questionText, answerList, correctAnswer);
+         } catch (SQLException ex)
+         {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+         }
        
          //TODO DB STUFF
          boolean inserted = true;
@@ -48,13 +80,30 @@ public class ModelCreateQuiz {
             
     }
     
+        public void addQuiz(String quizName){
+    
+            Database db = new Database(); 
+            db.insertQuiz(quizName);
+      
+    }
+    
+    
+    
     public static boolean addQuizToDB(LinkedList<QuestionBean> questionList){
         //TODO DB stuff
         return true;
     }
 
-    public boolean toggleAvailability(String available){
+    public boolean toggleAvailability(String available, String quizName){
         //DB stuff
+        
+        if (available.equals("on")){
+            Database db = new Database();
+            db.updateAvailability(quizName);  
+        }
+        
+        
+        
         return available.equalsIgnoreCase("on");
     }
 }
