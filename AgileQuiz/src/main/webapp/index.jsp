@@ -31,6 +31,9 @@
     <li><a href="/AgileQuiz/LogOut" >Logout</a></li>
     <li><a href="/AgileQuiz/Quiz/test" >Quiz</a></li>
     <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
+    <li><a href="/AgileQuiz/CompletedQuizzes">Completed Quizzes</a></li>
+    <li><a href="/AgileQuiz/summaryReport"> Quiz Summary Report</a></li>
+
                         <%}
                         }else{
                         %>

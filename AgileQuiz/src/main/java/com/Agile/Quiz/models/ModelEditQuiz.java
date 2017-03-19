@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author gemmawhyte
+ * @author gemmawhyte 
  */
 public class ModelEditQuiz {
     
@@ -27,5 +27,43 @@ public class ModelEditQuiz {
         String testquiztitle = "james";
         return testquiztitle;
     }
+    
+    /**
+ *
+ * @author Brian Stevenson
+ */
+    
+    //Method to edit the context of an answer
+    public String editQuizAnswer(){
+        
+        String quizAnswer = "Sean";
+        //wtf do I do? :( 
+        return quizAnswer;
+        
+    }
+    
+    //Method to delete an answer from a quiz
+    public String removeQuizAnswer(){
+        //Dummy Code that will actually be removed from the database
+        String quizAnswerRemove = "Gemma";
+        
+        //Removes String
+        quizAnswerRemove = "";
+        
+        return quizAnswerRemove;
+    }
+    
+    
+    //Method to add an answer to the quiz
+    public String addQuizAnswer(){
+        
+    String addAnswer;
+    
+    addAnswer = "Ramesh";
+    
+        return addAnswer;
+        
+    }
+    
     
 }
