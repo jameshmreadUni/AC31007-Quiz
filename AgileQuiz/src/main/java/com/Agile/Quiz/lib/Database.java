@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.lib;
 import com.Agile.Quiz.stores.AnswerBean;
+import com.Agile.Quiz.stores.ModuleBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
 import java.util.Iterator;
@@ -304,6 +305,77 @@ public class Database {
         
         
     
+    }
+    
+    
+    public LinkedList<ModuleBean> selectQuizes(){
+    
+        LinkedList<ModuleBean> moduleList = new LinkedList<>();
+        
+        try{
+            conn = this.establishConnection();
+            
+            ModuleBean module;
+            PreparedStatement ps = null;
+            PreparedStatement ps2 = null;
+            
+            
+            String statement1 = "SELECT * FROM module";
+
+            
+            ps = conn.prepareStatement(statement1);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                module = new ModuleBean(); 
+                module.setModuleCode(rs.getString("moduleCode"));
+                System.out.println(rs.getString("moduleCode"));
+                module.setModuleName(rs.getString("moduleName"));
+                System.out.println(rs.getString("moduleName"));
+                
+                module.setQuizName(this.selectQuestionName(rs.getString("moduleCode")));
+
+                moduleList.add(module);                
+            }
+ 
+            
+        }catch(SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+            
+        }finally{
+            conn = this.closeConnection();
+        }
+    
+    
+     return moduleList; 
+    }
+
+    public LinkedList<String> selectQuestionName(String moduleCode) throws SQLException {
+        LinkedList<String> questionNames = new LinkedList<>();
+        
+        try{
+                conn = this.establishConnection();
+                 String statement = "SELECT quizName from quiz where moduleCode = ? "; 
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement(statement);
+                ps.setString(1, moduleCode);
+                ResultSet result = ps.executeQuery();
+                while (result.next()){
+                    questionNames.add(result.getString("quizName"));
+                }
+        } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        
+        } finally{ 
+        
+            conn = this.closeConnection();
+        }
+        
+       return questionNames; 
     }
     
 }

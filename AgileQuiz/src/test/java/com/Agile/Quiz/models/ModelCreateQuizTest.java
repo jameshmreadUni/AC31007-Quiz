@@ -69,6 +69,7 @@ public class ModelCreateQuizTest {
         int questionNumber = 1;
         String quizName = "testQuiz";
         boolean expResult = true;
+        test.addQuiz(quizName);
         boolean result = test.addMultiAnswerQuestion(questionText, 
                 inputAnswerArray, 
                 correctAnswerArray, questionNumber, quizName);

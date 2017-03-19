@@ -6,6 +6,7 @@
 package com.Agile.Quiz.models;
 
 import com.Agile.Quiz.lib.Database;
+import com.Agile.Quiz.stores.ModuleBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;
 import java.util.Arrays;
@@ -36,10 +37,21 @@ public class ModelQuiz {
             return questions;
         }
         
-        
-        LinkedList<QuestionBean> question = new LinkedList<>();
-        QuestionBean questionBean;
-        
         return questions;
     }
+    
+    public LinkedList<ModuleBean> getModules(){
+    
+    LinkedList<ModuleBean> moduleList = new LinkedList<>();
+    
+    try{
+        Database db = new Database();
+        moduleList = db.selectQuizes();
+    } catch (Exception e) {
+        return moduleList; 
+    }
+     return moduleList; 
+    }
+    
+    
 }
