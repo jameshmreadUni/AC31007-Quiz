@@ -15,7 +15,9 @@ import static org.junit.Assert.*;
 
 /**
  *
+s
  * @author rameshk
+ * @author Brian
  */
 public class ModelQuizOrderTest {
     
@@ -39,6 +41,7 @@ public class ModelQuizOrderTest {
     }
 
     /**
+
      * Test of OrderByName method, of class ModelQuizOrder.
      */
     @Test
@@ -63,4 +66,21 @@ public class ModelQuizOrderTest {
     
 }
 
+/*
 
+     * Test of QuizOrder method, of class ModelQuizOrder.
+     */
+    @Test
+    public void testQuizOrder() {
+        System.out.println("QuizOrder");
+        LinkedList<String> expResult = new LinkedList<>();
+        expResult.add("MathsQuiz");
+        expResult.add("EnglishQuiz");
+        expResult.add("ComputingQuiz");
+        LinkedList<String> result = ModelQuizOrder.QuizOrder();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+      //  fail("The test case is a prototype.");
+    }
+    
+}

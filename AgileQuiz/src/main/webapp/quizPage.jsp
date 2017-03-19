@@ -10,15 +10,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%-- <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" /> --%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="Style.css">
+        
         <%LinkedList<QuestionBean> questionList = (LinkedList<QuestionBean>)request.getAttribute("quiz"); %>
         <%String quizTitle = (String)request.getAttribute("quizTitle");%>
         
         <title>Quiz - TODO input Module Code</title>
     </head>
     <body>
-        <h1><%=quizTitle%></h1>
+       <h1><%=quizTitle%></h1>
         <%
             Iterator<QuestionBean> iterator;
             iterator = questionList.iterator();
@@ -28,10 +31,12 @@
         %>
                     
                     <h2><%=question.getQuestionText() %></h2>
-                    <%String[] answers = question.getAnswerText(); %>
+                    <% Iterator<String> answeriterator;
+                        answeriterator = question.getAnswerText().iterator();
+                        while (answeriterator.hasNext()) {
+                        String answerText = (String)answeriterator.next(); %>
                     <form>
-                        <%for(int i = 0; i < question.getAnswerText().length; i++){ %>
-                        <input type="<%=answerType%>" name = "<%=question.getQuestionNumber()%>" value="<%=i%>"> <%=answers[i] %></li> <br>
+                        <input type="<%=answerType%>" name = "<%=question.getQuestionNumber()%>" value="<%=question.getQuestionNumber()%>"> <%=answerText %></li> <br>
                         <%}%>
             <%}%>
                     </form>

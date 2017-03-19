@@ -5,49 +5,55 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
+import com.Agile.Quiz.stores.ModuleBean;
 import com.Agile.Quiz.stores.QuestionBean;
+import java.sql.*;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Set;
 
 /**
  *
- * @author jamesread 
+
+ * @author jamesread
+ * this model returns the requested quiz
  */
 public class ModelQuiz {
     
     public LinkedList<QuestionBean> getQuestions(String quizName){
+                    
         //database connection, return info using quiz name
         //select all questions, answers from quizName
-        int numberOfQuestions = 4;
-        int numberOfAnswers = 5;
-        String answerType = "radio";
-        String questionText = "Placeholder Question Text";
-        String answerText = "Answer";
-        String explanation = "we dont have one";
-        
-        LinkedList<QuestionBean> question = new LinkedList<>();
-        QuestionBean questionBean;
-        
-        //this loop will go through the questions for a quiz and put the result into the Question bean
-        //the list of these beans will then be exported to the controller-->view
-        for(int i = 0; i < numberOfQuestions; i++){
-            questionBean = new QuestionBean(numberOfAnswers);
-            questionBean.setQuestionText(questionText);
-            questionBean.setQuestionNumber(i);
-            questionBean.setAnswerType(answerType);
-            questionBean.setExplanation(explanation);
 
-            //the I/j values need to be replaced with values appropriate to the content of the DB
-            for(int j = 0; j < numberOfAnswers; j++)
-                questionBean.setAnswerText(answerText, j);
-            
-            question.add(questionBean);
+        //int numberOfAnswers = 5;
+        String answerType = "radio"; 
+        //dummy data as DB does not have 'answer type collumn'
+        LinkedList<QuestionBean> questions = new LinkedList<>();
+        
+        
+
+        try{
+        Database db = new Database();
+        String quizID = db.selectQuizID(quizName);
+        questions = db.selectQuestionText(quizID);
+        }catch (Exception e){
+            return questions;
         }
-        //TODO implement database stuff
-        return question;
+        
+        return questions;
     }
-
-    public LinkedList<QuestionBean> getQuestiins(String quizName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public LinkedList<ModuleBean> getModules(){
+    
+    LinkedList<ModuleBean> moduleList = new LinkedList<>();
+    
+    try{
+        Database db = new Database();
+        moduleList = db.selectQuizes();
+    } catch (Exception e) {
+        return moduleList; 
+    }
+     return moduleList; 
     }
 }

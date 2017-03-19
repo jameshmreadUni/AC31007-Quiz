@@ -5,22 +5,25 @@
  */
 package com.Agile.Quiz.servlets;
 
+
+import com.Agile.Quiz.models.ModelSummaryReport;
+import com.Agile.Quiz.stores.SummaryReportBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.Agile.stores.storeQuestion;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author JoeDavis
+ * @author Brian
  */
-@WebServlet(name = "createQuestion", urlPatterns = {"/createQuestion"})
-public class createQuestion extends HttpServlet {
+@WebServlet(name = "SummaryReport", urlPatterns = {"/summaryReport"})
+public class SummaryReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class createQuestion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet createQuestion</title>");            
+            out.println("<title>Servlet SummaryReport</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet createQuestion at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SummaryReport at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,9 +61,18 @@ public class createQuestion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     //  processRequest(request, response);
+        ModelSummaryReport modelsummaryreport = new ModelSummaryReport();
+        LinkedList<SummaryReportBean> sl = modelsummaryreport.QuizSummaryReport();
+        
+        request.setAttribute("summaryList", sl);
+// This Will be the page that the login redipaches to once a vaild login is accheved
+          
+        
+           RequestDispatcher rd = request.getRequestDispatcher("/summaryReport.jsp");
+           rd.forward(request, response);
     }
 
     /**
@@ -72,55 +84,9 @@ public class createQuestion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session;
-        session = request.getSession();
-        
-        // Get the valiues of the question and the answers.
-        String question=request.getParameter("question");
-        String answer1=request.getParameter("answer1");
-        String answer2=request.getParameter("answer2");
-        String answer3=request.getParameter("answer3");
-        String answer4=request.getParameter("answer4");
-        
-        // Store the question and answers into the question Store.
-        storeQuestion storequestion;
-        storequestion = new storeQuestion();
-        storequestion.setQuestion(question);
-        storequestion.setAnswer1(answer1);
-        storequestion.setAnswer2(answer2);
-        storequestion.setAnswer3(answer3);
-        storequestion.setAnswer4(answer4);
-        session.setAttribute("storeQuestion", storequestion);
-        
-        // Get the value of which one is the right answer (radio buttons).
-        String correctAnswer = request.getParameter("correctAnswer");
-        if (null != correctAnswer){
-            switch (correctAnswer) {
-                case "correct1":
-                    correctAnswer = answer1;
-                    break;
-                case "correct2":
-                    correctAnswer = answer2;
-                    break;
-                case "correct3":
-                    correctAnswer = answer3;
-                    break;
-                case "correct4":
-                    correctAnswer = answer4;
-                    break;
-            }
-            
-            storequestion.setCorrectAnswer(correctAnswer);
-        }
-        
-        response.sendRedirect("/AgileQuiz/createQuestion.jsp");
-        
-        
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

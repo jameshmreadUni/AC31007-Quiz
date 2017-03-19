@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.servlets;
 
+import com.Agile.Quiz.models.ModelCreateQuiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,14 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.Agile.Quiz.models.*;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author seans
+ * @author seanstewart
  */
-@WebServlet(name = "toggleServlet", urlPatterns = {"/Toggle"})
-public class Toggle extends HttpServlet {
+@WebServlet(name = "FinishQuiz", urlPatterns = {"/FinishQuiz"})
+public class FinishQuiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +45,7 @@ public class Toggle extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+       
     }
 
     /**
@@ -58,21 +59,15 @@ public class Toggle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = (HttpSession) request.getSession();
+        ModelCreateQuiz createQuiz = new ModelCreateQuiz();
         
-        String input;
-        //boolean availability = false; 
+        System.out.println("Input: " + request.getParameter("toggleQuizAvailable"));
+        String quizName = session.getAttribute("quizName").toString();
         
-        input = request.getParameter("toggleBox");
-        System.out.println("Input: " + input);
-        
-        toggleModel tm = new toggleModel();
-        tm.checkAvailability(input);
-        
-        
+        createQuiz.toggleAvailability(request.getParameter("toggleQuizAvailable"), quizName);
         request.getRequestDispatcher("index.jsp").forward(request, response);
-        
-        
-        //processRequest(request, response);
+
     }
 
     /**

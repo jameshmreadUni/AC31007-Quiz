@@ -5,28 +5,38 @@
  */
 package com.Agile.Quiz.servlets;
 
-import com.Agile.Quiz.models.ModelStaffUser;
-import com.Agile.Quiz.stores.loginBean;
+import com.Agile.Quiz.lib.Convertors;
+import com.Agile.Quiz.models.ModelCreateQuiz;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.Agile.Quiz.stores.storeQuestion;
+import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Brian
+ * @author JoeDavis
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login","/login","/staffLogin","/stafflogin", "/Stafflogin","/StaffLogin", "/Login/*"})
+@WebServlet(name = "CreateQuiz", urlPatterns = {"/CreateQuiz"})
+public class CreateQuiz extends HttpServlet {
 
+      private final HashMap CommandsMap = new HashMap();
+      
+      
+      /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CreateQuiz() {
+        super();
+        CommandsMap.put("CreateQuiz", 1);
 
-public class StaffLogin extends HttpServlet {
-
-   
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,8 +49,22 @@ public class StaffLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
+        
+        String args[] = Convertors.SplitRequestPath(request);
+        int command;
+        try {
+            command = (Integer) CommandsMap.get(args[1]);
+        } catch (Exception et) {
+            return;
+        }
+        switch (command) {
+            case 1:
+                RequestDispatcher rd = request.getRequestDispatcher("/createQuiz.jsp");
+                rd.forward(request, response);
+                break;
+            default:
+               
+        }
     }
 
     /**
@@ -52,43 +76,18 @@ public class StaffLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String username = (String)request.getParameter("username");
-        System.out.println(username);
-        String password = request.getParameter("password");
-        System.out.println(password);
-// need a user model with placeholder
-
-        ModelStaffUser us = new ModelStaffUser();
-
-        HttpSession session = request.getSession();
-        System.out.println("Session in servlet " + session);
+        HttpSession session = (HttpSession) request.getSession();
         
         
-        if (us.IsValidUser(username, password)) {
-            loginBean lg = new loginBean();
-            lg.setLoggedin();
-            lg.setUsername(username);
-            session.setAttribute("loginBean", lg);
-            
-            
-            //If the login is successful, determine the users type
-            //Call method to determine user's type.
-            //
-
-// This Will be the page that the login redipaches to once a vaild login is accheved
-           System.out.println("Session in servlet " + session);
-
-
-           RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-           rd.forward(request, response);
-
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
-        }
+        String quizName = request.getParameter("quizName");
+        session.setAttribute("quizName", quizName);
+        ModelCreateQuiz createQuiz = new ModelCreateQuiz();
+        createQuiz.addQuiz(quizName);  
+        
+        request.getRequestDispatcher("createQuestion.jsp").forward(request, response);    
     }
 
     /**
@@ -102,4 +101,3 @@ public class StaffLogin extends HttpServlet {
     }// </editor-fold>
 
 }
-

@@ -13,6 +13,30 @@ body{
     background-color: #fcfcfc;
 }
 
+/* unvisited link */
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+/* selected link */
+a:active {
+    color: black;
+    text-decoration: none;
+}
+
 #content, #header{
     
     background-color: #47A8D7;
@@ -32,5 +56,75 @@ body{
 #questionBox{
     
     background-color: red;
+    
+}
+
+img{
+    
+    width: 220px;
+    height: 200px;
+    
+}
+
+#uniLogo{
+    
+    margin: auto;
+}
+#homepagehead{
+    text-align: center;
+    color: black;
+}
+
+#indexform {
+    background-color: lightskyblue;
+    text-align: center;
+    border-color: black;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#editquiz
+{
+    background-color: lightskyblue;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+#menubar {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: lightskyblue;
+    position: static;
+    top: 10px;
+    width: 98%;
+    font-family: Arial;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+    display: inline-block;
+    text-align: center;
+    border-radius: 10px;
+    
+}
+li {
+    display: inline-block;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+
+}
+
+.active {
+    background-color: blue;
     
 }

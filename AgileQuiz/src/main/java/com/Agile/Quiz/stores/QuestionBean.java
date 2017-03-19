@@ -5,20 +5,27 @@
  */
 package com.Agile.Quiz.stores;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author jamesread
  */
 public class QuestionBean {
+    private String questionID;
     private String questionText;
-    private String[] answerText;
+    private LinkedList<String> answerText;
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
     private String answerType;
+
     private String explanation;
+
+    private String[] correctAnswer;
+
     //constructor initialises the size of the array of questions upon creation
-    public QuestionBean(int numberOfAnswers){
-        answerText = new String[numberOfAnswers];
+    public QuestionBean(){
+        answerText = new LinkedList<>();
        /*
         this.questionText = "Question 1: Who is president?";
        this.answerText[0] = "A: Donald Trump";
@@ -27,15 +34,37 @@ public class QuestionBean {
        this.questionNumber = 1;
         */
     }
-    
-    public void setQuestionText(String questionText){
+
+   /**
+     * @return the questionID
+     */
+    public String getQuestionID() {
+        return questionID;
+
+    }
+
+    /**
+     * @param questionID the questionID to set
+     */
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
+
+    /**
+     * @return the questionText
+     */
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    /**
+     * @param questionText the questionText to set
+     */
+    public void setQuestionText(String questionText) {
         this.questionText = questionText;
     }
     
-    public String getQuestionText(){
-        return this.questionText;
-    }
-    
+
     public String getExplanation()
     {
         return this.explanation;
@@ -46,11 +75,13 @@ public class QuestionBean {
         explanation = explain;
     }
     
-    public void setAnswerText(String answerText, int answerNumber){
-        this.answerText[answerNumber] = answerText;
+
+    public void setAnswerText(LinkedList<String> answerText){
+        this.answerText = answerText; 
+
     }
     
-    public String[] getAnswerText(){
+    public LinkedList<String> getAnswerText(){
         return this.answerText;
     }
     
@@ -76,4 +107,15 @@ public class QuestionBean {
         return this.answerType;
     }
     
+
+    public String[] getCorrectAnswers(){
+        return this.correctAnswer;
+    }
+    
+    public void setCorrectAnswers(String correctAnswerMarker[]){
+        for(int i = 0; i < correctAnswer.length; i++){
+            this.correctAnswer[i] = correctAnswerMarker[i];
+        }
+    }
+
 }
