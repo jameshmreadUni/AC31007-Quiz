@@ -5,7 +5,9 @@
  */
 package com.Agile.Quiz.servlets;
 
-import com.Agile.Quiz.models.ModelQuizOrder;
+
+import com.Agile.Quiz.models.ModelSummaryReport;
+import com.Agile.Quiz.stores.SummaryReportBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -15,16 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author Brian
  */
-@WebServlet(name = "CompletedQuizzes", urlPatterns = {"/CompletedQuizzes","/completedquizzez","/completedQuizzes","/Completedquizzes/*"})
-public class QuizOrder extends HttpServlet {
-
+@WebServlet(name = "SummaryReport", urlPatterns = {"/summaryReport"})
+public class SummaryReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +42,10 @@ public class QuizOrder extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuizOrder</title>");            
+            out.println("<title>Servlet SummaryReport</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuizOrder at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SummaryReport at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,20 +61,20 @@ public class QuizOrder extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
      //  processRequest(request, response);
-        LinkedList<String> ls = ModelQuizOrder.QuizOrder();
+        ModelSummaryReport modelsummaryreport = new ModelSummaryReport();
+        LinkedList<SummaryReportBean> sl = modelsummaryreport.QuizSummaryReport();
         
-        request.setAttribute("linkedlist", ls);
+        request.setAttribute("summaryList", sl);
 // This Will be the page that the login redipaches to once a vaild login is accheved
           
         
-           RequestDispatcher rd = request.getRequestDispatcher("/CompletedQuizzes.jsp");
+           RequestDispatcher rd = request.getRequestDispatcher("/summaryReport.jsp");
            rd.forward(request, response);
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -87,12 +86,7 @@ public class QuizOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-        
-        
-        
-    
-
+        processRequest(request, response);
     }
 
     /**
