@@ -36,7 +36,7 @@ public class quizList extends HttpServlet {
               if (studentView == 2){
               ModelQuiz instance = new ModelQuiz();
               LinkedList<QuestionBean> expResult = null;
-              LinkedList<QuestionBean> result = instance.getQuestiins(quizName);
+              LinkedList<QuestionBean> result = instance.getQuestions(quizName);
               System.out.println("Available quizzes: " + quizName);
               } else if (staffView == 1){
                   System.out.println("There are no quizzes available!");
