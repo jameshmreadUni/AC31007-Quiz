@@ -293,17 +293,12 @@ public class Database {
         
         
         } catch (SQLException ex){
-            
-            
-            
+                  
         } finally {
         
             conn = this.closeConnection(); 
             
-        } 
-    
-        
-        
+        }   
     
     }
     
@@ -318,8 +313,7 @@ public class Database {
             ModuleBean module;
             PreparedStatement ps = null;
             PreparedStatement ps2 = null;
-            
-            
+      
             String statement1 = "SELECT * FROM module";
 
             
@@ -378,4 +372,34 @@ public class Database {
        return questionNames; 
     }
     
+    public boolean checkUserDetails(String username, String password){
+        
+        boolean valid = false; 
+        
+        try{
+            conn = this.establishConnection();
+            String statement = "SELECT username, password FROM user where user = ? AND password = ?";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(statement);
+            ps.setString(1, username);
+            ps.setString(1, password);
+            ResultSet rs = ps.executeQuery();
+            
+            if(!rs.isBeforeFirst())
+                valid = false;
+            else {
+                valid = true; 
+            }
+        
+        } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        }finally{
+            conn = this.closeConnection();
+        }
+    
+        return valid; 
+    }
+        
 }
