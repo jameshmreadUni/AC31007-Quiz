@@ -16,6 +16,12 @@ public class ModuleBean {
     private String moduleCode;
     private String moduleName;
     private LinkedList<String> quizName;
+    
+    public ModuleBean(){
+        quizName = new LinkedList<>();
+    
+  }
+    
 
     /**
      * @return the moduleCode
@@ -55,8 +61,8 @@ public class ModuleBean {
     /**
      * @param quizName the quizName to set
      */
-    public void setQuizName(String quizName) {
-        this.quizName.add(quizName);
+    public void setQuizName(LinkedList<String> quizName) {
+        this.quizName = quizName;
     }
     
 }

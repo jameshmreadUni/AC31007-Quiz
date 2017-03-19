@@ -17,14 +17,13 @@
     <body>
         <h1>Modules</h1>
         <% 
-            LinkedList<ModuleBean> moduleList = (LinkedList<ModuleBean>)request.getAttribute("quiz");
+            LinkedList<ModuleBean> moduleList = (LinkedList<ModuleBean>)request.getAttribute("modules");
             Iterator<ModuleBean> iterator;
             iterator = moduleList.iterator();
             while (iterator.hasNext()) {
                  ModuleBean module = (ModuleBean)iterator.next();
-            
         %> 
-                <h2><% module.getModuleCode();%> - <% module.getModuleName(); %> </h2>
+        <h2><%=module.getModuleCode()%> -  <%=module.getModuleName()%> </h2>
                 <h3>Quizzes Available: </h3>
                 <ul>
                     <% 
@@ -33,7 +32,7 @@
                                 while (quiz.hasNext()) {
                                 String quizName = (String)quiz.next();
                     %>
-                    <li><a href="/Quiz/<%=quizName%>"><%=quizName%></a>
+                    <li><a href="/AgileQuiz/Quiz/<%=quizName%>"><%=quizName%></a>
                 <%  } %>
                 </ul> 
                 <% } %>

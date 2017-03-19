@@ -316,11 +316,12 @@ public class Database {
             conn = this.establishConnection();
             
             ModuleBean module;
-            PreparedStatement ps = null; 
+            PreparedStatement ps = null;
+            PreparedStatement ps2 = null;
             
             
             String statement1 = "SELECT * FROM module";
-            String statement2 = "SELECT quizName from quiz where moduleCode = ? "; 
+
             
             ps = conn.prepareStatement(statement1);
             ResultSet rs = ps.executeQuery();
@@ -328,15 +329,12 @@ public class Database {
             while(rs.next()){
                 module = new ModuleBean(); 
                 module.setModuleCode(rs.getString("moduleCode"));
+                System.out.println(rs.getString("moduleCode"));
                 module.setModuleName(rs.getString("moduleName"));
+                System.out.println(rs.getString("moduleName"));
                 
-                ps = conn.prepareStatement(statement2);
-                ps.setString(1, rs.getString("moduleCode"));
-                ResultSet result = ps.executeQuery();
-                
-                while (result.next()){
-                    module.setQuizName(result.getString("quizName"));                
-                }
+                module.setQuizName(this.selectQuestionName(rs.getString("moduleCode")));
+
                 moduleList.add(module);                
             }
  
@@ -352,6 +350,32 @@ public class Database {
     
     
      return moduleList; 
+    }
+
+    public LinkedList<String> selectQuestionName(String moduleCode) throws SQLException {
+        LinkedList<String> questionNames = new LinkedList<>();
+        
+        try{
+                conn = this.establishConnection();
+                 String statement = "SELECT quizName from quiz where moduleCode = ? "; 
+                PreparedStatement ps = null;
+                ps = conn.prepareStatement(statement);
+                ps.setString(1, moduleCode);
+                ResultSet result = ps.executeQuery();
+                while (result.next()){
+                    questionNames.add(result.getString("quizName"));
+                }
+        } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        
+        } finally{ 
+        
+            conn = this.closeConnection();
+        }
+        
+       return questionNames; 
     }
     
 }
