@@ -94,8 +94,16 @@ public class ModelCreateQuiz {
         return true;
     }
 
-    public boolean toggleAvailability(String available){
+    public boolean toggleAvailability(String available, String quizName){
         //DB stuff
+        
+        if (available.equals("on")){
+            Database db = new Database();
+            db.updateAvailability(quizName);  
+        }
+        
+        
+        
         return available.equalsIgnoreCase("on");
     }
 }

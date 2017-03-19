@@ -57,7 +57,7 @@
                      <input type="submit" value="Add to Quiz">
                  </form>
             <%}%>
-            <form method="POST" action ="/AgileQuiz/CreateQuiz">
+            <form method="POST" action ="FinishQuiz">
                 <input type="checkbox" name="toggleQuizAvailable"> Quiz is available upon creation <br>
                 <input type="submit" value="Finish Quiz">
             </form>

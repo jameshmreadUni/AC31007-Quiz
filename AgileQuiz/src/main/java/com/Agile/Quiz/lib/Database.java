@@ -275,4 +275,35 @@ public class Database {
         }
     }
     
+    
+    public void updateAvailability(String quizName){
+        
+        try{
+            
+            conn = this.establishConnection();
+
+            String text = "UPDATE quiz SET availability = ? WHERE quizName = ?";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(text);
+            ps.setInt(1, 1);
+            ps.setString(1, quizName);
+            ps.execute(); 
+        
+        
+        
+        } catch (SQLException ex){
+            
+            
+            
+        } finally {
+        
+            conn = this.closeConnection(); 
+            
+        } 
+    
+        
+        
+    
+    }
+    
 }

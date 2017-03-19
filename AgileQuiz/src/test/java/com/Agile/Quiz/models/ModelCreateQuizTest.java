@@ -96,7 +96,7 @@ public class ModelCreateQuizTest {
         System.out.println("checkAvailability");
         String input ="true";
         ModelCreateQuiz instance = new ModelCreateQuiz();
-       boolean test = instance.toggleAvailability(input);
+       boolean test = instance.toggleAvailability(input, "testQuiz");
         assertEquals("Checking toggle return string", false, test);  
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -107,7 +107,7 @@ public class ModelCreateQuizTest {
         System.out.println("checkAvailability");
         String input ="on";
         ModelCreateQuiz instance = new ModelCreateQuiz();
-       boolean test = instance.toggleAvailability(input);
+       boolean test = instance.toggleAvailability(input, "testQuiz");
         assertEquals("Should be true", true, test);  
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

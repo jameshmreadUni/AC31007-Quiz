@@ -85,12 +85,7 @@ public class CreateQuiz extends HttpServlet {
         String quizName = request.getParameter("quizName");
         session.setAttribute("quizName", quizName);
         ModelCreateQuiz createQuiz = new ModelCreateQuiz();
-        createQuiz.addQuiz(quizName);
-        
-        
-        
-//        System.out.println("Input: " + request.getParameter("toggleQuizAvailable"));
-//        createQuiz.toggleAvailability(request.getParameter("toggleQuizAvailable"));  
+        createQuiz.addQuiz(quizName);  
         
         request.getRequestDispatcher("createQuestion.jsp").forward(request, response);    
     }
