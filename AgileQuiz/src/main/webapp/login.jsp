@@ -10,8 +10,10 @@
      <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <link rel="stylesheet" type="text/css" href="Style.css">
         <title>JSP Page</title>
+
         <title>Login</title>
     <nav>
         <ul>
@@ -20,6 +22,7 @@
     </nav>
     </head>
     <body>
+
         <script>
             function validateForm()
             {

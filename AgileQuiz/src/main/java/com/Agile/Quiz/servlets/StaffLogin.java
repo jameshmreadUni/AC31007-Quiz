@@ -77,7 +77,7 @@ public class StaffLogin extends HttpServlet {
             //If the login is successful, determine the users type
             //Call method to determine user's type.
             //
-     
+
 // This Will be the page that the login redipaches to once a vaild login is accheved
            System.out.println("Session in servlet " + session);
 
@@ -102,3 +102,4 @@ public class StaffLogin extends HttpServlet {
     }// </editor-fold>
 
 }
+

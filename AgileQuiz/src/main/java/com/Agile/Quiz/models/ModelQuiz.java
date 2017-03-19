@@ -11,9 +11,11 @@ import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
+
  * @author jamesread
  * this model returns the requested quiz
  */
@@ -23,12 +25,14 @@ public class ModelQuiz {
                     
         //database connection, return info using quiz name
         //select all questions, answers from quizName
+
         //int numberOfAnswers = 5;
         String answerType = "radio"; 
         //dummy data as DB does not have 'answer type collumn'
         LinkedList<QuestionBean> questions = new LinkedList<>();
         
         
+
         try{
         Database db = new Database();
         String quizID = db.selectQuizID(quizName);
@@ -52,6 +56,4 @@ public class ModelQuiz {
     }
      return moduleList; 
     }
-    
-    
 }

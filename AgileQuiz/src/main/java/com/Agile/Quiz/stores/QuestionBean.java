@@ -18,8 +18,11 @@ public class QuestionBean {
     private String quizName; //the quiz from which this question set is returned from
     private int questionNumber;
     private String answerType;
+
+    private String explanation;
+
     private String[] correctAnswer;
-    
+
     //constructor initialises the size of the array of questions upon creation
     public QuestionBean(){
         answerText = new LinkedList<>();
@@ -61,8 +64,21 @@ public class QuestionBean {
         this.questionText = questionText;
     }
     
+
+    public String getExplanation()
+    {
+        return this.explanation;
+    }
+    
+    public void setExplanation(String explain)
+    {
+        explanation = explain;
+    }
+    
+
     public void setAnswerText(LinkedList<String> answerText){
         this.answerText = answerText; 
+
     }
     
     public LinkedList<String> getAnswerText(){
@@ -91,6 +107,7 @@ public class QuestionBean {
         return this.answerType;
     }
     
+
     public String[] getCorrectAnswers(){
         return this.correctAnswer;
     }
@@ -100,4 +117,5 @@ public class QuestionBean {
             this.correctAnswer[i] = correctAnswerMarker[i];
         }
     }
+
 }

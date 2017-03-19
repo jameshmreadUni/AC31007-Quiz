@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 
 /**
  *
+s
+ * @author rameshk
  * @author Brian
  */
 public class ModelQuizOrderTest {
@@ -39,6 +41,33 @@ public class ModelQuizOrderTest {
     }
 
     /**
+
+     * Test of OrderByName method, of class ModelQuizOrder.
+     */
+    @Test
+    public void testOrderByName() {
+        System.out.println("OrderByName");
+        //LinkedList<String> ls;
+        ModelQuizOrder instance = new ModelQuizOrder();
+        LinkedList<String> expResult = new LinkedList<>();
+        expResult.add("Quiz 1");
+        expResult.add("Quiz 2"); 
+        LinkedList<String> result = instance.OrderByName();
+        
+        
+        for(int i=1; i<2; i++)
+        {
+              System.out.println(i);
+              assertEquals(expResult.get(i), result.get(i));
+         }
+
+        // TODO review the generated test code and remove the default call to fail.
+    }
+    
+}
+
+/*
+
      * Test of QuizOrder method, of class ModelQuizOrder.
      */
     @Test
