@@ -255,14 +255,16 @@ public class Database {
             iterator = answerList.iterator();
             while (iterator.hasNext()) {
                 AnswerBean answer = (AnswerBean)iterator.next();
-                ps.setString(1,answer.getAnswerText());
-                ps.setString(2,questionID);
-                if(answer.isCorrectAnswer()){
-                   ps.setInt(3, 1);
-                } else{
-                   ps.setInt(3, 0);
+                if(!answer.getAnswerText().isEmpty()){
+                    ps.setString(1,answer.getAnswerText());
+                    ps.setString(2,questionID);
+                    if(answer.isCorrectAnswer()){
+                       ps.setInt(3, 1);
+                    } else {
+                       ps.setInt(3, 0);
+                    }
+                    ps.execute();
                 }
-                ps.execute();
             }             
         } catch (SQLException ex) {
             // handle any errors

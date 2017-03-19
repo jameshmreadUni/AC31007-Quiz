@@ -68,7 +68,6 @@ public class ModelCreateQuiz {
              System.out.println("Lets try inserting a question");
             db.insertQuestion(quizID, questionText, answerList, correctAnswer);
          } catch (SQLException ex)
-
          {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
