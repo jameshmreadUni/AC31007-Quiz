@@ -5,6 +5,7 @@
  */
 package com.Agile.Quiz.lib;
 import com.Agile.Quiz.stores.AnswerBean;
+import com.Agile.Quiz.stores.ModuleBean;
 import com.Agile.Quiz.stores.QuestionBean;
 import java.sql.*;  
 import java.util.Iterator;
@@ -304,6 +305,53 @@ public class Database {
         
         
     
+    }
+    
+    
+    public LinkedList<ModuleBean> selectQuizes(){
+    
+        LinkedList<ModuleBean> moduleList = new LinkedList<>();
+        
+        try{
+            conn = this.establishConnection();
+            
+            ModuleBean module;
+            PreparedStatement ps = null; 
+            
+            
+            String statement1 = "SELECT * FROM module";
+            String statement2 = "SELECT quizName from quiz where moduleCode = ? "; 
+            
+            ps = conn.prepareStatement(statement1);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                module = new ModuleBean(); 
+                module.setModuleCode(rs.getString("moduleCode"));
+                module.setModuleName(rs.getString("moduleName"));
+                
+                ps = conn.prepareStatement(statement2);
+                ps.setString(1, rs.getString("moduleCode"));
+                ResultSet result = ps.executeQuery();
+                
+                while (result.next()){
+                    module.setQuizName(result.getString("quizName"));                
+                }
+                moduleList.add(module);                
+            }
+ 
+            
+        }catch(SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+            
+        }finally{
+            conn = this.closeConnection();
+        }
+    
+    
+     return moduleList; 
     }
     
 }
