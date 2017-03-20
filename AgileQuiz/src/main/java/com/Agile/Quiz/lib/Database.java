@@ -454,12 +454,16 @@ public class Database {
            System.out.println(rs);
            
            QuestionBean question; 
-           while (rs.next()) {
+           LinkedList<String> answerText;
+           while (rs.next()){
                question = new QuestionBean();
+               answerText = new LinkedList<>();
                question.setQuestionText(rs.getString("questionText"));
-               question.setAnswerText(this.selectAnswerText(rs.getString("questionID")));
+               answerText.add(rs.getString("answerText"));
+               question.setAnswerText(answerText);
                question.setAnswerType(rs.getString("answerType"));
                question.setExplanation(rs.getString("explanation"));
+               //TODO set quiz title
                //the sql statement only returns the correct answers anyway
                quizFeedback.add(question);
             }

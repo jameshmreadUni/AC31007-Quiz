@@ -25,18 +25,24 @@ public class ModelFeedbackTest {
     String quizName = "ModelFeedbackQuizName";
     String quizID = "12345";
     String questionText = "Who designed test driven development?!";
+    String[] correctAnswers = {"correct1", "correct2", "correct3"};
     LinkedList<AnswerBean> answerList = new LinkedList<>();
-    LinkedList<String> questionBeanAnswerList = new LinkedList<>();
+    LinkedList<String> setAnswerList = new LinkedList<>();
+    
     String correctAnswerArray = "3";
     Database db = new Database();
+    
     public ModelFeedbackTest() {
         AnswerBean answerBean;
         for(int i = 0; i < 4; i++){
             answerBean = new AnswerBean();
             answerBean.setAnswerText("Answer: " + i);
-            if(i == 0) answerBean.setCorrectAnswer(true);
+            if(i == 0) {
+                answerBean.setCorrectAnswer(true);
+                setAnswerList.add("Answer: " + i);
+            }
             else answerBean.setCorrectAnswer(false);
-            questionBeanAnswerList.add("Answer: " + i);
+            
             answerList.add(answerBean);
         }
         
@@ -55,8 +61,9 @@ public class ModelFeedbackTest {
         System.out.println("SET UP testGetFeedback");
         
         db.insertQuiz(quizName);
+        
         try{
-            db.insertQuestion(quizID, questionText, answerList, correctAnswerArray);
+            db.insertQuestion(db.selectQuizID(quizName), questionText, answerList, correctAnswerArray);
         }catch(Exception e){System.out.println("SETUP testGetfeedback: " + e);}
     }
     
@@ -73,20 +80,23 @@ public class ModelFeedbackTest {
         System.out.println("getFeedback");        
         ModelFeedback feedback = new ModelFeedback();
         QuestionBean expectedBean = new QuestionBean();
-        expectedBean.setAnswerText(questionBeanAnswerList);
+        
         expectedBean.setQuestionText(questionText);
         expectedBean.setExplanation("test");
-        
+        expectedBean.setCorrectAnswersFull(correctAnswers);
+        expectedBean.setAnswerText(setAnswerList);
         LinkedList<QuestionBean> expResult = new LinkedList<>();
         expResult.add(expectedBean);
+        
         LinkedList<QuestionBean> result = feedback.getFeedback(quizName);
-        QuestionBean expResultBean = expResult.getFirst();
-        QuestionBean resultBean = result.getFirst();
+        QuestionBean expResultBean = expResult.peekFirst();
         
-        for(int i = 0; i < resultBean.getCorrectAnswers().length; i++)
-            assertEquals(expResultBean.getCorrectAnswers()[i], resultBean.getCorrectAnswers()[i]);
+        QuestionBean resultBean = result.peekFirst();
+        System.out.println("expresultbean ");
+        System.out.println("result " + resultBean.getAnswerText());
+
         
-        assertEquals(expResultBean.getExplanation(), resultBean.getExplanation());
+        assertEquals(expResultBean.getAnswerText(), resultBean.getAnswerText());
         assertEquals(expResultBean.getQuestionText(), resultBean.getQuestionText());
         assertEquals(expResultBean.getExplanation(), resultBean.getExplanation());
     }

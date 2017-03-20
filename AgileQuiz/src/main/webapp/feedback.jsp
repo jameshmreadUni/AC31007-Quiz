@@ -4,7 +4,9 @@
     Author     : jamesread
 --%>
 
-<%@page import="com.Agile.Quiz.stores.QuizResultBean"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.Agile.Quiz.stores.QuestionBean"%>
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,17 +14,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Question Feedback</title>
     </head>
-    <%QuizResultBean quizResult = (QuizResultBean)request.getAttribute("quizFeedback"); %>
+    <%LinkedList<QuestionBean> quizResult = (LinkedList<QuestionBean>)request.getAttribute("quizFeedback"); %>
     <body>
-        <h1><%=quizResult.getQuizModule()%></h1>
-        <h2><%=quizResult.getQuizName()%></h2>
-        
-        <%for(int i = 0; i < quizResult.getQuestions().length; i++){ %>
-            <li> Question <%=i%>: <%=quizResult.getQuestions(i)%></li>
+        <h1>FEEDBACK</h1>
+         <% Iterator<QuestionBean> iterator;
+            iterator = quizResult.iterator();
+            while (iterator.hasNext()) {
+                QuestionBean question = (QuestionBean)iterator.next();
+                %>
+ 
+        <h2><%--question.getQuizName()--%></h2>
+       
+            <li> Question : <%=question.getQuestionText()%></li>
             <br>
-            <li> Correct Answers: <%=quizResult.getCorrectAnswers(i)%></li>
+            <li> Correct Answers: <%=question.getAnswerText()%></li>
             <br>
-            <li> Explanation: <%=quizResult.getQuestionExplanations(i)%></li>
+            <li> Explanation: <%=question.getExplanation()%></li>
             <br><br>
         <%}%>
     </body>

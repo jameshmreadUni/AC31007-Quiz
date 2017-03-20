@@ -112,8 +112,13 @@ public class QuestionBean {
         return this.correctAnswer;
     }
     
+    public void setCorrectAnswersFull(String[] input){
+        this.correctAnswer = input;
+    }
+
     public void setCorrectAnswers(String correctAnswerMarker[]){
-        for(int i = 0; i < correctAnswer.length; i++){
+        correctAnswer = new String[correctAnswerMarker.length];
+        for(int i = 0; i < correctAnswerMarker.length; i++){
             this.correctAnswer[i] = correctAnswerMarker[i];
         }
     }

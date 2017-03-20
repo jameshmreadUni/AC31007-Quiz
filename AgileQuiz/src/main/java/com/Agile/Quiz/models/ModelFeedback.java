@@ -19,25 +19,24 @@ public class ModelFeedback {
         //TODO database stuff      
        LinkedList<QuestionBean> quizFeedback = new LinkedList<>();
       
-        String[] questions = {"question1", "question2", "question3"};
-        String[] correctAnswers = {"correct1","correct2","correct3"};
-        String[] questionExplanations = {"explanation1", "explanation2", "explanation3"};
-        String module = "Module A";
-        int score = 2;
+//        String questions = "Question TEXT";
+//        String[] correctAnswers = {"correct1","correct2","correct3"};
+//        String questionExplanations = "Explanation of answer";
+//        String module = "Module A";
+//        int score = 2;
         
         Database db = new Database();
         
         
-        QuizResultBean quizResult = new QuizResultBean();
-        quizResult.setQuizName(quizName);
-        quizResult.setQuizModule(module);
-        quizResult.setCorrectAnswers(correctAnswers);
-        quizResult.setQuestions(questions);
-        quizResult.setQuestionExplanations(questionExplanations);
-        quizResult.setCorrectAnswers(correctAnswers);
-        quizResult.setScore(score);
+//        QuestionBean quizResult = new QuestionBean();
+//        quizResult.setQuizName(quizName);
+//        quizResult.setCorrectAnswers(correctAnswers);
+//        quizResult.setQuestionText(questions);
+//        quizResult.setExplanation(questionExplanations);
+//        quizResult.setCorrectAnswers(correctAnswers);
         
-        //return db.selectFeedback(quizName);
-        return quizFeedback;
+        //quizFeedback.add(quizResult);
+        return db.selectFeedback(quizName);
+        //return quizFeedback;
     }
 }
