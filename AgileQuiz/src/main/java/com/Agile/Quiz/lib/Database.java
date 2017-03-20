@@ -7,6 +7,7 @@ package com.Agile.Quiz.lib;
 import com.Agile.Quiz.stores.AnswerBean;
 import com.Agile.Quiz.stores.ModuleBean;
 import com.Agile.Quiz.stores.QuestionBean;
+import com.Agile.Quiz.stores.QuizResultBean;
 import java.sql.*;  
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -215,7 +216,7 @@ public class Database {
     }
              
     }
-
+    //also calls insertAnswer() below
     public void insertQuestion(String quizID, String questionText, LinkedList<AnswerBean> answerList, String correctAnswerArray) throws SQLException {
         //Inserts questions and the appropriate answers into the Database
         System.out.println("Insert Question");
@@ -248,7 +249,7 @@ public class Database {
         
         }
     }
-
+    //called by insertQuestion()
     public void insertAnswer(LinkedList<AnswerBean> answerList, String questionID) throws SQLException {
         //Inserts the answers into the database
         try{
@@ -430,6 +431,51 @@ public class Database {
         }
         
         return userType; 
+    }
+    
+    //DB command to return feedback to ModelFeedback
+     public LinkedList<QuestionBean> selectFeedback(String quizName){
+        //Returns the questiosns and answers and stores them in a linked list of question beans
+        System.out.println("--- SELECT QUIZ FEEDBACK ---"); 
+        
+        LinkedList<QuestionBean> quizFeedback = new LinkedList<>();
+        PreparedStatement ps = null;
+        
+        String quizID = this.selectQuizID(quizName);
+        String text = "SELECT * FROM question LEFT JOIN answer ON answer.questionID = question.questionID WHERE answer.correct = 1 AND question.quizID = ? ORDER BY question.questionID ASC";
+        try{
+           conn = this.establishConnection();
+           System.out.println("Conn: " + conn);
+           ps = conn.prepareStatement(text);
+           ps.setString(1, quizID);
+           System.out.println(ps);
+           System.out.println(quizID);
+           ResultSet rs = ps.executeQuery();
+           System.out.println(rs);
+           
+           QuestionBean question; 
+           while (rs.next()) {
+               question = new QuestionBean();
+               question.setQuestionText(rs.getString("questionText"));
+               question.setAnswerText(this.selectAnswerText(rs.getString("questionID")));
+               question.setAnswerType(rs.getString("answerType"));
+               question.setExplanation(rs.getString("explanation"));
+               //the sql statement only returns the correct answers anyway
+               quizFeedback.add(question);
+            }
+           
+                      
+        }catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        } finally {
+  
+        conn = this.closeConnection(); 
+       
+        }
+        return quizFeedback; 
     }
     
     
