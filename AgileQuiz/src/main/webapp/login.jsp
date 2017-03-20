@@ -56,7 +56,7 @@
          <nav>
         <ul id ="menubar">
             <h1 id="homepagehead">Student Portal</h1>
-        
+        <li><a href="/AgileQuiz/Modules">Modules</a></li>
         <li><a href="/AgileQuiz/Quiz/Sample">Sample Quiz</a></li>
         <%--<li><a href="quizes.jsp">Quiz List</a></li> waiting for Ramesh Commit--%>
         <li><a href="/AgileQuiz/CreateQuiz">Create Question</a></li>
@@ -64,6 +64,7 @@
         <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
         <li><a href="/AgileQuiz/Register">Register</a></li>
         <li><a href="/AgileQuiz/Login">Home</a></li>
+        
         <li style="float:right"><a href="login.jsp">Login</a></li>
         </ul>
     </nav>

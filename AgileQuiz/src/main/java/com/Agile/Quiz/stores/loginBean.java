@@ -11,7 +11,8 @@ package com.Agile.Quiz.stores;
  */
 public class loginBean {
     boolean loggedin=false;
-    String Username=null;
+    String username;
+    private String userType;
     
     //Constructor
     public void loginBean(){
@@ -19,10 +20,10 @@ public class loginBean {
     }
     
     public void setUsername(String name){
-        this.Username=name;
+        this.username=name;
     }
     public String getUsername(){
-        return Username;
+        return username;
     }
     public void setLoggedin(){
         loggedin=true;
@@ -30,6 +31,20 @@ public class loginBean {
 
     public boolean getloggedin(){
         return loggedin;
+    }
+
+    /**
+     * @return the userType
+     */
+    public String getUserType() {
+        return userType;
+    }
+
+    /**
+     * @param userType the userType to set
+     */
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
         
 }

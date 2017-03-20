@@ -21,11 +21,11 @@ public class Database {
     
    
     public Connection establishConnection(){
-    
+    //This establishes the connection with the MySQL Database
+        
+        
+        
         try {
-            // The newInstance() call is a work around for some
-            // broken Java implementations
-
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             System.out.println("Connecting to DB");
         } catch (Exception ex) {
@@ -49,6 +49,7 @@ public class Database {
     }
 
     public Connection closeConnection(){
+        //This closes the connection if there is one.
     try{
         if(conn!=null)
             conn.close(); System.out.println("Closed");
@@ -98,6 +99,7 @@ public class Database {
     }
     
     public LinkedList<QuestionBean> selectQuestionText(String quizID){
+        //Returns the questiosns and answers and stores them in a linked list of question beans
         System.out.println("--- SELECT QUESTION TEXT ---"); 
         
         LinkedList<QuestionBean> questions = new LinkedList<>(); 
@@ -145,6 +147,7 @@ public class Database {
       
      public LinkedList<String> selectAnswerText(String questionID){
         System.out.println("--- SELECT ANSWER TEXT ---"); 
+        //Returns all the answers for a specific question ID and stores them in a linked list of strings
         
         
         LinkedList<String> answerText = new LinkedList<>();
@@ -183,9 +186,8 @@ public class Database {
 
     public void insertQuiz(String quizName) {
        System.out.println("------INSERT QUIZ------");
-       
+       //Inserts a quiz into the Database
        String quizID = null;
-       //String questionID = null;
        
        try{
        conn = this.establishConnection();
@@ -215,6 +217,7 @@ public class Database {
     }
 
     public void insertQuestion(String quizID, String questionText, LinkedList<AnswerBean> answerList, String correctAnswerArray) throws SQLException {
+        //Inserts questions and the appropriate answers into the Database
         System.out.println("Insert Question");
         try{
             conn = this.establishConnection();          
@@ -247,7 +250,7 @@ public class Database {
     }
 
     public void insertAnswer(LinkedList<AnswerBean> answerList, String questionID) throws SQLException {
-        
+        //Inserts the answers into the database
         try{
             String text = ("INSERT INTO answer (answerText, questionID, correct) VALUES (?,?,?)");
             PreparedStatement ps = conn.prepareStatement(text);
@@ -278,7 +281,7 @@ public class Database {
     
     
     public void updateAvailability(String quizName){
-        
+        //Updates a specific quiz so that the quiz is available
         try{
             
             conn = this.establishConnection();
@@ -293,23 +296,18 @@ public class Database {
         
         
         } catch (SQLException ex){
-            
-            
-            
+                  
         } finally {
         
             conn = this.closeConnection(); 
             
-        } 
-    
-        
-        
+        }   
     
     }
     
     
     public LinkedList<ModuleBean> selectQuizes(){
-    
+    //Returns all the modules and Quizzes in a linked list of ModuleBeans
         LinkedList<ModuleBean> moduleList = new LinkedList<>();
         
         try{
@@ -318,8 +316,7 @@ public class Database {
             ModuleBean module;
             PreparedStatement ps = null;
             PreparedStatement ps2 = null;
-            
-            
+      
             String statement1 = "SELECT * FROM module";
 
             
@@ -353,6 +350,7 @@ public class Database {
     }
 
     public LinkedList<String> selectQuestionName(String moduleCode) throws SQLException {
+        //Selects all the quiz names and stores them in a linked list of strings.
         LinkedList<String> questionNames = new LinkedList<>();
         
         try{
@@ -377,5 +375,62 @@ public class Database {
         
        return questionNames; 
     }
+    
+    public boolean checkUserDetails(String username, String password){
+        
+        boolean valid = false; 
+        
+        try{
+            conn = this.establishConnection();
+            String statement = "SELECT username, password FROM user where username = ? AND password = ?";
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement(statement);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            
+            valid = rs.isBeforeFirst();
+        
+        } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        }finally{
+            conn = this.closeConnection();
+        }
+    
+        return valid; 
+    }
+        
+    public String selectUserType(String username, String password){
+    
+        String userType = null;
+        try{
+            
+            conn = this.establishConnection();
+            String statement = "SELECT userType from user where username = ? and password = ?";
+            PreparedStatement ps = null;
+            
+            ps = conn.prepareStatement(statement);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+              userType = rs.getString("userType");  
+ 
+            }
+    
+        }   catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+        
+        }finally{
+            conn = this.closeConnection();
+        }
+        
+        return userType; 
+    }
+    
     
 }

@@ -5,7 +5,9 @@
  */
 package com.Agile.Quiz.models;
 
+import com.Agile.Quiz.lib.Database;
 import com.Agile.Quiz.stores.RegisterBean;
+import com.Agile.Quiz.stores.loginBean;
 import java.util.Vector;
 
 /**
@@ -43,4 +45,25 @@ public class ModelUser {
         return username.equals("existingUsername");
         
     }
+        
+    public boolean validUser(String username, String password){
+        
+        Database db = new Database();
+        boolean valid = db.checkUserDetails(username, password);
+        
+        return valid;    
+    }    
+        
+        
+        
+   public String getUserType(String username, String passsword){
+       
+       Database db = new Database();
+       
+       String userType = db.selectUserType(username, passsword);
+ 
+       return userType;
+   }    
+        
+        
 }
