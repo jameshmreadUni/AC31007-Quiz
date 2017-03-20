@@ -53,5 +53,22 @@ public class ModelQuizTest {
         // TODO review the generated test code and remove the default call to fail.
         
     }
+ 
+    @Test
+    public void testDeleteQuiz(){
+        System.out.println("deleteQuiz");
+
+        ModelQuiz instance = new ModelQuiz();
+        ModelCreateQuiz insert = new ModelCreateQuiz();
+
+        insert.addQuiz("deleteTest");
+
+        boolean result = instance.deleteQuiz("deleteTest");
+        boolean expResult = true; 
+
+        assertEquals(expResult, result);
     
+    
+    }
+
 }
