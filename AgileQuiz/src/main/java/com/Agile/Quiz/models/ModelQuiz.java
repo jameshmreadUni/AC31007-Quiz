@@ -57,11 +57,12 @@ public class ModelQuiz {
      return moduleList; 
     }
     
-    public boolean deleteQuiz(){
-    
-        boolean deleted = true;
+    public boolean deleteQuiz(String quizName){
+        Database db = new Database();
+        db.deleteQuiz(quizName);
+        String quizID = db.selectQuizID(quizName);
+        return quizID == null;
         
-        return deleted; 
     
     }
     

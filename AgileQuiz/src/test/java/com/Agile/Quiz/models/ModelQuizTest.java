@@ -56,13 +56,17 @@ public class ModelQuizTest {
  
     @Test
     public void testDeleteQuiz(){
-    System.out.println("deleteQuiz");
-    
-    ModelQuiz instance = new ModelQuiz();
-    boolean result = instance.deleteQuiz();
-    boolean expResult = true; 
-    
-    assertEquals(expResult, result);
+        System.out.println("deleteQuiz");
+
+        ModelQuiz instance = new ModelQuiz();
+        ModelCreateQuiz insert = new ModelCreateQuiz();
+
+        insert.addQuiz("deleteTest");
+
+        boolean result = instance.deleteQuiz("deleteTest");
+        boolean expResult = true; 
+
+        assertEquals(expResult, result);
     
     
     }
