@@ -56,4 +56,15 @@ public class ModelQuiz {
     }
      return moduleList; 
     }
+    
+    public boolean deleteQuiz(){
+    
+        boolean deleted = true;
+        
+        return deleted; 
+    
+    }
+    
+    
+    
 }
