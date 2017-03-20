@@ -292,9 +292,11 @@ public class Database {
             ps.setString(1, quizName);
             ps.execute(); 
         
-        
-        
+
         } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
                   
         } finally {
         
@@ -450,9 +452,25 @@ public class Database {
          
       conn = this.closeConnection();
      } 
-    
-    
-    
     }
-    
+     
+     public void deleteQuiz(String quizName) {
+        //This should delete a quiz and all associated questions/answers with it 
+         try{
+             conn = this.establishConnection();
+             String statement = "DELETE FROM quiz WHERE quizName = ?";
+             
+             PreparedStatement ps = conn.prepareStatement(statement);
+             ps.setString(1, quizName);
+             ps.execute();
+         
+         
+         } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+         } finally {
+             conn = this.closeConnection();
+         }
+     }  
 }
