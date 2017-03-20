@@ -5,7 +5,7 @@
  */
 package com.Agile.Quiz.servlets;
 
-import com.Agile.Quiz.models.ModelStaffUser;
+import com.Agile.Quiz.models.ModelUser;
 import com.Agile.Quiz.stores.loginBean;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,24 +61,20 @@ public class StaffLogin extends HttpServlet {
         System.out.println(password);
 // need a user model with placeholder
 
-        ModelStaffUser us = new ModelStaffUser();
+        ModelUser us = new ModelUser();
 
         HttpSession session = request.getSession();
-        System.out.println("Session in servlet " + session);
+        System.out.println(username+ " " + password);
         
-        
-        if (us.IsValidUser(username, password)) {
+        //Check if the username & password are valid in the database
+        if (us.validUser(username, password)) {
             loginBean lg = new loginBean();
             lg.setLoggedin();
             lg.setUsername(username);
+            lg.setUserType(us.getUserType(username, password));
             session.setAttribute("loginBean", lg);
             
             
-            //If the login is successful, determine the users type
-            //Call method to determine user's type.
-            //
-
-// This Will be the page that the login redipaches to once a vaild login is accheved
            System.out.println("Session in servlet " + session);
 
 
