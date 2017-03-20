@@ -97,9 +97,14 @@ public class Register extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
                 rd.forward(request, response);
             }else{
-                //TODO CALL Login bean
-                RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-                rd.forward(request, response);
+                boolean register = user.register(username, password);
+                if (register == false){
+                    RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+                    rd.forward(request, response);
+                } else if (register == true){
+                    RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
+                }
             }
     }
     

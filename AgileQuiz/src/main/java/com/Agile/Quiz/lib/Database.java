@@ -432,5 +432,28 @@ public class Database {
         return userType; 
     }
     
+    public void registerUser(String username, String password){
+     try {
+         conn = this.establishConnection();
+         
+         String statement = "INSERT INTO user (username, password) VALUES (?,?)";
+         
+         PreparedStatement ps = conn.prepareStatement(statement);
+         ps.setString(1, username);
+         ps.setString(2, password);
+         ps.execute();
+     
+     } catch (SQLException ex) {
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+     } finally {
+         
+      conn = this.closeConnection();
+     } 
+    
+    
+    
+    }
     
 }

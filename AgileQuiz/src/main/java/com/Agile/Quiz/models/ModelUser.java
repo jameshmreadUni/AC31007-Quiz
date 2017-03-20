@@ -65,5 +65,17 @@ public class ModelUser {
        return userType;
    }    
         
-        
+   public boolean register(String username, String password){
+       Database db = new Database();
+       
+       boolean valid = db.checkUserDetails(username, password);
+       
+       if(!valid){
+           db.registerUser(username, password);
+           return true; 
+       } else{
+           return false; 
+       }
+
+   }     
 }

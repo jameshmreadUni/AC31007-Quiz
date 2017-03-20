@@ -46,15 +46,12 @@
 
                         <%} else if(type.equals("student")){
                         %>
-                         <li><a href="/AgileQuiz/Modules">Modules</a></li>
+        <li><a href="/AgileQuiz/Modules">Modules</a></li>
         <li><a href="/AgileQuiz/Quiz/test">Sample Quiz</a></li>
-        <%--<li><a href="quizes.jsp">Quiz List</a></li> waiting for Ramesh Commit--%>
-        <li><a href="/AgileQuiz/CreateQuiz">Create Question</a></li>
-        <%--<li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li> TODO NEXT SPRINT--%>
         <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
-        <li style="float:right"><a href="/AgileQuiz/LogOut" >Logout</a></li>
         <li><a href="/AgileQuiz/CompletedQuizzes">Completed Quizzes</a></li>
         <li><a href="/AgileQuiz/summaryReport"> Quiz Summary Report</a></li>
+        <li style="float:right"><a href="/AgileQuiz/LogOut" >Logout</a></li>
                         
                         <%} }
                     }else { 
