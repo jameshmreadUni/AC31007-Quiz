@@ -15,6 +15,8 @@ import java.util.LinkedList;
  *
  * @author seanstewart
  */
+
+//This class contains all the database funcitonality code used for connecting between the 
 public class Database {
     
     private Connection conn = null;
@@ -22,9 +24,6 @@ public class Database {
    
     public Connection establishConnection(){
     //This establishes the connection with the MySQL Database
-        
-        
-        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             System.out.println("Connecting to DB");
@@ -293,9 +292,11 @@ public class Database {
             ps.setString(1, quizName);
             ps.execute(); 
         
-        
-        
+
         } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
                   
         } finally {
         
@@ -377,7 +378,7 @@ public class Database {
     }
     
     public boolean checkUserDetails(String username, String password){
-        
+       //This checks if a user with that specific username and password exists. 
         boolean valid = false; 
         
         try{
@@ -403,7 +404,7 @@ public class Database {
     }
         
     public String selectUserType(String username, String password){
-    
+    //This returns the user's type from the database
         String userType = null;
         try{
             
@@ -451,9 +452,25 @@ public class Database {
          
       conn = this.closeConnection();
      } 
-    
-    
-    
     }
-    
+     
+     public void deleteQuiz(String quizName) {
+        //This should delete a quiz and all associated questions/answers with it 
+         try{
+             conn = this.establishConnection();
+             String statement = "DELETE FROM quiz WHERE quizName = ?";
+             
+             PreparedStatement ps = conn.prepareStatement(statement);
+             ps.setString(1, quizName);
+             ps.execute();
+         
+         
+         } catch (SQLException ex){
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+         } finally {
+             conn = this.closeConnection();
+         }
+     }  
 }

@@ -101,9 +101,7 @@ public class ModelCreateQuiz {
             Database db = new Database();
             db.updateAvailability(quizName);  
         }
-        
-        
-        
+   
         return available.equalsIgnoreCase("on");
     }
 }
