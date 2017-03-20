@@ -436,12 +436,12 @@ public class Database {
      try {
          conn = this.establishConnection();
          
-         String statement = "INSERT INTO user (username, passsword) VALUES = ?,?";
+         String statement = "INSERT INTO user (username, password) VALUES (?,?)";
          
          PreparedStatement ps = conn.prepareStatement(statement);
          ps.setString(1, username);
          ps.setString(2, password);
-         ps.executeQuery();
+         ps.execute();
      
      } catch (SQLException ex) {
           System.out.println("SQLException: " + ex.getMessage());
