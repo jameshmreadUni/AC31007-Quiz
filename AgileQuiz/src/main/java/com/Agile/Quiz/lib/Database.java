@@ -15,6 +15,8 @@ import java.util.LinkedList;
  *
  * @author seanstewart
  */
+
+//This class contains all the database funcitonality code used for connecting between the 
 public class Database {
     
     private Connection conn = null;
@@ -22,9 +24,6 @@ public class Database {
    
     public Connection establishConnection(){
     //This establishes the connection with the MySQL Database
-        
-        
-        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             System.out.println("Connecting to DB");
@@ -377,7 +376,7 @@ public class Database {
     }
     
     public boolean checkUserDetails(String username, String password){
-        
+       //This checks if a user with that specific username and password exists. 
         boolean valid = false; 
         
         try{
@@ -403,7 +402,7 @@ public class Database {
     }
         
     public String selectUserType(String username, String password){
-    
+    //This returns the user's type from the database
         String userType = null;
         try{
             
