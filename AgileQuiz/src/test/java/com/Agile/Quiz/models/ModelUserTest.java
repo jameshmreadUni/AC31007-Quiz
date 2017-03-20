@@ -138,12 +138,11 @@ public class ModelUserTest {
         boolean expResultLog = true;
         int expResultReg = 0;
         ModelUser instance = new ModelUser();
-        ModelStaffUser loginInstance = new ModelStaffUser();
         RegisterBean result = instance.checkRegistration(username, password, confirmPassword, email);
-        loginInstance.IsValidUser(username, password);
+        instance.validUser(username, password);
         //for(int i = 0; i < result.getInputErrorsSize(); i++)
           //  System.out.print(result.getInputErrors(i));
-        assertEquals(expResultLog, loginInstance.IsValidUser(username, password));
+        assertEquals(expResultLog, instance.validUser(username, password));
         assertEquals(expResultReg, result.getInputErrorsSize());
     }
 }
