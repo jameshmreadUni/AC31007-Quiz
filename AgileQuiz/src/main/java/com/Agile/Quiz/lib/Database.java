@@ -408,7 +408,7 @@ public class Database {
         try{
             
             conn = this.establishConnection();
-            String statement = "SELECT userType from user where username = ? and passsword = ?";
+            String statement = "SELECT userType from user where username = ? and password = ?";
             PreparedStatement ps = null;
             
             ps = conn.prepareStatement(statement);

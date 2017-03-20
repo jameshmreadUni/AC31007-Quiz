@@ -58,17 +58,10 @@ public class ModelUser {
         
    public String getUserType(String username, String passsword){
        
-       String userType=null;
        Database db = new Database();
-       boolean valid = db.checkUserDetails(username, passsword);
-       if (valid==true){
-           userType = db.selectUserType(username, passsword);
+       
+       String userType = db.selectUserType(username, passsword);
  
-       } else if (valid==false) {
-       
-            return null;
-       
-       }
        return userType;
    }    
         
