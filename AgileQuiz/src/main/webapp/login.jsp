@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-     <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
+     <link rel="stylesheet" type="text/css" href="/2016-agileteam4/Style.css" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -17,7 +17,7 @@
         <title>Login</title>
     <nav>
         <ul>
-         <li><a href="/AgileQuiz">Home</a></li>
+         <li><a href="/2016-agileteam4">Home</a></li>
         </ul>
     </nav>
     </head>
@@ -56,14 +56,14 @@
          <nav>
         <ul id ="menubar">
             <h1 id="homepagehead">Student Portal</h1>
-        <li><a href="/AgileQuiz/Modules">Modules</a></li>
-        <li><a href="/AgileQuiz/Quiz/Sample">Sample Quiz</a></li>
+        <li><a href="/2016-agileteam4/Modules">Modules</a></li>
+        <li><a href="/2016-agileteam4/Quiz/Sample">Sample Quiz</a></li>
         <%--<li><a href="quizes.jsp">Quiz List</a></li> waiting for Ramesh Commit--%>
-        <li><a href="/AgileQuiz/CreateQuiz">Create Question</a></li>
-        <%--<li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li> TODO NEXT SPRINT--%>
-        <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
-        <li><a href="/AgileQuiz/Register">Register</a></li>
-        <li><a href="/AgileQuiz/Login">Home</a></li>
+        <li><a href="/2016-agileteam4/CreateQuiz">Create Question</a></li>
+        <%--<li><a href="/2016-agileteam4/EditQuiz">Staff View - Quiz Page</a></li> TODO NEXT SPRINT--%>
+        <li><a href="/2016-agileteam4/QuizFeedback" >Quiz Feedback</a></li>
+        <li><a href="/2016-agileteam4/Register">Register</a></li>
+        <li><a href="/2016-agileteam4/Login">Home</a></li>
         
         <li style="float:right"><a href="login.jsp">Login</a></li>
         </ul>
@@ -79,7 +79,7 @@
                     <br/>
                     <input type="submit" value="Login"> 
                     <ul>
-                        <li><a href="/AgileQuiz/Register">Register</a></li>
+                        <li><a href="/2016-agileteam4/Register">Register</a></li>
                     </ul>
         </form>
     </body>

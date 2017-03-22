@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%-- <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" /> --%>
+    <%-- <link rel="stylesheet" type="text/css" href="/2016-agileteam4/Style.css" /> --%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css">

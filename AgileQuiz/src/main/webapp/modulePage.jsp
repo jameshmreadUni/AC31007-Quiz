@@ -32,7 +32,7 @@
                                 while (quiz.hasNext()) {
                                 String quizName = (String)quiz.next();
                     %>
-                    <li><a href="/AgileQuiz/Quiz/<%=quizName%>"><%=quizName%></a>
+                    <li><a href="/2016-agileteam4/Quiz/<%=quizName%>"><%=quizName%></a>
                 <%  } %>
                 </ul> 
                 <% } %>

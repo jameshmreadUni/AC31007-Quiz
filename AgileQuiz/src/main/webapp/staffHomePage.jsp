@@ -19,10 +19,10 @@
         </div>
         
         <div id="content">
-            <h1><a href="/AgileQuiz/createQuestion.jsp">Create Quiz</a></h1>
-            <h1><a href="/AgileQuiz/quizes.jsp">View Quizzes</a></h1>
-            <h1><a href="/AgileQuiz/createQuestion.jsp">Edit a Quiz</a></h1>
-            <h1><a href="/AgileQuiz/createQuestion.jsp">View Results</a></h1>
+            <h1><a href="/2016-agileteam4/createQuestion.jsp">Create Quiz</a></h1>
+            <h1><a href="/2016-agileteam4/quizes.jsp">View Quizzes</a></h1>
+            <h1><a href="/2016-agileteam4/createQuestion.jsp">Edit a Quiz</a></h1>
+            <h1><a href="/2016-agileteam4/createQuestion.jsp">View Results</a></h1>
         </div>
     </body>
 </html>

@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
+    <link rel="stylesheet" type="text/css" href="/2016-agileteam4/Style.css" />
     <head>
         <title>Student Portal</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,31 +34,31 @@
                              if(type.equals("staff")){   
 
     %>
-        <li><a href="/AgileQuiz/Modules">Modules</a></li>
-        <li><a href="/AgileQuiz/Quiz/test">Sample Quiz</a></li>
+        <li><a href="/2016-agileteam4/Modules">Modules</a></li>
+        <li><a href="/2016-agileteam4/Quiz/test">Sample Quiz</a></li>
         <%--<li><a href="quizes.jsp">Quiz List</a></li> waiting for Ramesh Commit--%>
-        <li><a href="/AgileQuiz/CreateQuiz">Create Question</a></li>
-        <%--<li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li> TODO NEXT SPRINT--%>
-        <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
-        <li style="float:right"><a href="/AgileQuiz/LogOut" >Logout</a></li>
-        <li><a href="/AgileQuiz/CompletedQuizzes">Completed Quizzes</a></li>
-        <li><a href="/AgileQuiz/summaryReport"> Quiz Summary Report</a></li>
+        <li><a href="/2016-agileteam4/CreateQuiz">Create Question</a></li>
+        <%--<li><a href="/2016-agileteam4/EditQuiz">Staff View - Quiz Page</a></li> TODO NEXT SPRINT--%>
+        <li><a href="/2016-agileteam4/QuizFeedback" >Quiz Feedback</a></li>
+        <li style="float:right"><a href="/2016-agileteam4/LogOut" >Logout</a></li>
+        <li><a href="/2016-agileteam4/CompletedQuizzes">Completed Quizzes</a></li>
+        <li><a href="/2016-agileteam4/summaryReport"> Quiz Summary Report</a></li>
 
                         <%} else if(type.equals("student")){
                         %>
-        <li><a href="/AgileQuiz/Modules">Modules</a></li>
-        <li><a href="/AgileQuiz/Quiz/test">Sample Quiz</a></li>
-        <li><a href="/AgileQuiz/QuizFeedback" >Quiz Feedback</a></li>
-        <li><a href="/AgileQuiz/CompletedQuizzes">Completed Quizzes</a></li>
-        <li><a href="/AgileQuiz/summaryReport"> Quiz Summary Report</a></li>
-        <li style="float:right"><a href="/AgileQuiz/LogOut" >Logout</a></li>
+        <li><a href="/2016-agileteam4/Modules">Modules</a></li>
+        <li><a href="/2016-agileteam4/Quiz/test">Sample Quiz</a></li>
+        <li><a href="/2016-agileteam4/QuizFeedback" >Quiz Feedback</a></li>
+        <li><a href="/2016-agileteam4/CompletedQuizzes">Completed Quizzes</a></li>
+        <li><a href="/2016-agileteam4/summaryReport"> Quiz Summary Report</a></li>
+        <li style="float:right"><a href="/2016-agileteam4/LogOut" >Logout</a></li>
                         
                         <%} }
                     }else { 
                         %>
                         
-    <li><a href="/AgileQuiz/Login">Login</a></li>
-    <li><a href="/AgileQuiz/Register">Register</a></li>
+    <li><a href="/2016-agileteam4/Login">Login</a></li>
+    <li><a href="/2016-agileteam4/Register">Register</a></li>
      <%}%>
     
     </ul>

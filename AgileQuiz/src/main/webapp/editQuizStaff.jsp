@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="/AgileQuiz/Style.css" />
+    <link rel="stylesheet" type="text/css" href="/2016-agileteam4/Style.css" />
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Portal - Edit Quiz</title>
@@ -21,7 +21,7 @@
         <li><a href="quizes.jsp">Quiz List</a></li>
         <li><a href="quizPage.jsp">Quiz Page</a></li>
         <li><a href="createQuestion.jsp">Create Question</a></li>
-        <li><a href="/AgileQuiz/EditQuiz">Staff View - Quiz Page</a></li>
+        <li><a href="/2016-agileteam4/EditQuiz">Staff View - Quiz Page</a></li>
         <li style="float:right"><a href="login.jsp">Login</a></li>
         </ul>
     </nav>

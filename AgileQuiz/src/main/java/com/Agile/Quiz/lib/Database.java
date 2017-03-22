@@ -26,7 +26,7 @@ public class Database {
     public Connection establishConnection(){
     //This establishes the connection with the MySQL Database
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             System.out.println("Connecting to DB");
         } catch (Exception ex) {
             // handle the error
